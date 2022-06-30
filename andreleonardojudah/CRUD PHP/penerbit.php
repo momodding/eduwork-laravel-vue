@@ -25,12 +25,12 @@
     <table class="table table-striped table-hover" width='80%' border=1>
  
     <tr>
-        <th>ID Penerbit</th> 
-        <th>Nama Penerbit</th> 
-        <th>Email</th> 
-        <th>Telepon</th>
-        <th>Alamat</th>
-        <th>Aksi</th>
+        <th><div class = "text-center">ID Penerbit</div></th> 
+        <th><div class = "text-center">Nama Penerbit</div></th> 
+        <th><div class = "text-center">Email</div></th> 
+        <th><div class = "text-center">Telepon</div></th>
+        <th><div class = "text-center">Alamat</div></th>
+        <th><div class = "text-center">Aksi</div></th>
     </tr>
     <?php  
         while($penerbit_data = mysqli_fetch_array($penerbit)) {         
@@ -44,5 +44,18 @@
         }
     ?>
     </table>
+
+    <footer class="text-center text-white" style="background-color: #f1f1f1;">
+        </section>
+        <!-- Section: Social media -->
+      </div>
+      <!-- Grid container -->
+
+      <!-- Copyright -->
+      <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2022 Andre Leonardo Judah
+      </div>
+      <!-- Copyright -->
+    </footer>
 </body>
 </html>
