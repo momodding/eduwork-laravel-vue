@@ -1,0 +1,71 @@
+<?php
+    include_once("connect.php");
+    $buku = mysqli_query($mysqli, "SELECT buku.*, nama_pengarang, nama_penerbit, katalog.nama as nama_katalog FROM buku 
+                                        LEFT JOIN  pengarang ON pengarang.id_pengarang = buku.id_pengarang
+                                        LEFT JOIN  penerbit ON penerbit.id_penerbit = buku.id_penerbit
+                                        LEFT JOIN  katalog ON katalog.id_katalog = buku.id_katalog
+                                        ORDER BY judul ASC");
+?>
+ 
+<html>
+<head>    
+    <title>Homepage</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+</head>
+ 
+<body>
+
+<center>
+    <a href="buku.php">Buku</a> |
+    <a href="penerbit.php">Penerbit</a> |
+    <a href="pengarang.php">Pengarang</a> |
+    <a href="katalog.php">Katalog</a>
+    <hr>
+</center>
+
+<a href="addbuku.php">Add New Buku</a><br/><br/>
+ 
+    <table class="table table-striped table-hover" width='80%' border=1>
+ 
+    <tr>
+        <th><div class = "text-center">ISBN</div></th>
+        <th><div class = "text-center">Judul</div></th> 
+        <th><div class = "text-center">Tahun</div></th> 
+        <th><div class = "text-center">Pengarang</div></th>
+        <th><div class = "text-center">Penerbit</div></th>
+        <th><div class = "text-center">Katalog</div></th>
+        <th><div class = "text-center">Stok</div></th>
+        <th><div class = "text-center">Harga Pinjam</div></th>
+        <th><div class = "text-center">Aksi</div></th>
+    </tr>
+    <?php  
+        while($buku_data = mysqli_fetch_array($buku)) {         
+            echo "<tr>";
+            echo "<td>".$buku_data['isbn']."</td>";
+            echo "<td>".$buku_data['judul']."</td>";
+            echo "<td>".$buku_data['tahun']."</td>";    
+            echo "<td>".$buku_data['nama_pengarang']."</td>";    
+            echo "<td>".$buku_data['nama_penerbit']."</td>";    
+            echo "<td>".$buku_data['nama_katalog']."</td>";    
+            echo "<td>".$buku_data['qty_stok']."</td>";    
+            echo "<td>".$buku_data['harga_pinjam']."</td>";    
+            echo "<td><a class='btn btn-primary' href='editbuku.php?isbn=$buku_data[isbn]'>Edit</a> | <a class='btn btn-danger' href='deletebuku.php?isbn=$buku_data[isbn]'>Delete</div></a></td></tr>";        
+        }
+    ?>
+    </table>
+
+    <footer class="text-center text-white" style="background-color: #f1f1f1;">
+        </section>
+        <!-- Section: Social media -->
+      </div>
+      <!-- Grid container -->
+
+      <!-- Copyright -->
+      <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2022 Andre Leonardo Judah
+      </div>
+      <!-- Copyright -->
+    </footer>
+</body>
+</html>
