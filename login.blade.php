@@ -65,7 +65,7 @@
         <a href="forgot-password.html">I forgot my password</a>
       </p>
       <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
+        <a href="http://127.0.0.1:8000/register" class="text-center">Register a new membership</a>
       </p>
     </div>
     <!-- /.card-body -->
