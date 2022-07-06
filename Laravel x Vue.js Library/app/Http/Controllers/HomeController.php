@@ -35,7 +35,7 @@ class HomeController extends Controller
         // $publishers = Publisher::with('books')->get();
         
 
-        return $catalogs;
+        // return $catalogs;
         return view('home');
     }
 }
