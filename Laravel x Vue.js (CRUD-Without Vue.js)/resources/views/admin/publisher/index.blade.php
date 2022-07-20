@@ -29,7 +29,7 @@
                       <td class="text-center">{{ $publisher->name }}</td>
                       <td class="text-center">{{ $publisher->email }}</td>
                       <td class="text-center">{{ $publisher->phone_number }}</td>
-                      <td class="text-center">{{ $publisher->Address }}</td>
+                      <td class="text-center">{{ $publisher->address }}</td>
                       <td class="text-center">{{ date('H:i:s | d/M/Y', strtotime($publisher->created_at)) }}</td>
                       <td class="text-center">
                         <a href="{{ url('publishers/'.$publisher->id.'/edit') }}" class="btn btn-warning btn-sm" style="width: 100px">Edit</a> <br><br>
