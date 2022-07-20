@@ -14,7 +14,10 @@ class CatalogController extends Controller
      */
     public function index()
     {
-        return view('admin.catalog.index');
+        $catalogs = Catalog::with('books')->get();
+
+        //return $catalogs;
+        return view('admin.catalog.index', compact('catalogs'));
     }
 
     /**
@@ -24,7 +27,7 @@ class CatalogController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.catalog.create');
     }
 
     /**
@@ -35,7 +38,23 @@ class CatalogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Security validasi backend untuk validasi input data catalog untuk function create
+
+        $this->validate($request,[
+            'name'      =>['required'],
+        ]);
+
+        // Cara pertama untuk memasukkan data ke table catalog
+
+        // $catalog = new Catalog;
+        // $catalog->name = $request->name;
+        // $catalog->save();
+
+        // Cara kedua untuk memasukkan data ke table catalog dan masukkan protected $fillable = ['']; ke models catalog.php
+
+        Catalog::create($request->all());
+
+        return redirect('catalogs');
     }
 
     /**
@@ -57,7 +76,8 @@ class CatalogController extends Controller
      */
     public function edit(Catalog $catalog)
     {
-        //
+        // return $catalog; untuk tes lihat hasil data
+        return view('admin.catalog.edit', compact('catalog'));
     }
 
     /**
@@ -69,7 +89,13 @@ class CatalogController extends Controller
      */
     public function update(Request $request, Catalog $catalog)
     {
-        //
+        $this->validate($request,[
+            'name'      =>['required'],
+        ]);
+
+        $catalog->update($request->all());
+
+        return redirect('catalogs');
     }
 
     /**
@@ -80,6 +106,9 @@ class CatalogController extends Controller
      */
     public function destroy(Catalog $catalog)
     {
-        //
+        
+        $catalog->delete();
+
+        return redirect('catalogs');
     }
 }

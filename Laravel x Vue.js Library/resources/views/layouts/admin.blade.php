@@ -87,7 +87,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="http://127.0.0.1:8000/home" class="brand-link">
       <img src="{{ asset('assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Perpustakaan</span>
     </a>
@@ -100,7 +100,7 @@
           <img src="{{ asset('assets/dist/img/user9-160x160.png') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ auth()->user()->name }}</a>
+          <a href="http://127.0.0.1:8000/home" class="d-block">{{ auth()->user()->name }}</a>
         </div>
       </div>
 
@@ -130,46 +130,58 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('catalog') }}" class="nav-link {{ request()->is('catalog') ? 'active' : '' }}">
+            <a href="{{ url('catalogs') }}" class="nav-link {{ request()->is('catalogs') ? 'active' : '' }}">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Catalog
               </p>
             </a>
           </li>
-          </li>
           <li class="nav-item">
-            <a href="{{ url('publisher') }}" class="nav-link {{ request()->is('publisher') ? 'active' : '' }}">
+            <a href="{{ url('publishers') }}" class="nav-link {{ request()->is('publishers') ? 'active' : '' }}">
               <i class="nav-icon fas fa-star"></i>
               <p>
                 Publisher
               </p>
             </a>
           </li>
-          </li>
           <li class="nav-item">
-            <a href="{{ url('author') }}" class="nav-link {{ request()->is('author') ? 'active' : '' }}">
+            <a href="{{ url('authors') }}" class="nav-link {{ request()->is('authors') ? 'active' : '' }}">
               <i class="nav-icon fas fa-comments"></i>
               <p>
                 Author
               </p>
             </a>
           </li>
-          </li>
           <li class="nav-item">
-            <a href="{{ url('book') }}" class="nav-link {{ request()->is('book') ? 'active' : '' }}">
+            <a href="{{ url('books') }}" class="nav-link {{ request()->is('books') ? 'active' : '' }}">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Book
               </p>
             </a>
           </li>
-          </li>
           <li class="nav-item">
-            <a href="{{ url('member') }}" class="nav-link {{ request()->is('member') ? 'active' : '' }}">
+            <a href="{{ url('members') }}" class="nav-link {{ request()->is('members') ? 'active' : '' }}">
               <i class="nav-icon fas fa-flag"></i>
               <p>
                 Member
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('transactions') }}" class="nav-link {{ request()->is('transactions') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-tree"></i>
+              <p>
+                Transaction
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('transaction_details') }}" class="nav-link {{ request()->is('transaction_details') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-user-secret"></i>
+              <p>
+                Transaction Detail
               </p>
             </a>
           </li>
