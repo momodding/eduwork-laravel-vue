@@ -14,7 +14,10 @@ class BookController extends Controller
      */
     public function index()
     {
-        return view('admin.book.index');
+        $books = Book::all();
+
+        //return $books;
+        return view('admin.book.index', compact('books'));
     }
 
     /**
@@ -24,7 +27,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.book.create');
     }
 
     /**
@@ -35,7 +38,23 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Security validasi backend untuk validasi input data book untuk function create
+
+        $this->validate($request,[
+            'name'      =>['required'],
+        ]);
+
+        // Cara pertama untuk memasukkan data ke table book
+
+        // $book = new Book;
+        // $book->name = $request->name;
+        // $book->save();
+
+        // Cara kedua untuk memasukkan data ke table book dan masukkan protected $fillable = ['']; ke models book.php
+
+        Catalog::create($request->all());
+
+        return redirect('books');
     }
 
     /**
@@ -57,7 +76,7 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        return view('admin.book.edit', compact('book'));
     }
 
     /**
@@ -69,7 +88,13 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        $this->validate($request,[
+            'name'      =>['required'],
+        ]);
+
+        $book->update($request->all());
+
+        return redirect('books');
     }
 
     /**
@@ -80,6 +105,8 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+
+        return redirect('books');
     }
 }

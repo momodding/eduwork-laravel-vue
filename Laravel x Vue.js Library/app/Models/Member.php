@@ -9,8 +9,10 @@ class Member extends Model
 {
     use HasFactory;
 
-    public function user()
+    protected $fillable = ['name', 'gender', 'phone_number', 'address', 'email', 'created_at'];
+
+    public function books()
     {
-        return $this->hasOne('App\Models\User', 'member_id');
+        return $this->hasMany('App\Models\Book', 'member_id');
     }
 }

@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['transaction_id', 'date_start', 'date_end', 'created_at'];
+
+    public function transactions()
+    {
+        return $this->hasMany('App\Models\Transaction', 'transaction_id');
+    }
 }

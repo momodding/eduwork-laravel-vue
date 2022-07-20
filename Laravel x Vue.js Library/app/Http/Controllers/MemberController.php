@@ -14,7 +14,10 @@ class MemberController extends Controller
      */
     public function index()
     {
-        return view('admin.member.index');
+        $members = Member::all();
+
+        //return $members;
+        return view('admin.member.index', compact('members'));
     }
 
     /**
@@ -24,7 +27,7 @@ class MemberController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.member.create');
     }
 
     /**
@@ -35,7 +38,23 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Security validasi backend untuk validasi input data member untuk function create
+
+        $this->validate($request,[
+            'name'      =>['required'],
+        ]);
+
+        // Cara pertama untuk memasukkan data ke table member
+
+        // $member = new Member;
+        // $member->name = $request->name;
+        // $member->save();
+
+        // Cara kedua untuk memasukkan data ke table member dan masukkan protected $fillable = ['']; ke models member.php
+
+        Member::create($request->all());
+
+        return redirect('members');
     }
 
     /**
@@ -57,7 +76,8 @@ class MemberController extends Controller
      */
     public function edit(Member $member)
     {
-        //
+        // return $member; untuk tes lihat hasil data
+        return view('admin.member.edit', compact('member'));
     }
 
     /**
@@ -69,8 +89,15 @@ class MemberController extends Controller
      */
     public function update(Request $request, Member $member)
     {
-        //
+        $this->validate($request,[
+            'name'      =>['required'],
+        ]);
+
+        $member->update($request->all());
+
+        return redirect('members');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -80,6 +107,8 @@ class MemberController extends Controller
      */
     public function destroy(Member $member)
     {
-        //
+        $member->delete();
+
+        return redirect('members');
     }
 }

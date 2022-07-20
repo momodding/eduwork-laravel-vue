@@ -14,7 +14,10 @@ class PublisherController extends Controller
      */
     public function index()
     {
-        return view('admin.publisher.index');
+        $publishers = Publisher::with('books')->get();
+
+        //return $publishers;
+        return view('admin.publisher.index', compact('publishers'));
     }
 
     /**
@@ -24,7 +27,7 @@ class PublisherController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.publisher.create');
     }
 
     /**
@@ -35,7 +38,23 @@ class PublisherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Security validasi backend untuk validasi input data catalog untuk function create
+
+        $this->validate($request,[
+            'name'      =>['required'],
+        ]);
+
+        // Cara pertama untuk memasukkan data ke table publisher
+
+        // $publisher = new Publisher;
+        // $publisher->name = $request->name;
+        // $publisher->save();
+
+        // Cara kedua untuk memasukkan data ke table publisher dan masukkan protected $fillable = ['']; ke models publisher.php
+
+        Publisher::create($request->all());
+
+        return redirect('publishers');
     }
 
     /**
@@ -57,7 +76,8 @@ class PublisherController extends Controller
      */
     public function edit(Publisher $publisher)
     {
-        //
+        // return $publisher; untuk tes lihat hasil data
+        return view('admin.publisher.edit', compact('publisher'));
     }
 
     /**
@@ -69,7 +89,13 @@ class PublisherController extends Controller
      */
     public function update(Request $request, Publisher $publisher)
     {
-        //
+        $this->validate($request,[
+            'name'      =>['required'],
+        ]);
+
+        $publisher->update($request->all());
+
+        return redirect('publishers');
     }
 
     /**
@@ -80,6 +106,9 @@ class PublisherController extends Controller
      */
     public function destroy(Publisher $publisher)
     {
-        //
+        
+        $publisher->delete();
+
+        return redirect('publishers');
     }
 }

@@ -14,7 +14,10 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        $transactions = Transaction::with('books')->get();
+
+        //return $transactions;
+        return view('admin.transaction.index', compact('transactions'));
     }
 
     /**
@@ -24,7 +27,7 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.transaction.create');
     }
 
     /**
@@ -35,7 +38,23 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Security validasi backend untuk validasi input data transaction untuk function create
+
+        $this->validate($request,[
+            'name'      =>['required'],
+        ]);
+
+        // Cara pertama untuk memasukkan data ke table transaction
+
+        // $transaction = new Transaction;
+        // $transaction->name = $request->name;
+        // $transaction->save();
+
+        // Cara kedua untuk memasukkan data ke table transaction dan masukkan protected $fillable = ['']; ke models transaction.php
+
+        Transaction::create($request->all());
+
+        return redirect('transactions');
     }
 
     /**
@@ -57,7 +76,8 @@ class TransactionController extends Controller
      */
     public function edit(Transaction $transaction)
     {
-        //
+        // return $transaction; untuk tes lihat hasil data
+        return view('admin.transaction.edit', compact('transaction'));
     }
 
     /**
@@ -69,7 +89,13 @@ class TransactionController extends Controller
      */
     public function update(Request $request, Transaction $transaction)
     {
-        //
+        $this->validate($request,[
+            'name'      =>['required'],
+        ]);
+
+        $transaction->update($request->all());
+
+        return redirect('transactions');
     }
 
     /**
@@ -80,6 +106,8 @@ class TransactionController extends Controller
      */
     public function destroy(Transaction $transaction)
     {
-        //
+        $transaction->delete();
+
+        return redirect('transactions');
     }
 }

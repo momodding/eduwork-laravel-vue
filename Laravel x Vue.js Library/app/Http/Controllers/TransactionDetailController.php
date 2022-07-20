@@ -14,7 +14,10 @@ class TransactionDetailController extends Controller
      */
     public function index()
     {
-        //
+        $transaction_details = TransactionDetail::with('books')->get();
+
+        //return $transactions;
+        return view('admin.transaction_detail.index', compact('transaction_details'));
     }
 
     /**
@@ -24,7 +27,7 @@ class TransactionDetailController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.transaction_detail.create');
     }
 
     /**
@@ -34,8 +37,24 @@ class TransactionDetailController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+        {
+        // Security validasi backend untuk validasi input data transaction_detail untuk function create
+
+        $this->validate($request,[
+            'name'      =>['required'],
+        ]);
+
+        // Cara pertama untuk memasukkan data ke table transaction_detail
+
+        // $transaction_detail = new TransactionDetail;
+        // $transaction_detail->name = $request->name;
+        // $transaction_detail->save();
+
+        // Cara kedua untuk memasukkan data ke table transaction_detail dan masukkan protected $fillable = ['']; ke models transaction_detail.php
+
+        TransactionDetail::create($request->all());
+
+        return redirect('transaction_details');
     }
 
     /**
@@ -57,7 +76,8 @@ class TransactionDetailController extends Controller
      */
     public function edit(TransactionDetail $transactionDetail)
     {
-        //
+        // return $transaction_detail; untuk tes lihat hasil data
+        return view('admin.transaction_detail.edit', compact('transaction_detail'));
     }
 
     /**
@@ -69,7 +89,13 @@ class TransactionDetailController extends Controller
      */
     public function update(Request $request, TransactionDetail $transactionDetail)
     {
-        //
+        $this->validate($request,[
+            'name'      =>['required'],
+        ]);
+
+        $transaction_detail->update($request->all());
+
+        return redirect('transaction_details');
     }
 
     /**
@@ -80,6 +106,8 @@ class TransactionDetailController extends Controller
      */
     public function destroy(TransactionDetail $transactionDetail)
     {
-        //
+        $transaction_detail->delete();
+
+        return redirect('transaction_details');
     }
 }
