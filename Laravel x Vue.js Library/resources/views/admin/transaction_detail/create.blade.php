@@ -11,11 +11,29 @@
       
           <form action="{{ url('transaction_details') }}" method="post">
               @csrf
-              <div class="card-body">
-                  <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" name="name" class="form-control" placeholder="Enter name" required="">
-                  </div>  
+              <div class="form-group">
+                  <div class="card-body">
+                    <label>Transaction ID</label>
+                    <input type="text" name="transaction_id" class="form-control" placeholder="Enter Transaction ID" required="">
+                  </div>
+
+              <div class="form-group">
+                  <div class="card-body">
+                    <label>Book ID</label>
+                    <input type="text" name="book_id" class="form-control" placeholder="Enter Book ID" required="">
+                  </div>
+
+              <div class="form-group">
+                  <div class="card-body">
+                    <label>Quantity</label>
+                    <input type="text" name="qty" class="form-control" placeholder="Enter Quantity" required="">
+                  </div>
+
+              <div class="form-group">
+                  <div class="card-body">
+                    <label>ISBN</label>
+                    <input type="text" name="isbn" class="form-control" placeholder="Enter ISBN" required="">
+                  </div> 
             </div>
       
             <div class="card-footer">

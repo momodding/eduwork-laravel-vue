@@ -6,7 +6,7 @@
     <div class="col-md-6">
       <div class="card"></div>
               <div class="card-header">
-                <a href="{{ url('catalogs/create') }}" class="btn btn-sm btn-primary pull-right">Create New Author</a>
+                <a href="{{ url('authors/create') }}" class="btn btn-sm btn-primary pull-right">Create New Author</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -29,7 +29,7 @@
                       <td class="text-center">{{ $author->name }}</td>
                       <td class="text-center">{{ $author->email }}</td>
                       <td class="text-center">{{ $author->phone_number }}</td>
-                      <td class="text-center">{{ $author->Address }}</td>
+                      <td class="text-center">{{ $author->address }}</td>
                       <td class="text-center">{{ date('H:i:s | d/M/Y', strtotime($author->created_at)) }}</td>
                       <td class="text-center">
                         <a href="{{ url('authors/'.$author->id.'/edit') }}" class="btn btn-warning btn-sm" style="width: 100px">Edit</a> <br><br>

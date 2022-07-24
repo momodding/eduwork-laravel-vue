@@ -116,13 +116,13 @@ class HomeController extends Controller
         //                 ->get();
 
         // // Nomor 13
-        //     $data13 = Member::select('members.name','members.phone_number','members.address','transactions.date_start','transactions.date_end','books.isbn','transaction_details.qty','books.title','books.price','transaction_details.qty*books.price')
-        //                 ->join('transactions','members.id','=','transactions.id')
-        //                ->join('transaction_details','transactions.id','=','transaction_details.transaction_id')
-        //                 ->join('books','transaction_details.isbn','=','books.isbn')
-        //                 ->join('publishers','books.publisher_id','=','publishers.id')
-        //                 ->join('authors','books.author_id','=','authors.id')
-        //                 ->get();
+            // $data13 = Member::select('members.name','members.phone_number','members.address','transactions.date_start','transactions.date_end','books.isbn','transaction_details.qty','books.title','books.price','transaction_details.qty*books.price')
+            //             ->join('transactions','members.id','=','transactions.id')
+            //            ->join('transaction_details','transactions.id','=','transaction_details.transaction_id')
+            //             ->join('books','transaction_details.isbn','=','books.isbn')
+            //             ->join('publishers','books.publisher_id','=','publishers.id')
+            //             ->join('authors','books.author_id','=','authors.id')
+            //             ->get();
 
         // // Nomor 14
         //     $data14 = Member::select('members.name','members.phone_number','members.address','transactions.date_start','transactions.date_end','books.isbn','transaction_details.qty','books.title','publishers.name','authors.name','catalogs.name')
@@ -165,7 +165,7 @@ class HomeController extends Controller
         //                 ->whereMonth('members.created_at','=','07')
         //                 ->get();
 
-        // // return $data;
+        //return $data;
         return view('home');
     }
 }

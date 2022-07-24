@@ -41,7 +41,7 @@ class TransactionController extends Controller
         // Security validasi backend untuk validasi input data transaction untuk function create
 
         $this->validate($request,[
-            'name'      =>['required'],
+            'member_id', 'date_start', 'date_end'      =>['required', 'string', 'min:5', 'max:60'],
         ]);
 
         // Cara pertama untuk memasukkan data ke table transaction

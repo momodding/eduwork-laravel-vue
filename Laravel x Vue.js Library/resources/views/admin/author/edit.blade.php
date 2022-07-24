@@ -9,7 +9,7 @@
           <h3 class="card-title">Edit Author</h3>
         </div>
       
-          <form action="{{ url('catalogs/'.$catalog->id) }}" method="post">
+          <form action="{{ url('authors/'.$author->id) }}" method="post">
               @csrf
               {{ method_field('PUT') }}
               

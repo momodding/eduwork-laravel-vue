@@ -89,7 +89,7 @@ class BookController extends Controller
     public function update(Request $request, Book $book)
     {
         $this->validate($request,[
-            'name'      =>['required'],
+            'isbn', 'title', 'year', 'publisher_id', 'author_id', 'catalog_id', 'qty', 'price'      =>['required', 'string', 'min:5', 'max:60'],
         ]);
 
         $book->update($request->all());

@@ -6,7 +6,7 @@ use App\Models\Author;
 use Illuminate\Http\Request;
 
 class AuthorController extends Controller
-    {
+{
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +41,7 @@ class AuthorController extends Controller
         // Security validasi backend untuk validasi input data catalog untuk function create
 
         $this->validate($request,[
-            'name'      =>['required'],
+            'name', 'email', 'phone_number', 'address'      =>['required', 'string', 'min:5', 'max:60'],
         ]);
 
         // Cara pertama untuk memasukkan data ke table author
@@ -106,7 +106,7 @@ class AuthorController extends Controller
     public function destroy(Author $author)
     {
         
-        $catalog->delete();
+        $author->delete();
 
         return redirect('authors');
     }

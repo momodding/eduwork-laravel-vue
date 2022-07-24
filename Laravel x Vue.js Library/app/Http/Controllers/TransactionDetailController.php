@@ -37,11 +37,11 @@ class TransactionDetailController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-        {
+    {
         // Security validasi backend untuk validasi input data transaction_detail untuk function create
 
         $this->validate($request,[
-            'name'      =>['required'],
+            'transaction_id', 'book_id', 'qty', 'isbn'      =>['required', 'string', 'min:5', 'max:60'],
         ]);
 
         // Cara pertama untuk memasukkan data ke table transaction_detail

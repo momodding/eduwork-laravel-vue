@@ -41,7 +41,7 @@ class MemberController extends Controller
         // Security validasi backend untuk validasi input data member untuk function create
 
         $this->validate($request,[
-            'name'      =>['required'],
+            'name', 'gender', 'phone_number', 'address', 'email'      =>['required', 'string', 'min:1', 'max:60'],
         ]);
 
         // Cara pertama untuk memasukkan data ke table member

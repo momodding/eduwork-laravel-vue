@@ -6,7 +6,7 @@
     <div class="col-md-6">
       <div class="card"></div>
               <div class="card-header">
-                <a href="{{ url('transactions/create') }}" class="btn btn-sm btn-primary pull-right">Create New Transaction Detail</a>
+                <a href="{{ url('transaction_details/create') }}" class="btn btn-sm btn-primary pull-right">Create New Transaction Detail</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
