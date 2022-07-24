@@ -41,7 +41,7 @@ class PublisherController extends Controller
         // Security validasi backend untuk validasi input data catalog untuk function create
 
         $this->validate($request,[
-            'name'      =>['required'],
+            'name', 'email', 'phone_number', 'address'      =>['required', 'string', 'min:5', 'max:60'],
         ]);
 
         // Cara pertama untuk memasukkan data ke table publisher
