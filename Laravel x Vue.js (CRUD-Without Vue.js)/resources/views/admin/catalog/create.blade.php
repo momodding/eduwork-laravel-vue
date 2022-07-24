@@ -11,12 +11,12 @@
       
           <form action="{{ url('catalogs') }}" method="post">
               @csrf
-              <div class="card-body">
-                  <div class="form-group">
+              <div class="form-group">
+                  <div class="card-body">
                     <label>Name</label>
-                    <input type="text" name="name" class="form-control" placeholder="Enter name" required="">
+                    <input type="text" name="name" class="form-control" placeholder="Enter Name" required="">
                   </div>  
-            </div>
+              </div>
       
             <div class="card-footer">
               <button type="submit" class="btn btn-primary">Submit</button>
