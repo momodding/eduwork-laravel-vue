@@ -13,11 +13,30 @@
               @csrf
               {{ method_field('PUT') }}
               
-              <div class="card-body">
-                  <div class="form-group">
+              <div class="form-group">
+                  <div class="card-body">
                     <label>Name</label>
-                    <input type="text" name="name" class="form-control" placeholder="Enter name" required="" value="{{ $publisher->name }}">
+                    <input type="text" name="name" class="form-control" placeholder="Enter Name" required="" value="{{ $publisher->name }}">
+                  </div>
+
+              <div class="form-group">
+                  <div class="card-body">
+                    <label>Email</label>
+                    <input type="text" name="email" class="form-control" placeholder="Enter Email" required="" value="{{ $publisher->email }}">
+                  </div>
+
+              <div class="form-group">
+                  <div class="card-body">
+                    <label>Phone Number</label>
+                    <input type="text" name="phone_number" class="form-control" placeholder="Enter Phone Number" required="" value="{{ $publisher->phone_number }}">
+                  </div>
+
+              <div class="form-group">
+                  <div class="card-body">
+                    <label>Address</label>
+                    <input type="text" name="address" class="form-control" placeholder="Enter Address" required="" value="{{ $publisher->address }}">
                   </div>  
+              </div>  
             </div>
       
             <div class="card-footer">

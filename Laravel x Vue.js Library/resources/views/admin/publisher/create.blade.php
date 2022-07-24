@@ -34,7 +34,7 @@
                     <label>Address</label>
                     <input type="text" name="address" class="form-control" placeholder="Enter Address" required="">
                   </div>  
-            </div>
+              </div>
       
             <div class="card-footer">
               <button type="submit" class="btn btn-primary">Submit</button>

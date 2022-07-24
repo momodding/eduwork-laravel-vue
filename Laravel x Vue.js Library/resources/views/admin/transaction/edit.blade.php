@@ -13,10 +13,22 @@
               @csrf
               {{ method_field('PUT') }}
               
-              <div class="card-body">
+              <div class="form-group">
+                    <div class="card-body">
+                    <label>Member ID</label>
+                    <input type="text" name="member_id" class="form-control" placeholder="Enter Member ID" required="" value="{{ $transaction->member_id }}">
+                  </div>
+
                   <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" name="name" class="form-control" placeholder="Enter name" required="" value="{{ $transaction->name }}">
+                    <div class="card-body">
+                    <label>Date Start</label>
+                    <input type="text" name="date_start" class="form-control" placeholder="Enter Date Start" required="" value="{{ $transaction->date_start }}">
+                  </div>
+
+                  <div class="form-group">
+                    <div class="card-body">
+                    <label>Date End</label>
+                    <input type="text" name="date_end" class="form-control" placeholder="Enter Date End" required="" value="{{ $transaction->date_end }}">
                   </div>  
             </div>
       
