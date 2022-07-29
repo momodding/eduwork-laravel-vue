@@ -9,7 +9,7 @@ class Catalog extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'created_at'];
+    protected $fillable = ['name'];
 
     public function books()
     {
