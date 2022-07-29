@@ -44,7 +44,7 @@ class PublisherController extends Controller
     {
         //return $request;
             $this->validate($request,[
-            'name' => ['required', 'string|min:1|max:60', 'alpha'],
+            'name' => ['required'],
             'email' => ['required', 'email'],
             'phone_number' => ['required', 'numeric'],
             'address' => ['required'],
@@ -87,7 +87,7 @@ class PublisherController extends Controller
     public function update(Request $request, Publisher $publisher)
     {
         $this->validate($request,[
-            'name' => ['required', 'string|min:1|max:60', 'alpha'],
+            'name' => ['required'],
             'email' => ['required', 'email'],
             'phone_number' => ['required', 'numeric'],
             'address' => ['required'],

@@ -44,7 +44,7 @@ class MemberController extends Controller
     {
         //return $request;
             $this->validate($request,[
-            'name' => ['required', 'string|min:1|max:60', 'alpha'],
+            'name' => ['required'],
             'gender' => ['required'],
             'phone_number' => ['required', 'numeric'],
             'address' => ['required'],
@@ -88,7 +88,7 @@ class MemberController extends Controller
     public function update(Request $request, Member $member)
     {
         $this->validate($request,[
-            'name' => ['required', 'string|min:1|max:60', 'alpha'],
+            'name' => ['required'],
             'gender' => ['required'],
             'phone_number' => ['required', 'numeric'],
             'address' => ['required'],

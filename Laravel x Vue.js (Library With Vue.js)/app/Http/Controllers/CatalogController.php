@@ -45,7 +45,7 @@ class CatalogController extends Controller
         // Security validasi backend untuk validasi input data catalog untuk function create
 
         $this->validate($request,[
-            'name' => ['required', 'string|min:1|max:60', 'alpha'],
+            'name' => ['required'],
         ]);
 
         Catalog::create($request->all());
@@ -85,7 +85,7 @@ class CatalogController extends Controller
     public function update(Request $request, Catalog $catalog)
     {
         $this->validate($request,[
-            'name' => ['required', 'string|min:1|max:60', 'alpha'],
+            'name' => ['required'],
         ]);
 
         $catalog->update($request->all());
