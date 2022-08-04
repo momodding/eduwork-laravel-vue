@@ -33,8 +33,8 @@
             </div>
         </div>   
     </div>
-</div>     
-<div class="modal fade" id="modal-default">
+     
+    <div class="modal fade" id="modal-default">
                   <div class="modal-dialog">
                       <div class="modal-content">
                           <form method="post" :action="actionUrl" autocomplete="off" @submit="submitForm($event, data.id)">
@@ -75,6 +75,7 @@
                           </form>
                       </div>
                   </div>
+    </div>              
 </div>
 @endsection
 

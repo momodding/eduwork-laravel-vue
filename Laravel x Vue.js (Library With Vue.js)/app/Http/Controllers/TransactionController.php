@@ -18,10 +18,15 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::all();
+        return view('admin.transaction');
+    }
 
-        //return $transactions;
-        return view('admin.transaction', compact('transactions'));
+    public function api() 
+    {
+        $transactions = Transaction::all();
+        $datatables = datatables()->of($transactions)->addIndexColumn();
+
+        return $datatables->make(true);
     }
 
     /**
