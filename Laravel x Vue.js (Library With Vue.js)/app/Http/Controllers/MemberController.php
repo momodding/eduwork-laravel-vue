@@ -18,10 +18,15 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $members = Member::all();
+        return view('admin.member');
+    }
 
-        //return $members;
-        return view('admin.member', compact('members'));
+    public function api() 
+    {
+        $members = Member::all();
+        $datatables = datatables()->of($members)->addIndexColumn();
+
+        return $datatables->make(true);
     }
 
     /**
@@ -46,9 +51,9 @@ class MemberController extends Controller
             $this->validate($request,[
             'name' => ['required'],
             'gender' => ['required'],
-            'phone_number' => ['required', 'numeric'],
+            'phone_number' => ['required'],
             'address' => ['required'],
-            'email' => ['required', 'email'],
+            'email' => ['required'],
             ]);
 
             Member::create($request->all());
@@ -90,14 +95,14 @@ class MemberController extends Controller
         $this->validate($request,[
             'name' => ['required'],
             'gender' => ['required'],
-            'phone_number' => ['required', 'numeric'],
+            'phone_number' => ['required'],
             'address' => ['required'],
-            'email' => ['required', 'email'],
+            'email' => ['required'],
         ]);
 
-        $publisher->update($request->all());
+        $member->update($request->all());
 
-        return redirect('publishers');
+        return redirect('members');
     }
 
 
@@ -109,7 +114,6 @@ class MemberController extends Controller
      */
     public function destroy(Member $member)
     {
-        $member->delete();
-        
+        $member->delete();  
     }
 }

@@ -44,11 +44,11 @@ class BookController extends Controller
     {
         //return $request;
             $this->validate($request,[
-            'isbn' => ['required', 'numeric'],
+            'isbn' => ['required'],
             'title' => ['required'],
-            'year' => ['required', 'numeric'],
-            'qty' => ['required', 'numeric'],
-            'price' => ['required', 'numeric'],
+            'year' => ['required'],
+            'qty' => ['required'],
+            'price' => ['required'],
             ]);
 
             Book::create($request->all());
@@ -88,11 +88,11 @@ class BookController extends Controller
     public function update(Request $request, Book $book)
     {
         $this->validate($request,[
-            'isbn' => ['required', 'numeric'],
+            'isbn' => ['required'],
             'title' => ['required'],
-            'year' => ['required', 'numeric'],
-            'qty' => ['required', 'numeric'],
-            'price' => ['required', 'numeric'],
+            'year' => ['required'],
+            'qty' => ['required'],
+            'price' => ['required'],
         ]);
 
         $book->update($request->all());
@@ -109,6 +109,5 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         $book->delete();
-        
     }
 }

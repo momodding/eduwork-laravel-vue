@@ -6,7 +6,7 @@ use App\Models\Publisher;
 use Illuminate\Http\Request;
 
 class PublisherController extends Controller
-{
+{    
     public function __construct()
     {
         $this->middleware('auth');
@@ -18,10 +18,15 @@ class PublisherController extends Controller
      */
     public function index()
     {
-        $publishers = Publisher::all();
+        return view('admin.publisher');
+    }
 
-        //return $publishers;
-        return view('admin.publisher', compact('publishers'));
+    public function api() 
+    {
+        $publishers = Publisher::all();
+        $datatables = datatables()->of($publishers)->addIndexColumn();
+
+        return $datatables->make(true);
     }
 
     /**
@@ -45,8 +50,8 @@ class PublisherController extends Controller
         //return $request;
             $this->validate($request,[
             'name' => ['required'],
-            'email' => ['required', 'email'],
-            'phone_number' => ['required', 'numeric'],
+            'email' => ['required'],
+            'phone_number' => ['required'],
             'address' => ['required'],
             ]);
 
@@ -88,8 +93,8 @@ class PublisherController extends Controller
     {
         $this->validate($request,[
             'name' => ['required'],
-            'email' => ['required', 'email'],
-            'phone_number' => ['required', 'numeric'],
+            'email' => ['required'],
+            'phone_number' => ['required'],
             'address' => ['required'],
         ]);
 
@@ -105,9 +110,7 @@ class PublisherController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Publisher $publisher)
-    {
-        
+    { 
         $publisher->delete();
-        
     }
 }

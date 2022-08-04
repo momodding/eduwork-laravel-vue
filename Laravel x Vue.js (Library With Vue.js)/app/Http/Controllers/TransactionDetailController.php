@@ -106,7 +106,6 @@ class TransactionDetailController extends Controller
      */
     public function destroy(TransactionDetail $transactionDetail)
     {
-        $transaction_detail->delete();
-        
+        $transaction_detail->delete();   
     }
 }
