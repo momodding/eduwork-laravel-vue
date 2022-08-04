@@ -18,10 +18,15 @@ class TransactionDetailController extends Controller
      */
     public function index()
     {
-        $transaction_details = TransactionDetail::all();
+        return view('admin.transaction_detail');
+    }
 
-        //return $transactions;
-        return view('admin.transaction_detail', compact('transaction_details'));
+    public function api() 
+    {
+        $transaction_details = TransactionDetail::all();
+        $datatables = datatables()->of($transaction_details)->addIndexColumn();
+
+        return $datatables->make(true);
     }
 
     /**
@@ -46,8 +51,8 @@ class TransactionDetailController extends Controller
             $this->validate($request,[
             'transaction_id' => ['required'],
             'book_id' => ['required'],
-            'qty' => ['required', 'numeric'],
-            'isbn' => ['required', 'numeric'],
+            'qty' => ['required'],
+            'isbn' => ['required'],
             ]);
 
             TransactionDetail::create($request->all());
@@ -89,8 +94,8 @@ class TransactionDetailController extends Controller
         $this->validate($request,[
             'transaction_id' => ['required'],
             'book_id' => ['required'],
-            'qty' => ['required', 'numeric'],
-            'isbn' => ['required', 'numeric'],
+            'qty' => ['required'],
+            'isbn' => ['required'],
         ]);
 
         $transaction_detail->update($request->all());
