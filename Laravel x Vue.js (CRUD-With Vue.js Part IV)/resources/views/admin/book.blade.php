@@ -120,7 +120,7 @@
         data: {
             books: [],
             search: '',
-            book: {}
+            book: {},
             editStatus: false
         },
         mounted: function () {
