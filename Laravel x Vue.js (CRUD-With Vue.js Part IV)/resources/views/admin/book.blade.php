@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('header', 'Book')
- 
+
 @section('content')
 <div id="controller">
     <div class="row">
@@ -67,7 +67,7 @@
                         @foreach($publishers as $publisher)
                         <option :selected="book.publisher_id == {{ $publisher->id }}" value="{{ $publisher->id }}">{{ $publisher->name }}</option>
                         @endforeach
-                      </select>                      
+                      </select>
                     </div>
 
                     <div class="form-group">
@@ -76,7 +76,7 @@
                         @foreach($authors as $author)
                         <option :selected="book.author_id == {{ $author->id }}" value="{{ $author->id }}">{{ $author->name }}</option>
                         @endforeach
-                      </select>                      
+                      </select>
                     </div>
 
                     <div class="form-group">
@@ -85,7 +85,7 @@
                         @foreach($catalogs as $catalog)
                         <option :selected="book.catalog_id == {{ $catalog->id }}" value="{{ $catalog->id }}">{{ $catalog->name }}</option>
                         @endforeach
-                      </select>                     
+                      </select>
                     </div>
 
                     <div class="form-group">
@@ -106,7 +106,7 @@
           </div>
         </div>
       </div>
-      
+
 </div>
 @endsection
 
@@ -124,7 +124,7 @@
             editStatus: false
         },
         mounted: function () {
-          this.get_books();            
+          this.get_books();
         },
         methods: {
             get_books() {
@@ -144,7 +144,7 @@
                 this.book = {};
                 this.editStatus = false;
                 $('#modal-default').modal();
-            }
+            },
             editData(book) {
                 this.book = book;
                 this.editStatus = true;
@@ -164,6 +164,6 @@
                 })
             }
           }
-  })     
+  })
 </script>
 @endsection
