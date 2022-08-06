@@ -1,5 +1,5 @@
 <?php
- 
+
 namespace App\Http\Controllers;
 
 use App\Models\Author;
@@ -21,9 +21,19 @@ class AuthorController extends Controller
         return view('admin.author');
     }
 
-    public function api() 
+    public function api()
     {
         $authors = Author::all();
+
+        foreach ($authors as $key => $author) {
+            $author->date = convert_date($author->created_at);
+        }
+
+        // $datatables = datatables()->of($authors)
+        //                     ->addColumn('date', function($author) {
+        //                         return convert_date($author->created_at);
+        //                     })->addIndexCoumn();
+
         $datatables = datatables()->of($authors)->addIndexColumn();
 
         return $datatables->make(true);

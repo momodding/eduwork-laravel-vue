@@ -23,6 +23,7 @@
                       <th width="30px" class="text-center">No.</th>
                       <th class="text-center">Name</th>
                       <th class="text-center">Total Books</th>
+                      <th class="text-center">Created At</th>
                       <th class="text-center">Action</th>
                     </tr>
                   </thead>
@@ -32,6 +33,7 @@
                       <td class="text-center">{{ $key+1 }}</td>
                       <td class="text-center">{{ $catalog->name }}</td>
                       <td class="text-center">{{ count($catalog->books) }}</td>
+                      <td class="text-center">{{ convert_date($catalog->created_at) }}</td>
                       <td class="text-center">
                         <a href="#" @click="editData({{ $catalog }})" class="btn btn-warning btn-sm" style="width: 100px">Edit</a>
                         <a href="#" @click="deleteData({{ $catalog->id }})" class="btn btn-danger btn-sm" style="width: 100px">Delete</a>
@@ -41,13 +43,13 @@
                   </tbody>
                 </table>
               </div>
-        
-        <div class="modal fade" id="modal-default">
+
+              <div class="modal fade" id="modal-default">
                   <div class="modal-dialog">
                       <div class="modal-content">
                           <form method="post" :action="actionUrl" autocomplete="off">
                               <div class="modal-header">
-                                
+
                                   <h4 class="modal-title">Catalog</h4>
 
                                   <button type="button" class="close" data-dismiss='modal' aria-label='close'>
@@ -67,6 +69,10 @@
                                         <label>Total Books</label>
                                         <input type="text" class="form-control" name="email" :value="data.totalBooks" required="">
                                     </div>
+                                    <div class="form-group">
+                                        <label>Created At</label>
+                                        <input type="text" class="form-control" name="email" :value="data.created_at" required="">
+                                    </div>
                                 </div>
                                 <div class="modal-footer justify-content-between">
                                     <button type="button" class="btn btn-default" data-dismiss='modal'>Close</button>
@@ -79,7 +85,6 @@
         </div>
       </div>
     </div>
-  </div>
 </div>
 @endsection
 

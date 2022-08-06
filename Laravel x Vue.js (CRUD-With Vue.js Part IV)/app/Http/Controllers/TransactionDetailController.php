@@ -21,9 +21,19 @@ class TransactionDetailController extends Controller
         return view('admin.transaction_detail');
     }
 
-    public function api() 
+    public function api()
     {
         $transaction_details = TransactionDetail::all();
+
+        foreach ($transaction_details as $key => $transaction_detail) {
+            $transaction_detail->date = convert_date($transaction_detail->created_at);
+        }
+
+        // $datatables = datatables()->of($transaction_details)
+        //                     ->addColumn('date', function($transaction_detail) {
+        //                         return convert_date($transaction_detail->created_at);
+        //                     })->addIndexCoumn();
+
         $datatables = datatables()->of($transaction_details)->addIndexColumn();
 
         return $datatables->make(true);
@@ -111,6 +121,6 @@ class TransactionDetailController extends Controller
      */
     public function destroy(TransactionDetail $transactionDetail)
     {
-        $transaction_detail->delete();   
+        $transaction_detail->delete();
     }
 }

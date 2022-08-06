@@ -62,6 +62,11 @@
                     </div>
 
                     <div class="form-group">
+                        <label>Created At</label>
+                        <input type="text" class="form-control" name="created_at" required="" :value="book.created_at">
+                    </div>
+
+                    <div class="form-group">
                       <label>Publisher</label>
                       <select name="publisher_id" class="form-control">
                         @foreach($publishers as $publisher)

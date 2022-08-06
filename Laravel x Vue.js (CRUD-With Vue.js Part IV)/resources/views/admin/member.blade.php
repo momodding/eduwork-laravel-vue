@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 @endsection
- 
+
 @section('content')
 <div id="controller">
     <div class="row">
@@ -26,21 +26,22 @@
                             <th class="text-center">Phone Number</th>
                             <th class="text-center">Address</th>
                             <th class="text-center">Email</th>
+                            <th class="text-center">Created At</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
                 </table>
               </div>
             </div>
-        </div>   
+        </div>
     </div>
-     
+
     <div class="modal fade" id="modal-default">
                   <div class="modal-dialog">
                       <div class="modal-content">
                           <form method="post" :action="actionUrl" autocomplete="off" @submit="submitForm($event, data.id)">
                               <div class="modal-header">
-                                
+
                                   <h4 class="modal-title">Member</h4>
 
                                   <button type="button" class="close" data-dismiss='modal' aria-label='close'>
@@ -62,7 +63,7 @@
                                     </div>
                                     <div class="form-group">
                                       <label>Phone Number</label>
-                                      <input type="text" class="form-control" name="phone_number" :value="data.phone_number" required="">
+                                      <input type="number" class="form-control" name="phone_number" :value="data.phone_number" required="">
                                     </div>
                                     <div class="form-group">
                                       <label>Address</label>
@@ -72,6 +73,10 @@
                                         <label>Email</label>
                                         <input type="text" class="form-control" name="email" :value="data.email" required="">
                                     </div>
+                                    <div class="form-group">
+                                        <label>Created At</label>
+                                        <input type="text" class="form-control" name="created_at" :value="data.created_at" required="">
+                                      </div>
                                 </div>
                                 <div class="modal-footer justify-content-between">
                                     <button type="button" class="btn btn-default" data-dismiss='modal'>Close</button>
@@ -80,7 +85,7 @@
                           </form>
                       </div>
                   </div>
-    </div>              
+    </div>
 </div>
 @endsection
 
@@ -109,6 +114,7 @@
         {data: 'phone_number', class: 'text-center', orderable: true},
         {data: 'address', class:'text-center', orderable: true},
         {data: 'email', class: 'text-center', orderable: true},
+        {data: 'date', class:'text-center', orderable: true},
         {render: function (index, row, data, meta) {
             return `
                 <a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">

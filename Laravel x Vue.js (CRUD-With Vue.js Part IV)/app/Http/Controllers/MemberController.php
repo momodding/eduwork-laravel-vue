@@ -21,9 +21,19 @@ class MemberController extends Controller
         return view('admin.member');
     }
 
-    public function api() 
+    public function api()
     {
         $members = Member::all();
+
+        foreach ($members as $key => $member) {
+            $member->date = convert_date($member->created_at);
+        }
+
+        // $datatables = datatables()->of($members)
+        //                     ->addColumn('date', function($member) {
+        //                         return convert_date($member->created_at);
+        //                     })->addIndexCoumn();
+
         $datatables = datatables()->of($members)->addIndexColumn();
 
         return $datatables->make(true);
@@ -114,6 +124,6 @@ class MemberController extends Controller
      */
     public function destroy(Member $member)
     {
-        $member->delete();  
+        $member->delete();
     }
 }

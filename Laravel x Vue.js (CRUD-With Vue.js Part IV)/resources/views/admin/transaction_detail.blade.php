@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 @endsection
- 
+
 @section('content')
 <div id="controller">
     <div class="row">
@@ -25,21 +25,22 @@
                             <th class="text-center">Book ID</th>
                             <th class="text-center">Quantity</th>
                             <th class="text-center">ISBN</th>
+                            <th class="text-center">Created At</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
                 </table>
               </div>
             </div>
-        </div>   
+        </div>
     </div>
-     
+
     <div class="modal fade" id="modal-default">
                   <div class="modal-dialog">
                       <div class="modal-content">
                           <form method="post" :action="actionUrl" autocomplete="off" @submit="submitForm($event, data.id)">
                               <div class="modal-header">
-                                
+
                                   <h4 class="modal-title">Transaction Detail</h4>
 
                                   <button type="button" class="close" data-dismiss='modal' aria-label='close'>
@@ -61,11 +62,15 @@
                                     </div>
                                     <div class="form-group">
                                       <label>Quantity</label>
-                                      <input type="text" class="form-control" name="qty" :value="data.qty" required="">
+                                      <input type="number" class="form-control" name="qty" :value="data.qty" required="">
                                     </div>
                                     <div class="form-group">
                                       <label>ISBN</label>
-                                      <input type="text" class="form-control" name="isbn" :value="data.isbn" required="">
+                                      <input type="number" class="form-control" name="isbn" :value="data.isbn" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Created At</label>
+                                        <input type="text" class="form-control" name="email" :value="data.created_at" required="">
                                     </div>
                                 </div>
                                 <div class="modal-footer justify-content-between">
@@ -75,7 +80,7 @@
                           </form>
                       </div>
                   </div>
-    </div>              
+    </div>
 </div>
 @endsection
 
@@ -103,6 +108,7 @@
         {data: 'book_id', class: 'text-center', orderable: true},
         {data: 'qty', class: 'text-center', orderable: true},
         {data: 'isbn', class: 'text-center', orderable: true},
+        {data: 'date', class: 'text-center', orderable: true},
         {render: function (index, row, data, meta) {
             return `
                 <a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">

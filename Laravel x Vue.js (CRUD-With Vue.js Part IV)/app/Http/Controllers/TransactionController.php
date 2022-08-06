@@ -21,9 +21,19 @@ class TransactionController extends Controller
         return view('admin.transaction');
     }
 
-    public function api() 
+    public function api()
     {
         $transactions = Transaction::all();
+
+        foreach ($transactions as $key => $transaction) {
+            $transaction->date = convert_date($transaction->created_at);
+        }
+
+        // $datatables = datatables()->of($transactions)
+        //                     ->addColumn('date', function($transaction) {
+        //                         return convert_date($transaction->created_at);
+        //                     })->addIndexCoumn();
+
         $datatables = datatables()->of($transactions)->addIndexColumn();
 
         return $datatables->make(true);
