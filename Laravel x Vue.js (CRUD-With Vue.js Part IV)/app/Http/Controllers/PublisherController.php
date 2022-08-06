@@ -6,7 +6,7 @@ use App\Models\Publisher;
 use Illuminate\Http\Request;
 
 class PublisherController extends Controller
-{    
+{
     public function __construct()
     {
         $this->middleware('auth');
@@ -21,9 +21,19 @@ class PublisherController extends Controller
         return view('admin.publisher');
     }
 
-    public function api() 
+    public function api()
     {
         $publishers = Publisher::all();
+
+        foreach ($publishers as $key => $publisher) {
+            $publisher->date = convert_date($publisher->created_at);
+        }
+
+        // $datatables = datatables()->of($publishers)
+        //                     ->addColumn('date', function($publisher) {
+        //                         return convert_date($publisher->created_at);
+        //                     })->addIndexCoumn();
+
         $datatables = datatables()->of($publishers)->addIndexColumn();
 
         return $datatables->make(true);
@@ -110,7 +120,7 @@ class PublisherController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Publisher $publisher)
-    { 
+    {
         $publisher->delete();
     }
 }

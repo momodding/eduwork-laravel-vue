@@ -25,6 +25,7 @@
                             <th class="text-center">Email</th>
                             <th class="text-center">Phone Number</th>
                             <th class="text-center">Address</th>
+                            <th class="text-center">Created At</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -67,6 +68,10 @@
                                       <label>Address</label>
                                       <input type="text" class="form-control" name="address" :value="data.address" required="">
                                     </div>
+                                    <div class="form-group">
+                                        <label>Created At</label>
+                                        <input type="text" class="form-control" name="email" :value="data.created_at" required="">
+                                    </div>
                                 </div>
                                 <div class="modal-footer justify-content-between">
                                     <button type="button" class="btn btn-default" data-dismiss='modal'>Close</button>
@@ -103,6 +108,7 @@
         {data: 'email', class: 'text-center', orderable: true},
         {data: 'phone_number', class: 'text-center', orderable: true},
         {data: 'address', class:'text-center', orderable: true},
+        {data: 'date', class:'text-center', orderable: true},
         {render: function (index, row, data, meta) {
             return `
                 <a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">
