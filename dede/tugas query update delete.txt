@@ -1,0 +1,5 @@
+DELETE FROM `produsen` WHERE `id` = 12;
+DELETE FROM resep WHERE dokter_name LIKE 'Dr. Test 4';
+UPDATE produsen SET alamat = 'Balikpapan' WHERE id = 1;
+UPDATE obat SET stock = 100 WHERE id = 6;
+UPDATE penjualan SET harga = 50000 WHERE pasien_name LIKE 'Pasien Test';
