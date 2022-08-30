@@ -18,10 +18,25 @@ class CatalogController extends Controller
      */
     public function index()
     {
+        return view('admin.catalog');
+    }
+
+    public function api()
+    {
         $catalogs = Catalog::all();
 
-        //return $catalogs;
-        return view('admin.catalog', compact('catalogs'));
+        foreach ($catalogs as $key => $catalog) {
+            $catalog->date = convert_date($catalog->created_at);
+        }
+
+        // $datatables = datatables()->of($catalogs)
+        //                     ->addColumn('date', function($catalog) {
+        //                         return convert_date($catalog->created_at);
+        //                     })->addIndexCoumn();
+
+        $datatables = datatables()->of($catalogs)->addIndexColumn();
+
+        return $datatables->make(true);
     }
 
     /**

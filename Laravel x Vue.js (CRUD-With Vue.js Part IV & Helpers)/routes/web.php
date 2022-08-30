@@ -20,6 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/members', [App\Http\Controllers\MemberController::class, 'index'])->name('dashboard');
+Route::get('/catalogs', [App\Http\Controllers\CatalogController::class, 'index'])->name('dashboard');
 Route::get('/transactions', [App\Http\Controllers\TransactionController::class, 'index'])->name('dashboard');
 Route::get('/transaction_details', [App\Http\Controllers\TransactionDetailController::class, 'index'])->name('dashboard');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
@@ -38,3 +39,4 @@ Route::get('/api/members', [App\Http\Controllers\MemberController::class, 'api']
 Route::get('/api/transactions', [App\Http\Controllers\TransactionController::class, 'api']);
 Route::get('/api/transaction_details', [App\Http\Controllers\TransactionDetailController::class, 'api']);
 Route::get('/api/books', [App\Http\Controllers\BookController::class, 'api']);
+Route::get('/api/catalogs', [App\Http\Controllers\CatalogController::class, 'api']);

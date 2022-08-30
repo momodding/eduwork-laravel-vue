@@ -108,50 +108,22 @@
         var actionUrl = '{{ url('transaction_details') }}';
         var apiUrl = '{{ url('api/transaction_details') }}';
 
-        var columns = [{
-                data: 'DT_RowIndex',
-                class: 'text-center',
-                orderable: true
-            },
-            {
-                data: 'transaction_id',
-                class: 'text-center',
-                orderable: true
-            },
-            {
-                data: 'book_id',
-                class: 'text-center',
-                orderable: true
-            },
-            {
-                data: 'qty',
-                class: 'text-center',
-                orderable: true
-            },
-            {
-                data: 'isbn',
-                class: 'text-center',
-                orderable: true
-            },
-            {
-                data: 'date',
-                class: 'text-center',
-                orderable: true
-            },
-            {
-                render: function(index, row, data, meta) {
-                    return `
-                <a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">
+        var columns = [
+            {data: 'DT_RowIndex', class: 'text-center', orderable: true},
+            {data: 'transaction_id', class: 'text-center', orderable: true},
+            {data: 'book_id', class: 'text-center', orderable: true},
+            {data: 'qty', class: 'text-center', orderable: true},
+            {data: 'isbn', class: 'text-center', orderable: true},
+            {data: 'date', class: 'text-center', orderable: true},
+            {render: function(index, row, data, meta) {
+                return `
+                    <a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">
                     Edit
-                </a>
-                <a class="btn btn-danger btn-sm" onclick="controller.deleteData(event, ${data.id})">
+                    </a>
+                    <a class="btn btn-danger btn-sm" onclick="controller.deleteData(event, ${data.id})">
                     Delete
-                </a>`;
-                },
-                orderable: false,
-                width: '200px',
-                class: 'text-center'
-            },
+                    </a>`;
+                }, orderable: false, width: '200px', class: 'text-center'},
         ];
         var controller = new Vue({
             el: '#controller',

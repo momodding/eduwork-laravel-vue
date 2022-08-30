@@ -9,7 +9,7 @@ class Transaction extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['member_id', 'date_start', 'date_end'];
+    protected $fillable = ['member_id', 'date_start', 'date_end', 'created_at'];
 
     public function transactions()
     {

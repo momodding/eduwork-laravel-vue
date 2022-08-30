@@ -26,7 +26,7 @@
                 <div class="info-box" v-on:click="editData(book)">
                     <div class="info-box-content">
                         <span class="info-box-text h3">@{{ book.title }} ( @{{ book.qty }} )</span>
-                        <span class="info-box-number">Rp. @{{ numberWithSpaces(book.price) }} ,-<small></small></span>
+                        <span class="info-box-number">Rp @{{ numberWithSpaces(book.price) }} ,-<small></small></span>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
         <div class="modal fade" id="modal-default">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form method="post" action="" autocomplete="off">
+                    <form method="post" :action="actionUrl" autocomplete="off" @submit="submitForm($event, book.id)">
                         <div class="modal-header">
                             <h4 class="modal-title">Book</h4>
                             <button type="button" class="close" data-dismiss='modal' aria-label='close'>
@@ -135,6 +135,7 @@
             data: {
                 books: [],
                 search: '',
+                actionUrl: actionUrl,
                 book: {},
                 editStatus: false
             },
@@ -162,11 +163,20 @@
                 },
                 editData(book) {
                     this.book = book;
+                    this.actionUrl = '{{ url('books') }}' + '/' + book.id;
                     this.editStatus = true;
                     $('#modal-default').modal();
                 },
                 deleteData(id) {
                     console.log(id);
+                    this.actionUrl = '{{ url('books') }}' + '/' + id;
+                    if (confirm("Are you sure?")) {
+                        axios.post(this.actionUrl, {
+                            _method: "DELETE"
+                        }).then(response => {
+                            location.reload();
+                        });
+                    }
                 },
                 numberWithSpaces(x) {
                     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");

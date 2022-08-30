@@ -14,8 +14,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <a href="#" @click="addData()" class="btn btn-sm btn-primary pull-right">Create New
-                            Publisher</a>
+                        <a href="#" @click="addData()" class="btn btn-sm btn-primary pull-right">Create New Publisher</a>
                     </div>
                     <div class="card-body">
                         <table id="datatable" class="table table-striped table-bordered">
@@ -75,7 +74,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Created At</label>
-                                <input type="text" class="form-control" name="email" :value="data.created_at"
+                                <input type="text" class="form-control" name="created_at" :value="data.created_at"
                                     required="">
                             </div>
                         </div>
@@ -108,50 +107,22 @@
         var actionUrl = '{{ url('publishers') }}';
         var apiUrl = '{{ url('api/publishers') }}';
 
-        var columns = [{
-                data: 'DT_RowIndex',
-                class: 'text-center',
-                orderable: true
-            },
-            {
-                data: 'name',
-                class: 'text-center',
-                orderable: true
-            },
-            {
-                data: 'email',
-                class: 'text-center',
-                orderable: true
-            },
-            {
-                data: 'phone_number',
-                class: 'text-center',
-                orderable: true
-            },
-            {
-                data: 'address',
-                class: 'text-center',
-                orderable: true
-            },
-            {
-                data: 'date',
-                class: 'text-center',
-                orderable: true
-            },
-            {
-                render: function(index, row, data, meta) {
+        var columns = [
+            {data: 'DT_RowIndex', class: 'text-center', orderable: true},
+            {data: 'name', class: 'text-center', orderable: true},
+            {data: 'email', class: 'text-center', orderable: true},
+            {data: 'phone_number', class: 'text-center', orderable: true},
+            {data: 'address', class: 'text-center', orderable: true},
+            {data: 'date', class: 'text-center', orderable: true},
+            {render: function(index, row, data, meta) {
                     return `
-                <a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">
+                    <a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">
                     Edit
-                </a>
-                <a class="btn btn-danger btn-sm" onclick="controller.deleteData(event, ${data.id})">
+                    </a>
+                    <a class="btn btn-danger btn-sm" onclick="controller.deleteData(event, ${data.id})">
                     Delete
-                </a>`;
-                },
-                orderable: false,
-                width: '200px',
-                class: 'text-center'
-            },
+                    </a>`;
+                }, orderable: false, width: '200px', class: 'text-center'},
         ];
         var controller = new Vue({
             el: '#controller',

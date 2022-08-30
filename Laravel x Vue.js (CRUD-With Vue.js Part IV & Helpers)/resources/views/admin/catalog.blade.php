@@ -14,8 +14,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <a href="#" @click="addData()" data-target="modal-default" data-toggle="modal"
-                            class="btn btn-sm btn-primary pull-right">Create New Catalog</a>
+                        <a href="#" @click="addData()" class="btn btn-sm btn-primary pull-right">Create New Catalog</a>
                     </div>
                     <div class="card-body">
                         <table id="datatable" class="table table-striped table-bordered">
@@ -23,33 +22,21 @@
                                 <tr>
                                     <th width="30px" class="text-center">No.</th>
                                     <th class="text-center">Name</th>
-                                    <th class="text-center">Total Books</th>
+                                    <th class="text-center">Created At</th>
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($catalogs as $key => $catalog)
-                                    <tr>
-                                        <td class="text-center">{{ $key + 1 }}</td>
-                                        <td class="text-center">{{ $catalog->name }}</td>
-                                        <td class="text-center">{{ count($catalog->books) }}</td>
-                                        <td class="text-center">
-                                            <a href="#" @click="editData({{ $catalog }})"
-                                                class="btn btn-warning btn-sm" style="width: 100px">Edit</a>
-                                            <a href="#" @click="deleteData({{ $catalog->id }})"
-                                                class="btn btn-danger btn-sm" style="width: 100px">Delete</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
                         </table>
                     </div>
+                </div>
+            </div>
+        </div>
 
-                    <div class="modal fade" id="modal-default">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <form method="post" :action="actionUrl" autocomplete="off">
-                                    <div class="modal-header">
+        <div class="modal fade" id="modal-default">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form method="post" :action="actionUrl" autocomplete="off" @submit="submitForm($event, data.id)">
+                        <div class="modal-header">
 
                                         <h4 class="modal-title">Catalog</h4>
 
@@ -68,9 +55,9 @@
                                                 required="">
                                         </div>
                                         <div class="form-group">
-                                            <label>Total Books</label>
-                                            <input type="text" class="form-control" name="email"
-                                                :value="data.totalBooks" required="">
+                                            <label>Created At</label>
+                                            <input type="text" class="form-control" name="created_at" required=""
+                                                :value="data.created_at">
                                         </div>
                                     </div>
                                     <div class="modal-footer justify-content-between">
@@ -102,56 +89,80 @@
     <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
     <script type="text/javascript">
-        $(function() {
-            $("#datatable").DataTable();
-            // $('#example2').DataTable({
-            //   "paging": true,
-            //   "lengthChange": false,
-            //   "searching": false,
-            //   "ordering": true,
-            //   "info": true,
-            //   "autoWidth": false,
-            //   "responsive": true,
-            // });
-        });
-    </script>
-    <!-- CRUD Vue js -->
-    <script type="text/javascript">
+        var actionUrl = '{{ url('catalogs') }}';
+        var apiUrl = '{{ url('api/catalogs') }}';
+
+        var columns = [
+            {data: 'DT_RowIndex', class: 'text-center', orderable: true},
+            {data: 'name', class: 'text-center', orderable: true},
+            {data: 'date', class: 'text-center', orderable: true},
+            {render: function(index, row, data, meta) {
+                return `
+                    <a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">
+                    Edit
+                    </a>
+                    <a class="btn btn-danger btn-sm" onclick="controller.deleteData(event, ${data.id})">
+                    Delete
+                    </a>`;
+                }, orderable: false, width: '200px', class: 'text-center'},
+        ];
         var controller = new Vue({
             el: '#controller',
             data: {
+                datas: [],
                 data: {},
-                actionUrl: '{{ url('catalogs') }}',
-                editStatus: false
+                actionUrl,
+                apiUrl,
+                editStatus: false,
             },
             mounted: function() {
-
+                console.log('catalogLoaded')
+                this.datatable();
             },
             methods: {
+                datatable() {
+                    const _this = this;
+                    _this.table = $('#datatable').DataTable({
+                        ajax: {
+                            url: _this.apiUrl,
+                            type: 'GET',
+                        },
+                        columns
+                    }).on('xhr', function() {
+                        _this.datas = _this.table.ajax.json().data;
+                    });
+                },
                 addData() {
-                    console.log('addCatalog');
                     this.data = {};
-                    this.actionUrl = '{{ url('catalogs') }}';
                     this.editStatus = false;
                     $('#modal-default').modal();
                 },
-                editData(data) {
-                    this.data = data;
-                    this.actionUrl = '{{ url('catalogs') }}' + '/' + data.id;
+                editData(event, row) {
+                    this.data = this.datas[row];
                     this.editStatus = true;
                     $('#modal-default').modal();
                 },
-                deleteData(id) {
-                    this.actionUrl = '{{ url('catalogs') }}' + '/' + id;
+                deleteData(event, id) {
                     if (confirm("Are you sure?")) {
-                        axios.post(this.actionUrl, {
+                        $(event.target).parents('tr').remove();
+                        axios.post(this.actionUrl + '/' + id, {
                             _method: "DELETE"
                         }).then(response => {
-                            location.reload();
+                            alert('Data has been removed');
                         });
                     }
-                }
+                },
+                submitForm(event, id) {
+                    event.preventDefault();
+                    const _this = this;
+                    var actionUrl = !this.editStatus ? this.actionUrl : this.actionUrl + '/' + id;
+                    axios.post(actionUrl, new FormData($(event.target)[0])).then(response => {
+                        $('#modal-default').modal('hide');
+                        _this.table.ajax.reload();
+                    });
+                },
             }
         });
     </script>
+    {{-- <script src="{{ asset('js/data.js') }}"></script> --}}
 @endsection

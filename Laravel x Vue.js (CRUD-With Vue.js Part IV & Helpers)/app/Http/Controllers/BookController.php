@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Author;
 use App\Models\Catalog;
+use App\Models\Author;
 use App\Models\Publisher;
 use App\Models\Book;
 use Illuminate\Http\Request;
@@ -20,23 +20,13 @@ class BookController extends Controller
         $publishers = Publisher::all();
         $authors = Author::all();
         $catalogs = Catalog::all();
+
         return view('admin.book', compact('publishers', 'authors', 'catalogs'));
     }
 
     public function api()
     {
         $books = Book::all();
-
-        foreach ($books as $key => $book) {
-            $book->date = convert_date($book->created_at);
-        }
-
-        // $datatables = datatables()->of($books)
-        //                     ->addColumn('date', function($book) {
-        //                         return convert_date($book->created_at);
-        //                     })->addIndexCoumn();
-
-        $datatables = datatables()->of($books)->addIndexColumn();
 
         return json_encode($books);
     }
@@ -67,7 +57,7 @@ class BookController extends Controller
             'qty' => ['required'],
             'price' => ['required'],
             ]);
-
+            // dd($request->all());
             Book::create($request->all());
 
             return redirect('books');
