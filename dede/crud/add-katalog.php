@@ -34,10 +34,12 @@
 		if(isset($_POST['Submit-katalog'])) {
 			$id_katalog = $_POST['id_katalog'];
 			$nama_katalog = $_POST['nama'];
-			
+			// var_dump($id_katalog);
+			// var_dump($nama_katalog);
+			// die;
 			include_once("connect.php");
 
-			$result = mysqli_query($mysqli, "INSERT INTO `katalog` (`id_katalog`, `nama_katalog`) VALUES ('$id_katalog', '$nama_katalog');");
+			$result = mysqli_query($mysqli, "INSERT INTO `katalog` (`id_katalog`, `nama`) VALUES ('$id_katalog', '$nama_katalog');");
 			
 			header("Location:katalog.php");
 		}
