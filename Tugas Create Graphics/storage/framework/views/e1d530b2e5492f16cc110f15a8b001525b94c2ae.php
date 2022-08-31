@@ -1,0 +1,188 @@
+<?php $__env->startSection('header', 'Transaction Detail'); ?>
+
+<?php $__env->startSection('css'); ?>
+    <!-- Datatables -->
+    <link rel="stylesheet" href="<?php echo e(asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')); ?>">
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+    <div id="controller">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <a href="#" @click="addData()" class="btn btn-sm btn-primary pull-right">Create New
+                            Transaction Detail</a>
+                    </div>
+                    <div class="card-body">
+                        <table id="datatable" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th width="30px" class="text-center">No.</th>
+                                    <th class="text-center">Transaction ID</th>
+                                    <th class="text-center">Book ID</th>
+                                    <th class="text-center">Quantity</th>
+                                    <th class="text-center">ISBN</th>
+                                    <th class="text-center">Created At</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal-default">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form method="post" :action="actionUrl" autocomplete="off" @submit="submitForm($event, data.id)">
+                        <div class="modal-header">
+
+                            <h4 class="modal-title">Transaction Detail</h4>
+
+                            <button type="button" class="close" data-dismiss='modal' aria-label='close'>
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <?php echo csrf_field(); ?>
+
+                            <input type="hidden" name="_method" value="PUT" v-if="editStatus">
+
+                            <div class="form-group">
+                                <label>Transaction ID</label>
+                                <input type="text" class="form-control" name="transaction_id"
+                                    :value="data.transaction_id" required="">
+                            </div>
+                            <div class="form-group">
+                                <label>Book ID</label>
+                                <input type="text" class="form-control" name="book_id" :value="data.book_id"
+                                    required="">
+                            </div>
+                            <div class="form-group">
+                                <label>Quantity</label>
+                                <input type="number" class="form-control" name="qty" :value="data.qty"
+                                    required="">
+                            </div>
+                            <div class="form-group">
+                                <label>ISBN</label>
+                                <input type="number" class="form-control" name="isbn" :value="data.isbn"
+                                    required="">
+                            </div>
+                            <div class="form-group">
+                                <label>Created At</label>
+                                <input type="text" class="form-control" name="email" :value="data.created_at"
+                                    required="">
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss='modal'>Close</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('js'); ?>
+    <!-- Datatables & Plugins -->
+    <script src="<?php echo e(asset('assets/plugins/datatables/jquery.dataTables.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/datatables-buttons/js/dataTables.buttons.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/jszip/jszip.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/pdfmake/pdfmake.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/pdfmake/vfs_fonts.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/datatables-buttons/js/buttons.html5.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/datatables-buttons/js/buttons.print.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js')); ?>"></script>
+    <script type="text/javascript">
+        var actionUrl = '<?php echo e(url('transaction_details')); ?>';
+        var apiUrl = '<?php echo e(url('api/transaction_details')); ?>';
+
+        var columns = [
+            {data: 'DT_RowIndex', class: 'text-center', orderable: true},
+            {data: 'transaction_id', class: 'text-center', orderable: true},
+            {data: 'book_id', class: 'text-center', orderable: true},
+            {data: 'qty', class: 'text-center', orderable: true},
+            {data: 'isbn', class: 'text-center', orderable: true},
+            {data: 'date', class: 'text-center', orderable: true},
+            {render: function(index, row, data, meta) {
+                return `
+                    <a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">
+                    Edit
+                    </a>
+                    <a class="btn btn-danger btn-sm" onclick="controller.deleteData(event, ${data.id})">
+                    Delete
+                    </a>`;
+                }, orderable: false, width: '200px', class: 'text-center'},
+        ];
+        var controller = new Vue({
+            el: '#controller',
+            data: {
+                datas: [],
+                data: {},
+                actionUrl,
+                apiUrl,
+                editStatus: false,
+            },
+            mounted: function() {
+                console.log('transaction_detailLoaded')
+                this.datatable();
+            },
+            methods: {
+                datatable() {
+                    const _this = this;
+                    _this.table = $('#datatable').DataTable({
+                        ajax: {
+                            url: _this.apiUrl,
+                            type: 'GET',
+                        },
+                        columns
+                    }).on('xhr', function() {
+                        _this.datas = _this.table.ajax.json().data;
+                    });
+                },
+                addData() {
+                    this.data = {};
+                    this.editStatus = false;
+                    $('#modal-default').modal();
+                },
+                editData(event, row) {
+                    this.data = this.datas[row];
+                    this.editStatus = true;
+                    $('#modal-default').modal();
+                },
+                deleteData(event, id) {
+                    if (confirm("Are you sure?")) {
+                        $(event.target).parents('tr').remove();
+                        axios.post(this.actionUrl + '/' + id, {
+                            _method: "DELETE"
+                        }).then(response => {
+                            alert('Data has been removed');
+                        });
+                    }
+                },
+                submitForm(event, id) {
+                    event.preventDefault();
+                    const _this = this;
+                    var actionUrl = !this.editStatus ? this.actionUrl : this.actionUrl + '/' + id;
+                    axios.post(actionUrl, new FormData($(event.target)[0])).then(response => {
+                        $('#modal-default').modal('hide');
+                        _this.table.ajax.reload();
+                    });
+                },
+            }
+        });
+    </script>
+    
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\library\resources\views/admin/transaction_detail.blade.php ENDPATH**/ ?>
