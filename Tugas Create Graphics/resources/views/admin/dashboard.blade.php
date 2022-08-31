@@ -2,7 +2,7 @@
 @section('header', 'Dashboard')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('assets/plugins/chart.js/Chart.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/plugins/chart.js/Chart.min.css') }}">
 @endsection
 
 @section('content')
@@ -80,7 +80,7 @@
     </div>
 
     <div class="col-lg-6">
-        <div class="card card-successr">
+        <div class="card card-success">
             <div class="card-header">
                 <h3 class="card-title">Grafik Peminjaman</h3>
 

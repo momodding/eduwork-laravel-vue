@@ -1,7 +1,7 @@
 <?php $__env->startSection('header', 'Dashboard'); ?>
 
 <?php $__env->startSection('css'); ?>
-    <link rel="stylesheet" href="<?php echo e(asset('assets/plugins/chart.js/Chart.min.css')); ?>">
+<link rel="stylesheet" href="<?php echo e(asset('assets/plugins/chart.js/Chart.min.css')); ?>">
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -79,7 +79,7 @@
     </div>
 
     <div class="col-lg-6">
-        <div class="card card-successr">
+        <div class="card card-success">
             <div class="card-header">
                 <h3 class="card-title">Grafik Peminjaman</h3>
 
