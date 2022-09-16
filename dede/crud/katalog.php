@@ -24,11 +24,13 @@
 <a href="add-katalog.php">Add New Katalog</a><br/><br/>
  
     <table class="table" width='80%' border=1>
- 
+    <thead class="thead-dark">
     <tr>
         <th>Kode Pengarang</th> 
         <th>Nama Katalog</th>
+        <th>Aksi</th>
     </tr>
+    </thead>
     <?php  
         while($katalog_data = mysqli_fetch_array($katalog)) {         
             echo "<tr>";

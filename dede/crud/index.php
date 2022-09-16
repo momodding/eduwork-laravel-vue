@@ -27,7 +27,7 @@
 <a href="add.php">Add New Buku</a><br/><br/>
  
     <table class="table" width='80%' border=1>
- 
+    <thead class="thead-dark">
     <tr>
         <th>ISBN</th> 
         <th>Judul</th> 
@@ -39,6 +39,7 @@
         <th>Harga Pinjam</th>
         <th>Aksi</th>
     </tr>
+    </thead>
     <?php  
         while($buku_data = mysqli_fetch_array($buku)) {         
             echo "<tr>";
