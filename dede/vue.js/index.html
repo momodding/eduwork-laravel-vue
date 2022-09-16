@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Basic Component Vue.js</title>
+    </head>
+    <body>
+
+    <div id="app" v-if="status == 'tampilkan'">
+        {{ message }} <br>
+        <label v-for="user in users">Name : {{user.name}}, Umur {{user.age}}<br></label>
+    </div>   
+
+    </body>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const { createApp } = Vue
+      
+        createApp({
+          data() {
+            return {
+              message: 'Hello Vue!',
+              status: 'tampilkan',
+              users: [
+                {
+                    name : 'Dede',
+                    age : '23'
+                },
+                {
+                    name : 'Arfiansyah',
+                    age : '23'
+                }
+              ]
+            }
+          }
+        }).mount('#app')
+      </script>
+</html>
