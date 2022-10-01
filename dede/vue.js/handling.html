@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Event Handling</title>
+</head>
+
+<body>
+    <div id="example-1">
+        <button @click="count++">Add 1</button>
+        <p>Count is: {{ count }}</p>
+    </div>
+    <br>
+    <div id="example-2">
+        <!-- `greet` is the name of the method defined above -->
+        <button @click="greet">Greet</button>
+    </div>
+    <br>
+    <div id="example-3">
+        <button @click="say('hello')">Say hello</button>
+        <button @click="say('bye')">Say bye</button>
+    </div>
+    <br>
+    <div id="example-4"> <!--masih bingung disini-->
+        <!-- using $event special variable -->
+        <button @click="warn('Form cannot be submitted yet.', $event)">
+            Submit
+        </button>
+        
+        <!-- using inline arrow function -->
+        <button @click="(event) => warn('Form cannot be submitted yet.', event)">
+            Submit
+        </button>
+    </div>
+    <br>
+    <div id="example-5">
+        <!-- the click event's propagation will be stopped -->
+        <a @click.stop="doThis"></a>
+
+        <!-- the submit event will no longer reload the page -->
+        <form @submit.prevent="onSubmit"></form>
+
+        <!-- modifiers can be chained -->
+        <a @click.stop.prevent="doThat"></a>
+
+        <!-- just the modifier -->
+        <form @submit.prevent></form>
+
+        <!-- only trigger handler if event.target is the element itself -->
+        <!-- i.e. not from a child element -->
+        <div @click.self="doThat">...</div>
+    </div>
+
+
+</body>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+    const {createApp} = Vue
+    createApp({
+        data() {
+            return {
+                count: 0
+            }
+        }
+    }).mount('#example-1');
+
+    const example2 = createApp({
+        data() {
+        return {
+            name: 'Vue.js'
+        }
+        },
+        methods: {
+        greet(event) {
+            // `this` inside methods points to the current active instance
+            alert(`Hello ${this.name}!`)
+            // `event` is the native DOM event
+            if (event) {
+            alert(event.target.tagName)
+            }
+        }
+        }
+    }).mount('#example-2');
+
+    const example3 = createApp({
+        methods: {
+            say(message) {
+                alert(message)
+            }
+        }
+    }).mount('#example-3');
+
+    const example4 = createApp({
+        methods: {
+            warn(message, event) {
+                // now we have access to the native event
+                if (event) {
+                event.preventDefault()
+                }
+                alert(message)
+            }
+        }
+    }).mount('#example-4');
+    
+    const example5 = createApp({
+        methods: {
+            warn(message, event) {
+                // now we have access to the native event
+                if (event) {
+                event.preventDefault()
+                }
+                alert(message)
+            }
+        }
+    }).mount('#example-5');
+</script>
+
+</html>
