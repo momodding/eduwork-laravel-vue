@@ -19,6 +19,8 @@ class CreateTransactionsTable extends Migration
             $table->date('date_start');
             $table->date('date_end');
             $table->timestamps();
+
+            $table->foreign('member_id')->references('id')->on('members');
         });
     }
 
