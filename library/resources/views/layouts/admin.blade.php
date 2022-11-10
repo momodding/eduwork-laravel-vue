@@ -113,42 +113,42 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{url('catalog')}}" class="nav-link {{ request()->is('catalog') ? 'active' : '' }}">
+            <a href="{{url('catalogs')}}" class="nav-link {{ request()->is('catalogs') ? 'active' : '' }}">
               <i class="nav-icon fas fa-solid fa-bars"></i>
               <p>CATALOG
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{url('author')}}" class="nav-link {{ request()->is('author') ? 'active' : '' }}">
+            <a href="{{url('authors')}}" class="nav-link {{ request()->is('authors') ? 'active' : '' }}">
               <i class="nav-icon fas fa-reguler fa-id-badge"></i>
               <p>AUTHOR
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{url('book')}}" class="nav-link {{ request()->is('book') ? 'active' : '' }}">
+            <a href="{{url('books')}}" class="nav-link {{ request()->is('books') ? 'active' : '' }}">
               <i class="nav-icon fas fa-solid fa-book"></i>
               <p>BOOK
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{url('publisher')}}" class="nav-link {{ request()->is('publisher') ? 'active' : '' }}">
+            <a href="{{url('publishers')}}" class="nav-link {{ request()->is('publishers') ? 'active' : '' }}">
               <i class="nav-icon fas fa-solid fa-user-check"></i>
               <p>PUBLISHER
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{url('member')}}" class="nav-link {{ request()->is('member') ? 'active' : '' }}">
+            <a href="{{url('members')}}" class="nav-link {{ request()->is('members') ? 'active' : '' }}">
               <i class="nav-icon fas fa-solid fa-users"></i>
               <p>MEMBER
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{url('transaction')}}" class="nav-link {{ request()->is('transaction') ? 'active' : '' }}">
+            <a href="{{url('transactions')}}" class="nav-link {{ request()->is('transactions') ? 'active' : '' }}">
               <i class="nav-icon fas fa-solid fa-sort"></i>
               <p>TRANSACTION
               </p>
