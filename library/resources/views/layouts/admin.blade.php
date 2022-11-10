@@ -106,9 +106,51 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="#" class="nav-link active">
+            <a href="{{url('home')}}" class="nav-link {{ request()->is('home') ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>HOME
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('catalog')}}" class="nav-link {{ request()->is('catalog') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-solid fa-bars"></i>
+              <p>CATALOG
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('author')}}" class="nav-link {{ request()->is('author') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-reguler fa-id-badge"></i>
+              <p>AUTHOR
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('book')}}" class="nav-link {{ request()->is('book') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-solid fa-book"></i>
+              <p>BOOK
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('publisher')}}" class="nav-link {{ request()->is('publisher') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-solid fa-user-check"></i>
+              <p>PUBLISHER
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('member')}}" class="nav-link {{ request()->is('member') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-solid fa-users"></i>
+              <p>MEMBER
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('transaction')}}" class="nav-link {{ request()->is('transaction') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-solid fa-sort"></i>
+              <p>TRANSACTION
               </p>
             </a>
           </li>
@@ -126,11 +168,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
+            <h1 class="m-0">@yield('header')</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{url('home')}}">Home</a></li>
               <li class="breadcrumb-item active">Dashboard v1</li>
             </ol>
           </div><!-- /.col -->

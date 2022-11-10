@@ -37,7 +37,7 @@
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="password" class="form-control" placeholder="Retype password">
+            <input type="password" name="password_confirmation" class="form-control" placeholder="Retype password">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
@@ -77,5 +77,15 @@
       </div>
       <!-- /.form-box -->
     </div><!-- /.card -->
+    <!--  Error handle -->
+    @if($errors->any())
+    <div class="row collapse">
+        <ul class="alert-box warning radius">
+            @foreach($errors->all() as $error)
+                <li> {{ $error }} </li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
   </div>
 @endsection
