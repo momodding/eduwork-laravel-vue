@@ -59,11 +59,12 @@ class HomeController extends Controller
                             ->get();
 
         //no5
-        // $data5 = Transaction::select('transactions.member_id', 'members.name', 'members.phone_number')
-        //                     ->join('members', 'members.id', '=', 'transactions.member_id')
-        //                     ->groupBy('transactions.member_id')
-        //                     ->having('count(transactions.member_id)', '>', 1)
-        //                     ->get();
+        // $data5 = DB::select('SELECT * from members');
+        $data5 = Transaction::select('transactions.member_id', 'members.name', 'members.phone_number')
+                            ->join('members', 'members.id', '=', 'transactions.member_id')
+                            ->groupBy('transactions.member_id')
+                            ->having(DB::raw('count(transactions.member_id)'), '>', 1)
+                            ->get();
 
         //no6
         $data6 = Transaction::select('members.name', 'members.phone_number', 'transactions.date_start', 'transactions.date_end')
@@ -161,7 +162,7 @@ class HomeController extends Controller
                         ->get();
 
 
-        // return $data20;
+        // return $data5;
 
 
         return view('home');
