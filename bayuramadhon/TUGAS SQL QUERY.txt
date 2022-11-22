@@ -1,0 +1,10 @@
+SELECT * FROM `obat` ORDER BY pembuat_obat ASC
+SELECT * FROM `obat` ORDER BY nama_obat DESC
+SELECT * FROM `obat` WHERE nama_obat LIKE '%s%'
+SELECT nama_obat, pembuat_obat FROM obat
+SELECT * FROM pasien WHERE (tanggal_lahir_pasien BETWEEN '2012-11-08' AND '2017-10-11')
+SELECT DISTINCT stok_obat FROM obat
+SELECT SUM(stok_obat) AS total_stok FROM obat
+SELECT YEAR(tanggal_lahir_pasien) FROM pasien
+SELECT * FROM `pasien` WHERE nama_pasien LIKE '%i%'
+SELECT * FROM obat
