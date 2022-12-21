@@ -6,7 +6,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Data Catalog</h3>
+                <a class="btn btn-success" href="{{ route('catalogs.create') }}"> Create New Catalog</a>
                 <div class="card-tools">
                     <div class="input-group input-group-sm" style="width: 150px;">
                         <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -28,6 +28,7 @@
                             <th class="text-center">Created At</th>
                             <th class="text-center">Updated At</th>
                             <th class="text-center">Total Books</th>
+                            <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,6 +39,14 @@
                             <td class="text-center">{{ date('H:i:s - d M Y', strtotime($catalog->created_at) )}}</td>
                             <td class="text-center">{{ date('H:i:s - d M Y', strtotime($catalog->updated_at) )}}</td>
                             <td class="text-center">{{ count($catalog->books)}}</td>
+                            <td>
+                                <a class="btn btn-primary" href="{{ route('catalogs.edit',$catalog->id) }}">Edit</a>
+                                <form action="{{ route('catalogs.destroy',$catalog->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are You Sure?')">
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
