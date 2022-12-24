@@ -1,0 +1,4 @@
+UPDATE `obat` SET 'pembuat_obat' = 'Ari'
+WHERE `nama_obat` = 'biogesic'
+
+DELETE FROM `obat` WHERE nama_obat = 'Dexatip'
