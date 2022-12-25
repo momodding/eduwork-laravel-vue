@@ -1,4 +1,16 @@
-UPDATE `obat` SET 'pembuat_obat' = 'Ari'
+1. UPDATE `obat` SET `pembuat_obat` = 'Awir'
 WHERE `nama_obat` = 'biogesic'
 
-DELETE FROM `obat` WHERE nama_obat = 'Dexatip'
+2. DELETE FROM `obat` WHERE nama_obat = 'Dexatip'
+
+3. UPDATE `obat` SET `stok_obat` = '120'
+WHERE `nama_obat` = 'sangobion'
+
+4. UPDATE `pasien` SET `tanggal_lahir_pasien` = '2010-08-02'
+WHERE `nama_pasien` = 'hilda'
+
+5. UPDATE `pasien` SET `nama_pasien` = 'argus'
+WHERE `tanggal_lahir_pasien` = '2013-02-07'
+
+
+

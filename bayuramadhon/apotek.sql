@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2022 at 11:09 AM
+-- Generation Time: Dec 25, 2022 at 09:59 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -41,11 +41,11 @@ CREATE TABLE `obat` (
 --
 
 INSERT INTO `obat` (`id`, `id_obat`, `nama_obat`, `pembuat_obat`, `stok_obat`, `tgl_kadaluwarsa`) VALUES
-(1, 0, 'biogesic', 'Ari', 50, '2023-01-01'),
+(1, 0, 'biogesic', 'Anwar', 50, '2023-01-01'),
 (2, 0, 'panadol', 'Banu', 50, '2023-01-04'),
 (3, 0, 'neozep', 'Nina', 45, '2023-01-12'),
 (4, 0, 'Mylanta', 'Risma', 60, '2023-02-08'),
-(5, 0, 'Sangobion', 'Dani', 25, '2023-03-01'),
+(5, 0, 'Sangobion', 'Dani', 120, '2023-03-01'),
 (6, 0, 'Bodrex', 'Valdi', 100, '2022-02-09'),
 (7, 0, 'Combantrin', 'Reza', 90, '2023-01-28'),
 (8, 0, 'Amoxcilin', 'Vina', 75, '2022-05-04'),
@@ -59,6 +59,7 @@ INSERT INTO `obat` (`id`, `id_obat`, `nama_obat`, `pembuat_obat`, `stok_obat`, `
 --
 
 CREATE TABLE `pasien` (
+  `id` int(11) NOT NULL,
   `id_pasien` int(11) NOT NULL,
   `nama_pasien` varchar(30) NOT NULL,
   `tanggal_lahir_pasien` date NOT NULL
@@ -68,17 +69,17 @@ CREATE TABLE `pasien` (
 -- Dumping data for table `pasien`
 --
 
-INSERT INTO `pasien` (`id_pasien`, `nama_pasien`, `tanggal_lahir_pasien`) VALUES
-(1, 'hilda', '2012-11-08'),
-(2, 'zilong', '2013-11-06'),
-(3, 'vale', '2012-08-14'),
-(4, 'valir', '2013-02-07'),
-(5, 'miya', '2022-03-11'),
-(6, 'layla', '2013-12-20'),
-(7, 'thamuz', '2014-07-09'),
-(8, 'lancelot', '2013-09-12'),
-(9, 'freya', '2022-08-31'),
-(10, 'selena', '2017-10-11');
+INSERT INTO `pasien` (`id`, `id_pasien`, `nama_pasien`, `tanggal_lahir_pasien`) VALUES
+(1, 0, 'hilda', '2010-08-02'),
+(2, 0, 'zilong', '2013-11-06'),
+(3, 0, 'vale', '2012-08-14'),
+(4, 0, 'argus', '2013-02-07'),
+(5, 0, 'miya', '2022-03-11'),
+(6, 0, 'layla', '2013-12-20'),
+(7, 0, 'thamuz', '2014-07-09'),
+(8, 0, 'lancelot', '2013-09-12'),
+(9, 0, 'freya', '2022-08-31'),
+(10, 0, 'selena', '2017-10-11');
 
 -- --------------------------------------------------------
 
@@ -107,7 +108,7 @@ ALTER TABLE `obat`
 -- Indexes for table `pasien`
 --
 ALTER TABLE `pasien`
-  ADD PRIMARY KEY (`id_pasien`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `transaksi`
@@ -125,13 +126,7 @@ ALTER TABLE `transaksi`
 -- AUTO_INCREMENT for table `obat`
 --
 ALTER TABLE `obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `pasien`
---
-ALTER TABLE `pasien`
-  MODIFY `id_pasien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
