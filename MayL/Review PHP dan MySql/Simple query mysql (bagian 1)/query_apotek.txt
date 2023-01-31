@@ -1,0 +1,10 @@
+select nama_pelanggan from pelanggan order by nama_pelanggan asc;
+select nama_pelanggan, umur from pelanggan order by umur desc;
+select nama_pelanggan, alamat from pelanggan where alamat like '%Yogyakarta%';
+select nama_pelanggan, alamat from pelanggan where alamat like '%Bekasi%';
+select count(jk) as Pria from pelanggan where jk = 1;
+select count(jk) as Wanita from pelanggan where jk = 2;
+select nama_pelanggan, umur from pelanggan where umur between 20 and 30; 
+select nama_pelanggan from pelanggan where nama_pelanggan like 'Angga';
+select nama_pelanggan from pelanggan where nama_pelanggan like '%Angga%';
+select count(nama_pelanggan) as jumlah_pelanggan from pelanggan;
