@@ -1,0 +1,5 @@
+update pelanggan set nama_pelangan = 'Agus Susilo Putro Dewo' where nama_pelanggan = 'Agus susilo';
+update pelanggan set alamat = 'Jl Lele masih Kecil 45b Yogyakarta where nama_pelanggan = 'Andri Anggara';
+update pelanggan set umur = '42' where nama_pellanggan = 'Sri Wahyuni';
+delete from pelanggan where nama_pelanggan = 'Shirley Ratnawati';
+delete from pelanggan where nama_pelanggan ='Agus Susilo Putro';
