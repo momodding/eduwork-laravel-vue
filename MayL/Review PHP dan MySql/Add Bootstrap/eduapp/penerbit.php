@@ -14,20 +14,21 @@
 </head>
 <body>
 <div class="container">
-    <a href="index.php">Buku</a>
-    <a href="penerbit.php">Penerbit</a>
-    <a href="pengarang.php">Pengarang</a>
-    <a href="katalog.php">Katalog</a>
+    <a class="btn btn-primary" href="index.php">Buku</a>
+    <a class="btn btn-primary" href="penerbit.php">Penerbit</a>
+    <a class="btn btn-primary" href="pengarang.php">Pengarang</a>
+    <a class="btn btn-primary" href="katalog.php">Katalog</a>
 </div>
 
-<a href="addpenerbit.php">Tambah Penerbit</a><br><br>
-    <table>
+<a class="btn btn-success" href="addpenerbit.php">Tambah Penerbit</a><br><br>
+    <table width='80%' class="table table-bordered">
         <tr>
-            <td>Id Penerbit</td>
-            <td>Nama Penerbit</td>
-            <td>Email</td>
-            <td>Telp</td>
-            <td>Alamat</td>
+            <th>Id Penerbit</th>
+            <th>Nama Penerbit</th>
+            <th>Email</th>
+            <th>Telp</th>
+            <th>Alamat</th>
+            <th>Aksi</th>
         </tr>
 
         <?php
@@ -38,7 +39,7 @@
                 echo "<td>" .$penerbit_data['email']. "</td>";
                 echo "<td>" .$penerbit_data['telp']. "</td>";
                 echo "<td>" .$penerbit_data['alamat']. "</td>";
-                echo "<td><a href='editpenerbit.php?id_penerbit=$penerbit_data[id_penerbit]'>Edit</a> | <a href='deletepenerbit.php?id_penerbit=$penerbit_data[id_penerbit]'>Delete</a></td><br>";
+                echo "<td><a class='btn btn-warning' href='editpenerbit.php?id_penerbit=$penerbit_data[id_penerbit]'>Edit</a> | <a class='btn btn-danger' href='deletepenerbit.php?id_penerbit=$penerbit_data[id_penerbit]'>Delete</a></td><br>";
             }
         ?>
 

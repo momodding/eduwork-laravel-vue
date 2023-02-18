@@ -20,15 +20,15 @@
 <body>
 
 <div class="container">
-    <a href="index.php">Buku</a>
-    <a href="penerbit.php">Penerbit</a>
-    <a href="pengarang.php">Pengarang</a>
-    <a href="katalog.php">Katalog</a>
+    <a class="btn btn-primary" href="index.php">Buku</a>
+    <a class="btn btn-primary"  href="penerbit.php">Penerbit</a>
+    <a class="btn btn-primary"  href="pengarang.php">Pengarang</a>
+    <a class="btn btn-primary"  href="katalog.php">Katalog</a>
 </div>
 
-<a href="add.php">Add New Book</a><br><br>
+<a class="btn btn-success" href="add.php">Add New Book</a><br><br>
 
-    <table width='80%'>
+    <table width='80%' class="table table-bordered">
     
     <tr>
         <th>ISBN</th>
@@ -40,7 +40,8 @@
         <th>Stok</th>
         <th>Harga Pinjam</th>
         <th>Aksi</th>
-    </tr>
+    </tr> 
+
     <?php
         while($buku_data = mysqli_fetch_array($buku)){
             echo "<tr>";
@@ -52,11 +53,12 @@
             echo "<td>" .$buku_data['nama_katalog']. "</td>";
             echo "<td>" .$buku_data['qty_stok']. "</td>";
             echo "<td>" .$buku_data['harga_pinjam']. "</td>";
-            echo "<td><a href='edit.php?isbn=$buku_data[isbn]'>Edit</a> | <a href='delete.php?isbn=$buku_data[isbn]'>Delete</a></td>";
+            echo "<td><a class='btn btn-warning' href='edit.php?isbn=$buku_data[isbn]'>Edit</a> | <a class='btn btn-danger' href='delete.php?isbn=$buku_data[isbn]'>Delete</a></td>";
             echo "</tr>"; 
-
+            
         }
     ?>
+</table>  
 
 </body>
 </html>

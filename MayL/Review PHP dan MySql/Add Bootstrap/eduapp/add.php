@@ -13,11 +13,11 @@
 </head>
 
 <body>
-	<a href="index.php">Go to Home</a>
+	<a class="btn btn-primary" href="index.php">Go to Home</a>
 	<br /><br />
 
-	<form action="add.php" method="post" name="form1">
-		<table width="25%" border="0">
+	<form action="add.php" method="post" name="form1" class="container-fluid">
+		<table width='25%' >
 			<tr>
 				<td>ISBN</td>
 				<td><input type="text" name="isbn"></td>
@@ -76,7 +76,7 @@
 			</tr>
 			<tr>
 				<td></td>
-				<td><input type="submit" name="Submit" value="Add"></td>
+				<td><input type="submit" name="Submit" value="Add" class="btn btn-success"></td>
 			</tr>
 		</table>
 	</form>

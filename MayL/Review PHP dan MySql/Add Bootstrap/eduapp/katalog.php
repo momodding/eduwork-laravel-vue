@@ -14,17 +14,18 @@
 </head>
 <body>
 <div class="container">
-    <a href="index.php">Buku</a>
-    <a href="penerbit.php">Penerbit</a>
-    <a href="pengarang.php">Pengarang</a>
-    <a href="katalog.php">Katalog</a>
+    <a class="btn btn-primary" href="index.php">Buku</a>
+    <a class="btn btn-primary" href="penerbit.php">Penerbit</a>
+    <a class="btn btn-primary" href="pengarang.php">Pengarang</a>
+    <a class="btn btn-primary" href="katalog.php">Katalog</a>
 </div>
 
-<a href="addkatalog.php">Tambah Katalog</a><br><br>
-    <table>
+<a class="btn btn-success" href="addkatalog.php">Tambah Katalog</a><br><br>
+    <table width='80%' class="table table-bordered">
         <tr>
-            <td>Id Katalog</td>
-            <td>Nama Katalog</td>
+            <th>Id Katalog</th>
+            <th>Nama Katalog</th>
+            <th>Aksi</th>
         </tr>
 
         <?php
@@ -32,7 +33,7 @@
                 echo "<tr>";
                 echo "<td>" .$katalog_data['id_katalog']."</td>";
                 echo "<td>" .$katalog_data['nama']. "</td>";
-                echo "<td><a href='editkatalog.php?id_katalog=$katalog_data[id_katalog]'>Edit</a> | <a href='deletekatalog.php?id_katalog=$katalog_data[id_katalog]'>Delete</a></td><br>";
+                echo "<td><a class='btn btn-warning' href='editkatalog.php?id_katalog=$katalog_data[id_katalog]'>Edit</a> | <a class='btn btn-danger' href='deletekatalog.php?id_katalog=$katalog_data[id_katalog]'>Delete</a></td><br>";
             }
         ?>
 
