@@ -14,20 +14,21 @@
 </head>
 <body>
 <div class="container">
-    <a href="index.php">Buku</a>
-    <a href="penerbit.php">Penerbit</a>
-    <a href="pengarang.php">Pengarang</a>
-    <a href="katalog.php">Katalog</a>
+    <a class="btn btn-primary" href="index.php">Buku</a>
+    <a class="btn btn-primary" href="penerbit.php">Penerbit</a>
+    <a class="btn btn-primary" href="pengarang.php">Pengarang</a>
+    <a class="btn btn-primary" href="katalog.php">Katalog</a>
 </div>
 
-<a href="addpengarang.php">Tambah Pengarang</a><br><br>
-    <table>
+<a class="btn btn-success" href="addpengarang.php">Tambah Pengarang</a><br><br>
+    <table width='80%' class="table table-bordered">
         <tr>
-            <td>Id Pengarang</td>
-            <td>Nama Pengarang</td>
-            <td>Email</td>
-            <td>Telp</td>
-            <td>Alamat</td>
+            <th>Id Pengarang</th>
+            <th>Nama Pengarang</th>
+            <th>Email</th>
+            <th>Telp</th>
+            <th>Alamat</th>
+            <th>Aksi</th>
         </tr>
 
         <?php
@@ -38,10 +39,9 @@
                 echo "<td>" .$pengarang_data['email']. "</td>";
                 echo "<td>" .$pengarang_data['telp']. "</td>";
                 echo "<td>" .$pengarang_data['alamat']. "</td>";
-                echo "<td><a href='editpengarang.php?id_pengarang=$pengarang_data[id_pengarang]'>Edit</a> | <a href='deletepengarang.php?id_pengarang=$pengarang_data[id_pengarang]'>Delete</a></td><br>";
+                echo "<td><a class='btn btn-warning' href='editpengarang.php?id_pengarang=$pengarang_data[id_pengarang]'>Edit</a> | <a class='btn btn-danger' href='deletepengarang.php?id_pengarang=$pengarang_data[id_pengarang]'>Delete</a></td><br>";
             }
         ?>
-
     </table>
     
 </body>

@@ -9,21 +9,33 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </head>
 <body>
-<a href="pengarang.php">Go to Pengarang</a>
+<a href="pengarang.php" class="btn btn-primary">Go to Pengarang</a>
     <br><br>
     <h2>Tambah Pengarang</h2>
-    <form action="addpengarang.php" method="post" name="form1">
-        <p>ID Pengarang</P>
-        <input type="text" name="idPengarang">
-        <p>Nama Pengarang</P>
-        <input type="text" name="namaPengarang">
-        <p>Email Pengarang</P>
-        <input type="text" name="emailPengarang">
-        <p>Telp Pengarang</P>
-        <input type="text" name="telpPengarang">
-        <p>Alamat Pengarang</P>
-        <input type="text" name="alamatPengarang">
-        <input type="submit" name="Submit" value="Add"></td>
+    <form action="addpengarang.php" method="post" name="form1" class="container-fluid">
+        <table>
+            <tr>
+                <td>ID Pengarang</td>
+                <td><input type="text" name="idPengarang"></td>
+            </tr>
+            <tr>
+                <td>Nama Pengarang</td>
+                <td><input type="text" name="namaPengarang"></td>
+            </tr>
+            <tr>
+                <td>Email Pengarang</td>
+                <td><input type="text" name="emailPengarang"></td>
+            </tr>
+            <tr>
+                <td>Telp Pengarang</td>
+                <td><input type="text" name="telpPengarang"></td>
+            </tr>
+            <tr>
+                <td>Alamat Pengarang</td>
+                <td><input type="text" name="alamatPengarang"></td>
+            </tr>
+        </table>
+        <input type="submit" name="Submit" value="Add" class="btn btn-success"></td>
     </form>
 <?php
     // Check if form submitted, insert from data into users table.

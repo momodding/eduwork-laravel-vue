@@ -9,21 +9,36 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </head>
 <body>
-    <a href="penerbit.php">Go to Penerbit</a>
+    <a href="penerbit.php" class="btn btn-primary">Go to Penerbit</a>
     <br><br>
     <h2>Tambah Penerbit</h2>
-    <form action="addpenerbit.php" method="post" name="form1">
-        <p>ID Penerbit</P>
-        <input type="text" name="idPenerbit">
-        <p>Nama Penerbit</P>
-        <input type="text" name="namaPenerbit">
-        <p>Email Penerbit</P>
-        <input type="text" name="emailPenerbit">
-        <p>Telp Penerbit</P>
-        <input type="text" name="telpPenerbit">
-        <p>Alamat Penerbit</P>
-        <input type="text" name="alamatPenerbit">
-        <input type="submit" name="Submit" value="Add"></td>
+    <form action="addpenerbit.php" method="post" name="form1" class="container-fluid">
+        <table>
+            <tr>
+                <td>ID Penerbit</td>
+                <td><input type="text" name="idPenerbit"></td>
+            </tr>
+            <tr>
+                <td>Nama Penerbit</td>
+                <td><input type="text" name="namaPenerbit"></td>
+            </tr>
+            <tr>
+                <td>Email Penerbit</td>
+                <td><input type="text" name="emailPenerbit"></td>
+            </tr>
+            <tr>
+                <td>Telp Penerbit</td>
+                <td><input type="text" name="telpPenerbit"></td>
+            </tr>
+            <tr>
+                <td>Alamat Penerbit</td>
+                <td><input type="text" name="alamatPenerbit"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" name="Submit" value="Add" class="btn btn-success"></td></td>
+            </tr>
+        </table>
     </form>
 <?php
     // Check if form submitted, insert from data into users table.
