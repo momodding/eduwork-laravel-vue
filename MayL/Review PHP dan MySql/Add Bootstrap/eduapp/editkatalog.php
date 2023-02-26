@@ -21,7 +21,7 @@ while ($katalog_data = mysqli_fetch_array($katalog)) {
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </head>
 <body>
-    <a href="katalog.php">Edit Katalog</a>
+    <a href="katalog.php" class="btn btn-primary">Katalog</a>
     <br>
 
     <form action="editkatalog.php?id_katalog=<?php echo $id_katalog; ?>" method="post">
@@ -36,7 +36,7 @@ while ($katalog_data = mysqli_fetch_array($katalog)) {
             </tr>
             <tr>
                 <td></td>
-                <td><input type="submit" name="update" value="update"></td>
+                <td><input type="submit" name="update" value="update" class="btn btn-success"></td>
             </tr>
         </table>
     </form>

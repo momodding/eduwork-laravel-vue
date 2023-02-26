@@ -27,11 +27,11 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </head>
 <body>
-	<a href="index.php">Go to Home</a>
+	<a href="index.php" class="btn btn-primary">Go to Home</a>
 	<br/><br/>
  
 	<form action="edit.php?isbn=<?php echo $isbn; ?>" method="post">
-		<table width="25%" border="0">
+		<table width="25%">
 			<tr> 
 				<td>ISBN</td>
 				<td style="font-size: 11pt;"><?php echo $isbn; ?> </td>
@@ -90,7 +90,7 @@
 			</tr>
 			<tr> 
 				<td></td>
-				<td><input type="submit" name="update" value="Update"></td>
+				<td><input type="submit" name="update" value="Update" class="btn btn-success"></td>
 			</tr>
 		</table>
 	</form>
