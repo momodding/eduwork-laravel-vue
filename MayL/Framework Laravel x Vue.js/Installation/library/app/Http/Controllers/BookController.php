@@ -12,9 +12,9 @@ class BookController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index()
     {
-        //
+        return view('admin.book.index');
     }
 
     /**
