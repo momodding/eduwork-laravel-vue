@@ -25,3 +25,4 @@ Route::get('/publisher', [App\Http\Controllers\PublisherController::class, 'inde
 Route::get('/author', [App\Http\Controllers\AuthorController::class, 'index']);
 Route::get('/book', [App\Http\Controllers\BookController::class, 'index']);
 Route::get('/member', [App\Http\Controllers\MemberController::class, 'index']);
+Route::get('/transaction', [App\Http\Controllers\TransactionController::class, 'index']);
