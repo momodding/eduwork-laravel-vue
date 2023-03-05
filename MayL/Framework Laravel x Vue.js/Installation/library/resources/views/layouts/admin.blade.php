@@ -252,7 +252,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ url('book') }}" class="nav-link {{ request()->is('book') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-edit"></i>
+                                <i class="nav-icon fas fa-layer-group"></i>
                                 <p>
                                     Book
                                 </p>
@@ -260,9 +260,17 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ url('member') }}" class="nav-link {{ request()->is('member') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-edit"></i>
+                                <i class="nav-icon fas fa-users"></i>
                                 <p>
                                     Member
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('transaction') }}" class="nav-link {{ request()->is('transaction') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>
+                                    Transaction
                                 </p>
                             </a>
                         </li>
