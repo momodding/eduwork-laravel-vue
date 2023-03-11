@@ -14,23 +14,34 @@ class PublisherController extends Controller
      */
     public function index()
     {
-        return view('admin.publisher.index');
+        $publishers = Publisher::with('publishers')->get();
+
+        return view('admin.publisher.index', compact('publishers'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): Response
+    public function create()
     {
-        //
+        return view('admin.publisher.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'name' =>['required','max:64'],
+            'email' =>['required'],
+            'phone_number' =>['required','numeric'],
+            'address' =>['required'],
+        ]);
+
+        Publisher::create($request->all());
+
+        return redirect('publishers');
     }
 
     /**
@@ -44,9 +55,9 @@ class PublisherController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Publisher $publisher): Response
+    public function edit(Publisher $publisher)
     {
-        //
+        return view('admin.publisher.edit', compact('publisher'));
     }
 
     /**
@@ -54,7 +65,13 @@ class PublisherController extends Controller
      */
     public function update(Request $request, Publisher $publisher): RedirectResponse
     {
-        //
+        $this->validate($request,[
+            'name' => ['required'],
+        ]);
+
+        $publisher->update($request->all());
+
+        return redirect('publishers');
     }
 
     /**
@@ -62,6 +79,8 @@ class PublisherController extends Controller
      */
     public function destroy(Publisher $publisher): RedirectResponse
     {
-        //
+        $publisher->delete();
+
+        return redirect('catalogs');
     }
 }
