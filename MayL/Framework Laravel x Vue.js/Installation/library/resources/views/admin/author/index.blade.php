@@ -18,7 +18,10 @@
                       <tr>
                         <th style="width: 10px">#</th>
                         <th>Name</th>
-                        
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -26,7 +29,9 @@
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td>{{ $author->name }}</td>
-                                
+                                <td>{{ $author->email }}</td>
+                                <td>{{ $author->phone_number }}</td>
+                                <td>{{ $author->address }}</td>
                                 <td>
                                   <a href="{{ url('authors/'.$author->id.'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
                                   <form action="{{ url('authors', ['id' => $author->id]) }}" method="post">
