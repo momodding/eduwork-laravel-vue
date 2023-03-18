@@ -21,7 +21,7 @@ class PublisherController extends Controller
     {
         $publishers = Publisher::with('publishers')->get();
 
-        return view('admin.publisher.index', compact('publishers'));
+        return view('admin.publisher', compact('publishers'));
     }
 
     /**
@@ -29,7 +29,7 @@ class PublisherController extends Controller
      */
     public function create()
     {
-        return view('admin.publisher.create');
+        //return view('admin.publisher.create');
     }
 
     /**
@@ -68,7 +68,7 @@ class PublisherController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Publisher $publisher): RedirectResponse
+    public function update(Request $request, Publisher $publisher)
     {
         $this->validate($request,[
             'name' => ['required'],
@@ -82,7 +82,7 @@ class PublisherController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Publisher $publisher): RedirectResponse
+    public function destroy(Publisher $publisher)
     {
         $publisher->delete();
 

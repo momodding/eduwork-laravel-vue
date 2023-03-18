@@ -38,7 +38,7 @@ class AuthorController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'name' =>['required','unique','max:64'],
+            'name' =>['required','max:64'],
             'email' =>['required'],
             'phone_number' =>['required'],
             'address' =>['required'],
@@ -68,16 +68,25 @@ class AuthorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Author $author): RedirectResponse
+    public function update(Request $request, Author $author)
     {
-        //
+        $this->validate($request,[
+            'name' =>['required','max:64'],
+            'email' =>['required'],
+            'phone_number' =>['required'],
+            'address' =>['required'],
+        ]);
+
+        $author->update($request->all());
+
+        return redirect('authors');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Author $author): RedirectResponse
+    public function destroy(Author $author)
     {
-        //
+        $author->delete();
     }
 }
