@@ -1,11 +1,11 @@
 @extends('layouts.admin')
-@section('header', 'Publisher')
+@section('header', 'Member')
 
 @section('css')
-<!-- DataTables -->
-<link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 @endsection
 
 @section('content')
@@ -16,7 +16,7 @@
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-header">
-                            <a href="#" @click="addData()" class="btn btn-primary pull-right">Create New Publisher</a>
+                            <a href="#" @click="addData()" class="btn btn-primary pull-right">Create New Member</a>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -25,30 +25,13 @@
                                     <tr>
                                         <th style="width: 10px">#</th>
                                         <th>Name</th>
+                                        <th>Gender</th>
                                         <th>Email</th>
                                         <th>Phone</th>
                                         <th>Address</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                {{-- <tbody>
-                                    @foreach ($publishers as $key => $publisher)
-                                        <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $publisher->name }}</td>
-                                            <td>{{ $publisher->email }}</td>
-                                            <td>{{ $publisher->phone_number }}</td>
-                                            <td>{{ $publisher->address }}</td>
-                                            <td>
-                                                <a href="#" @click="editData({{ $publisher }})"
-                                                    class="btn btn-warning btn-sm">Edit</a>
-                                                <a href="#" @click="deleteData({{ $publisher->id }})"
-                                                    class="btn btn-danger btn-sm">Delete</a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-
-                                </tbody> --}}
                             </table>
                         </div>
                         <!-- /.card-body -->
@@ -77,7 +60,7 @@
                 <div class="modal-content">
                     <form :action="actionUrl" method="post" autocomplete="off" @submit="submitForm($event, data.id)">
                         <div class="modal-header">
-                            <h4 class="modal-title">Publisher</h4>
+                            <h4 class="modal-title">Member</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -91,6 +74,13 @@
                                 <label>Name</label>
                                 <input type="text" class="form-control" name="name" v-model="data.name"
                                     required="">
+                            </div>
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <select class="form-control" name="gender" id="">
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
@@ -119,6 +109,11 @@
             <!-- /.modal-dialog -->
         </div>
     </div><!-- /.container-fluid -->
+    <!-- /.content -->
+
+
+    <!-- /.modal -->
+
 @endsection
 
 @section('js')
@@ -136,16 +131,26 @@
     <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
     <script type="text/javascript">
-        var actionUrl = '{{ url('publishers') }}';
-        var apiUrl = '{{ url('api/publishers') }}';
+        var actionUrl = '{{ url('members') }}';
+        var apiUrl = '{{ url('api/members') }}';
 
         var columns = [
             {data: 'DT_RowIndex', class: 'text-center', oderable: true},
             {data: 'name', class:'text-center', orderable:true},
+            {data: 'gender', class:'text-center', orderable:true},
+            // render: function(data, row, meta){
+            //     if({data: 'gender'} == '1'){
+            //         return `<a>Male</a>`;
+            //    }
+            //     // else if(data =2){
+            //     //     return 'Female';
+            //     // }
+            // }, orderable: false},
             {data: 'email', class:'text-center', orderable:true},
             {data: 'phone_number', class:'text-center', orderable:false},
             {data: 'address', class:'text-center', orderable:false},
             {render: function(index, row, data, meta){
+                
                 return`
                     <a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event,
                         ${meta.row})">
@@ -157,6 +162,9 @@
                     </a>`;
             }, orderable: false, width: '200px', class:'text-center'},
         ];
+
+        
     </script>
     <script src="{{ asset('js/data.js') }}"></script>
+    
 @endsection
