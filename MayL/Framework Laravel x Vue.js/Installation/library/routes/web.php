@@ -49,3 +49,6 @@ Route::resource('/publishers', PublisherController::class);
 
 Route::get('/transactions', [App\Http\Controllers\TransactionController::class, 'index']);
 
+Route::get('api/authors', [App\Http\Controllers\AuthorController::class, 'api']);
+
+
