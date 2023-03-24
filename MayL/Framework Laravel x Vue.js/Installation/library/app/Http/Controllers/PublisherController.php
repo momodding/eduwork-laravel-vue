@@ -21,9 +21,16 @@ class PublisherController extends Controller
     {
         $publishers = Publisher::with('publishers')->get();
 
-        return view('admin.publisher', compact('publishers'));
+        return view('admin.publisher');
     }
 
+    public function api()
+    {
+        $publishers = publisher::all();
+        $datatables = datatables()->of($publishers)->addIndexColumn();
+
+        return $datatables->make(true);
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -62,7 +69,7 @@ class PublisherController extends Controller
      */
     public function edit(Publisher $publisher)
     {
-        return view('admin.publisher.edit', compact('publisher'));
+        //return view('admin.publisher.edit', compact('publisher'));
     }
 
     /**

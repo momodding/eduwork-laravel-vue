@@ -37,7 +37,12 @@ Route::get('/books', [App\Http\Controllers\BookController::class, 'index']);
 // Route::delete('/catalogs/{catalog}', [App\Http\Controllers\CatalogController::class, 'destroy']);
 Route::resource('/catalogs', CatalogController::class);
 
+//Route::resource('/members', MemberController::class);
 Route::get('/members', [App\Http\Controllers\MemberController::class, 'index']);
+Route::post('/members', [App\Http\Controllers\MemberController::class, 'store']);
+Route::get('/members/{member}/edit', [App\Http\Controllers\MemberController::class, 'edit']);
+Route::put('/members/{member}', [App\Http\Controllers\MemberController::class, 'update']);
+Route::delete('/members/{member}', [App\Http\Controllers\MemberController::class, 'destroy']);
 
 // Route::get('/publishers', [App\Http\Controllers\PublisherController::class, 'index']);
 // Route::get('/publishers/create', [App\Http\Controllers\PublisherController::class, 'create']);
@@ -50,5 +55,6 @@ Route::resource('/publishers', PublisherController::class);
 Route::get('/transactions', [App\Http\Controllers\TransactionController::class, 'index']);
 
 Route::get('api/authors', [App\Http\Controllers\AuthorController::class, 'api']);
-
+Route::get('api/members', [App\Http\Controllers\MemberController::class, 'api']);
+Route::get('api/publishers', [App\Http\Controllers\PublisherController::class, 'api']);
 
