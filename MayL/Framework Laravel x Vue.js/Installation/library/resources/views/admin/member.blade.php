@@ -76,11 +76,9 @@
                                     required="">
                             </div>
                             <div class="form-group">
-                                <label>Gender</label>
-                                <select class="form-control" name="gender" id="">
-                                    <option value="1">Male</option>
-                                    <option value="2">Female</option>
-                                </select>
+                                <label>Gender</label><br>
+                                <input type="radio" name="gender" value="1"> Male
+                                <input type="radio" name="gender" value="2"> Female
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
@@ -137,15 +135,15 @@
         var columns = [
             {data: 'DT_RowIndex', class: 'text-center', oderable: true},
             {data: 'name', class:'text-center', orderable:true},
-            {data: 'gender', class:'text-center', orderable:true},
-            // render: function(data, row, meta){
-            //     if({data: 'gender'} == '1'){
-            //         return `<a>Male</a>`;
-            //    }
-            //     // else if(data =2){
-            //     //     return 'Female';
-            //     // }
-            // }, orderable: false},
+            {data: 'gender', class:'text-center', orderable:true,
+             render: function(data, type, row, meta){
+                if(row.gender == 1){
+                    return `<a>Male</a>`;
+                }
+                else {
+                    return `<a>Female</a>`;
+                }
+             }}, 
             {data: 'email', class:'text-center', orderable:true},
             {data: 'phone_number', class:'text-center', orderable:false},
             {data: 'address', class:'text-center', orderable:false},
