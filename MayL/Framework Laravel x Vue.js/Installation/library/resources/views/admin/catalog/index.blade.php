@@ -30,7 +30,7 @@
                                 <td>{{ $key+1 }}</td>
                                 <td>{{ $catalog->name }}</td>
                                 <td>{{ count($catalog->catalogs) }}</td>
-                                <td>{{ date('H:i - d M Y', strtotime($catalog->created_at)) }}</td>
+                                <td>{{ convert_date($catalog->created_at) }}</td>
                                 {{-- <td>{{ date('H:i - d M Y', strtotime($catalog->updated_at)) }}</td> --}}
                                 <td>
                                   <a href="{{ url('catalogs/'.$catalog->id.'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
