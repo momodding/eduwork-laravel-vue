@@ -18,12 +18,14 @@
         </div>
         <hr>
 
-        <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12" v-for="book in filteredList">
-                <div class="info-box" v-on:click="editData(book)">
-                    <div class="info-box-content">
-                        <span class="info-box-text h3">@{{ book.title }} (@{{ book.qty }})</span>
-                        <span class="info-box-number">Rp @{{ numberWithSpaces(book.price) }},- <small></small></span>
+        <div id="infoBoxBook">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 col-xs-12" v-for="book in filteredList">
+                    <div class="info-box" v-on:click="editData(book)">
+                        <div class="info-box-content">
+                            <span class="info-box-text h3">@{{ book.title }} (@{{ book.qty }})</span>
+                            <span class="info-box-number">Rp @{{ numberWithSpaces(book.price) }},- <small></small></span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -153,7 +155,6 @@
 
                         axios.post(this.actionUrl+'/'+id, {_method: 'DELETE'}).then(response => {
                             location.reload();
-                            //alert('Data has been removed');
                         });
                     }
                 },
