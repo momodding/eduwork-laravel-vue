@@ -24,7 +24,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('home');
+Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard']);
 
 //Route::get('/authors', [App\Http\Controllers\AuthorController::class, 'index']);
 Route::resource('/authors', AuthorController::class);
