@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <title>Blejar vue</title>
+  </head>
+  <body>
+    <div id="app" v-if="status == 'tampilkan' ">
+      {{message }} <br />
+      <label v-for="user in users">
+        Name : {{ user.name}}, Umur {{ user.age }}<br
+      /></label>
+    </div>
+  </body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+<script type="text/javascript">
+  var app = new Vue({
+    el: "#app",
+    data: {
+      message: "hello vue!",
+      status: "tampilkan",
+      users: [
+        {
+          name: "pelita",
+          age: "21",
+        },
+        {
+          name: "nur",
+          age: "22",
+        },
+        {
+          name: "najmina",
+          age: "25",
+        },
+      ],
+    },
+  });
+</script>
