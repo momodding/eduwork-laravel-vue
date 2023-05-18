@@ -150,7 +150,7 @@
                     $('#modal-default').modal();
                 },
                 deleteData(id){
-                    console.log(id);
+                    //console.log(id);
                     if (confirm("Are you sure?")) {
 
                         axios.post(this.actionUrl+'/'+id, {_method: 'DELETE'}).then(response => {
@@ -159,7 +159,7 @@
                     }
                 },
                 submitForm(event, id){
-                    console.log(id);
+                    //console.log(id);
                     event.preventDefault();
                     const _this = this;
                     var actionUrl = ! this.editStatus ? this.actionUrl : this.actionUrl+'/'+id;

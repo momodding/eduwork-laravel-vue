@@ -5,6 +5,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PublisherController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,9 +44,14 @@ Route::resource('/catalogs', CatalogController::class);
 Route::resource('/members', MemberController::class);
 Route::resource('/publishers', PublisherController::class);
 
-Route::get('/transactions', [App\Http\Controllers\TransactionController::class, 'index']);
+Route::resource('/transactions', TransactionController::class);
+Route::get('/transaction_details/{id}', [App\Http\Controllers\TransactionController::class, 'detail']);
+Route::get('/transaction_edit/{id}', [App\Http\Controllers\TransactionController::class, 'edit']);
 
 Route::get('api/authors', [App\Http\Controllers\AuthorController::class, 'api']);
+Route::get('api/books', [App\Http\Controllers\BookController::class, 'api']);
 Route::get('api/members', [App\Http\Controllers\MemberController::class, 'api']);
 Route::get('api/publishers', [App\Http\Controllers\PublisherController::class, 'api']);
-Route::get('api/books', [App\Http\Controllers\BookController::class, 'api']);
+Route::get('api/transactions', [App\Http\Controllers\TransactionController::class, 'api']);
+
+
