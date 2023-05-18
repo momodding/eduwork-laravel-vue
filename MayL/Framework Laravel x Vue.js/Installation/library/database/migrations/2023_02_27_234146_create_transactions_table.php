@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('member_id');
+            $table->boolean('status')->default(0);
             $table->date('date_start');
             $table->date('date_end');
             $table->timestamps();
