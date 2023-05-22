@@ -1,0 +1,9 @@
+UPDATE karyawan SET Tahun_Lahir = 2001 WHERE nama = 'Azka Fabiatul';
+
+UPDATE obat SET pembuat_obat = 'Dr. Yongki' WHERE pembuat_obat = 'Dr. yongku';
+
+UPDATE karyawan SET nama = 'Fragma Dwika Maharani' WHERE Tahun_Lahir = 2002;
+
+DELETE FROM supplier WHERE nama = 'jonhathan'
+
+DELETE FROM supplier WHERE Alamat = 'Trenggalek';

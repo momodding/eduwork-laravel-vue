@@ -1,0 +1,19 @@
+1. SELECT * FROM `transaksi_penjualan` WHERE jumlah > 2;
+
+2. UPDATE karyawan SET Tahun_Lahir = 2001 WHERE nama = 'Azka Fabiatul';
+
+3. INSERT INTO karyawan (nama, Tahun_Lahir, alamat, no_telepon) VALUES ('Dhisa Alalia', '2001', 'Gunungkidul', '08746348');
+
+4. DELETE FROM supplier WHERE nama = 'jonhathan'
+
+5. SELECT nama FROM karyawan;
+
+6. SELECT nama FROM karyawan WHERE Tahun_Lahir = 1999;
+
+7. SELECT * FROM obat ORDER BY pembuat_obat;
+
+8. SELECT nama_obat FROM obat ORDER By pembuat_obat DESC;
+
+9. DROP table apotek
+
+10. SELECT * FROM karyawan WHERE Tahun_Lahir = '2001'or Tahun_Lahir = '1999';
