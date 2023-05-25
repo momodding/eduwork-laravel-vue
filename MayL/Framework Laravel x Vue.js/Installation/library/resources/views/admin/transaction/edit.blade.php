@@ -8,18 +8,23 @@
             <div class="col-md-6">
                 <!-- general form elements -->
                 <div class="card card-primary">
+                    
+                    {{-- detail_id<input type="text" name="" value="{{ $transactions->transaction_details_id }}"> --}}
                     <div class="card-header">
                         <h3 class="card-title">Edit Transaction</h3>
                     </div>
                     <!-- /.card-header -->
-                    <!-- form start -->
-                    <form action="{{ url('transactions') }}" method="post">
+                    <!-- form start method="post" @method('PUT')-->
+                    <form action="{{ url('transactions/'.$transactions->transactions_id) }}"  method="post" >
                         @csrf
+                        <input type="hidden" name="id" value="{{ $transactions->transactions_id }}">
+                        <input type="hidden" name="book_id" value="{{ $transactions->book_id }}">
+                        @method('PUT')
                         <div class="card-body">
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Member</label>
                                 <div class="col-sm-10">
-                                    {{ $transactions->name }}
+                                    <input type="text" value="{{ $transactions->name }}">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -38,7 +43,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Qty Book</label>
                                 <div class="col-sm-10">
-                                    {{ $transactions->qty }}
+                                    <input type="text" value="{{ $transactions->qty }}" name="qty">
                                 </div>
                             </div>
                             <div class="form-group row">

@@ -11,14 +11,14 @@
                 <div class="card-header">
                   <a href="{{ url('transactions/create') }}" class="btn btn-primary pull-right">Create New Transaction</a>
                 
-                  <select cname="" id="" >
-                    <option value="">Terbaru</option>
-                    <option value="">Terbanyak</option>
+                  <select v-model="selectedStatus">
+                    <option value="0">Belum dikembalikan</option>
+                    <option value="1">sudah dikembalikan</option>
                   </select>
                   
-                  <select style="float:right;" cname="" id="">
-                    <option value="">Terbaru</option>
-                    <option value="">Terbanyak</option>
+                  <select name="filterTanggal" id="">
+                    <option value="1">Peminjaman terbaru</option>
+                    <option value="2">Peminjaman terlama</option>
                   </select>
                 </div>
                 <!-- /.card-header -->
@@ -58,7 +58,6 @@
                                 </td>
                             </tr>
                         @endforeach
-                      
                     </tbody> --}}
                   </table>
                 </div>
@@ -66,8 +65,6 @@
               </div>
             </div>
           </div>
-
-          
         </div>
       <!-- /.content -->
 @endsection
@@ -120,7 +117,7 @@
                         ${data.id})">
                         Edit
                     </a>
-                    <a class="btn btn-danger btn-sm" onclick="controller.deleteData(event,
+                    <a class="btn btn-danger btn-sm" onclick="controller.deleteData(
                         ${data.id})">
                         Delete
                     </a>`;
@@ -131,8 +128,8 @@
     el: '#controller',
     data: {
         datas:[],
+        selectedStatus:'',
         data: {},
-        //anggota:{},
         actionUrl,
         apiUrl,
         editStatus:false,
@@ -163,10 +160,26 @@
           this.actionUrl = '{{ url('transaction_edit') }}' + '/' +row;
             location.href = this.actionUrl;
         },
+        deleteData(id){
+          console.log(id);
+          if (confirm("Are you sure?")) {
+
+            axios.post(this.actionUrl+'/'+id, {_method: 'DELETE'}).then(response => {
+              location.reload();
+            });
+          }
+        },
         numberWithSpaces(x){
                     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
                 }
-    }
+    },
+    computed:{
+        filteredStatus(){
+          return this.datas.filter(data =>{
+            return data.status === this.selectedStatus;
+            }, this);
+          }
+        }
 });
 </script>
 {{-- <script src="{{ asset('js/data.js') }}"></script> --}}
