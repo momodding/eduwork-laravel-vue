@@ -54,4 +54,4 @@ Route::get('api/members', [App\Http\Controllers\MemberController::class, 'api'])
 Route::get('api/publishers', [App\Http\Controllers\PublisherController::class, 'api']);
 Route::get('api/transactions', [App\Http\Controllers\TransactionController::class, 'api']);
 
-
+Route::get('filterStatus/{status}',[App\Http\Controllers\TransactionController::class, 'filterStatus']);

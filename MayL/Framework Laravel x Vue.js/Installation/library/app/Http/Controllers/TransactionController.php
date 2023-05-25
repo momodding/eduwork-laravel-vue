@@ -24,9 +24,9 @@ class TransactionController extends Controller
     public function index()
     {
         $transactions = Transaction::select('transactions.date_start','transactions.date_end','members.name','books.title','transaction_details.qty','books.price','status')
-        ->join('members','transactions.member_id','=','members.id')
-        ->join('transaction_details','transactions.id','=','transaction_details.transaction_id')
-        ->join('books','books.id','=','transaction_details.book_id')
+        ->leftjoin('members','transactions.member_id','=','members.id')
+        ->leftjoin('transaction_details','transactions.id','=','transaction_details.transaction_id')
+        ->leftjoin('books','books.id','=','transaction_details.book_id')
         ->get();
         
         //return $transactions;
@@ -35,7 +35,7 @@ class TransactionController extends Controller
     }
 
     public function api(){
-        $transactions = Transaction::select('transactions.date_start','transactions.date_end','members.name','books.title','transaction_details.qty',DB::raw('transaction_details.qty*books.price as rentPrice'),'status','transaction_details.id')
+        $transactions = Transaction::select('transaction_details.id as transaction_details_id','transactions.date_start','transactions.date_end','members.name','books.title','transaction_details.qty',DB::raw('transaction_details.qty*books.price as rentPrice'),'status','transaction_details.id')
         ->join('members','transactions.member_id','=','members.id')
         ->join('transaction_details','transactions.id','=','transaction_details.transaction_id')
         ->join('books','books.id','=','transaction_details.book_id')
@@ -116,7 +116,7 @@ class TransactionController extends Controller
      */
     public function edit($id)
     {
-        $transactions = Transaction::select('transactions.date_start','transactions.date_end','members.name','books.title','transaction_details.qty',DB::raw('transaction_details.qty*books.price as rentPrice'),'status','transaction_details.id')
+        $transactions = Transaction::select('transactions.id as transactions_id','transaction_details.id as transaction_details_id','books.id as book_id','transactions.date_start','transactions.date_end','members.name','books.title','transaction_details.qty',DB::raw('transaction_details.qty*books.price as rentPrice'),'status','transaction_details.id')
         ->join('members','transactions.member_id','=','members.id')
         ->join('transaction_details','transactions.id','=','transaction_details.transaction_id')
         ->join('books','books.id','=','transaction_details.book_id')
@@ -124,6 +124,7 @@ class TransactionController extends Controller
         ->first();
         //$datatables = datatables()->of($transactions)->addIndexColumn();
 
+        //dd($transactions);
         //return json_decode($transactions);
         return view ('admin.transaction.edit',compact('transactions'));
     }
@@ -133,12 +134,16 @@ class TransactionController extends Controller
      */
     public function update(Request $request, Transaction $transaction)
     {
-        dd($transactions);
-        $this->validate($request,[
-            'name' => ['required'],
-        ]);
+        //dd($request);
+        // $this->validate($request,[
+        //     'status' => ['required'],
+        // ]);
 
         $transaction->update($request->all());
+        // TransactionDetail::create(array_merge($request->all(),['transaction_id'=>$transaction->id]));
+        $book = Book::where('id',$request->input('book_id'))->first();
+        $book->qty=$book->qty + $request->input('qty');
+        $book->save();
 
         return redirect('transactions');
     }
@@ -146,8 +151,23 @@ class TransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Transaction $transaction)
+    public function destroy(TransactionDetail $transaction)
     {
-        //
+        $transaction->delete();
+        Transaction::where('id',$transaction->transaction_id)->delete();
     }
+
+    public function filterStatus($status){
+        $transactions = Transaction::select('transaction_details.id as transaction_details_id','transactions.date_start','transactions.date_end','members.name','books.title','transaction_details.qty',DB::raw('transaction_details.qty*books.price as rentPrice'),'status','transaction_details.id')
+        ->join('members','transactions.member_id','=','members.id')
+        ->join('transaction_details','transactions.id','=','transaction_details.transaction_id')
+        ->join('books','books.id','=','transaction_details.book_id')
+        ->where('transactions.status','=', $status)
+        ->get();
+        
+        //dd($transactions);
+        return view ('admin.transaction.index',compact('transactions'));
+    }
+
+
 }
