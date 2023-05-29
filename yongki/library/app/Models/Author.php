@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Author extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name', 'phone_number', 'address', 'email'];
+
     public function books()
     {
         return $this->hasMany('App\Models\Book', 'author_id');

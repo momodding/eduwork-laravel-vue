@@ -226,7 +226,7 @@
           </li>
           <li class="nav-item menu-open">
             <a href="{{ url('book') }}" class="nav-link {{ request()->is('book') ? 'active' : '' }}">
-             <i class="fa-duotone fa-grid-2"></i>
+             <i class="nav-icon fas fa-edit"></i>
               <p>
                 Book
               </p>
