@@ -201,49 +201,50 @@
             </a>
           </li>
           <li class="nav-item menu-open">
-            <a href="{{ url('catalog') }}" class="nav-link {{ request()->is('catalog') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-edit"></i>
+            <a href="{{ url('transactions') }}" class="nav-link {{ request()->is('transactions') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-money-bill"></i>
               <p>
-                Catalog
+                Transaction
               </p>
             </a>
           </li>
           <li class="nav-item menu-open">
-            <a href="{{ url('publisher') }}" class="nav-link {{ request()->is('publisher') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-                Publisher
-              </p>
-            </a>
-          </li>
-          <li class="nav-item menu-open">
-            <a href="{{ url('author') }}" class="nav-link {{ request()->is('author') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-                Author
-              </p>
-            </a>
-          </li>
-          <li class="nav-item menu-open">
-            <a href="{{ url('book') }}" class="nav-link {{ request()->is('book') ? 'active' : '' }}">
-             <i class="nav-icon fas fa-edit"></i>
+            <a href="{{ url('books') }}" class="nav-link {{ request()->is('books') ? 'active' : '' }}">
+             <i class="nav-icon fas fa-book"></i>
               <p>
                 Book
               </p>
             </a>
           </li>
           <li class="nav-item menu-open">
-            <a href="{{ url('member') }}" class="nav-link {{ request()->is('member') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-edit"></i>
+            <a href="{{ url('members') }}" class="nav-link {{ request()->is('members') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-users"></i>
               <p>
                 Member
               </p>
             </a>
-            <li class="nav-item menu-open">
-            <a href="{{ url('transaction') }}" class="nav-link {{ request()->is('transaction') ? 'active' : '' }}">
+          </li>
+          <li class="nav-item menu-open">
+            <a href="{{ url('publishers') }}" class="nav-link {{ request()->is('publishers') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-building"></i>
+              <p>
+                Publisher
+              </p>
+            </a>
+          </li>
+          <li class="nav-item menu-open">
+            <a href="{{ url('authors') }}" class="nav-link {{ request()->is('authors') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-pen-nib"></i>
+              <p>
+                Author
+              </p>
+            </a>
+          </li>
+          <li class="nav-item menu-open">
+            <a href="{{ url('catalogs') }}" class="nav-link {{ request()->is('catalogs') ? 'active' : '' }}">
               <i class="nav-icon fas fa-edit"></i>
               <p>
-                Transaction
+                Catalog
               </p>
             </a>
           </li>

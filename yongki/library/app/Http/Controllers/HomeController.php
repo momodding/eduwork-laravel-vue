@@ -156,7 +156,7 @@ class HomeController extends Controller
                     ->groupBy('members.name')
                     ->get();
         
-        return $data17;
+       // return $data17;
         return view('home');
     }
 }
