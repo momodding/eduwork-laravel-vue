@@ -7,5 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
-    use HasFactory;
+    public function publishers()
+    {
+        return $this->belongsTo('App\Models\Publisher', 'publisher_id');
+    }
+    public function authors()
+    {
+        return $this->belongsTo('App\Models\Author', 'author_id');
+    }
+    public function catalogs()
+    {
+        return $this->belongsTo('App\Models\catalog', 'catalog_id');
+    }
 }
