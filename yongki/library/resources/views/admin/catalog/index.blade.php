@@ -15,7 +15,7 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th style="width: 10px">#</th>
+                                    <th style="width: 10px">No</th>
                                     <th class="text-center">Name</th>
                                     <th class="text-center">Total Books</th>
                                     <th class="text-center">Created At</th>
@@ -31,11 +31,12 @@
                                     <td class="text-center">{{ date('H:i:s - d M Y', strtotime($catalog->created_at)) }}</td>
                                     <td class="text-center">
                                         <a href="{{ url('catalogs/'.$catalog->id.'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
+
                                         <form action="{{ url('catalogs', ['id' => $catalog->id]) }}" method="post">
-                                        <input class="btn btn-danger btn-sm" type="submit" value="Delete" onclick="return confirm('Are you sure?')">
-                                        @method('delete')
-                                        @csrf
-                                    </form>
+                                            <input class="btn btn-danger btn-sm" type="submit" value="Delete" onclick="return confirm('Are you sure?')">
+                                            @method('delete')
+                                            @csrf
+                                        </form>
                                     </td>
                                     
 
