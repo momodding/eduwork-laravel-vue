@@ -166,8 +166,30 @@ class TransactionController extends Controller
         ->get();
         
         //dd($transactions);
-        return view ('admin.transaction.index',compact('transactions'));
+        //return view ('admin.transaction.index',compact('transactions'));
+        $datatables = datatables()->of($transactions)->addIndexColumn();
+
+        //return json_decode($transactions);
+        return $datatables->make(true);
     }
 
+    public function filterDate(Request $request){
+        //dd($request);
+        $date_start = $request->input('date_start');
+        $date_end = $request->input('date_end');
 
+        $transactions = Transaction::select('transaction_details.id as transaction_details_id','transactions.date_start','transactions.date_end','members.name','books.title','transaction_details.qty',DB::raw('transaction_details.qty*books.price as rentPrice'),'status','transaction_details.id')
+        ->join('members','transactions.member_id','=','members.id')
+        ->join('transaction_details','transactions.id','=','transaction_details.transaction_id')
+        ->join('books','books.id','=','transaction_details.book_id')
+        ->whereBetween('transactions.date_start',[$date_start,$date_end])
+        ->get();
+        
+        //dd($transactions);
+        //return view ('admin.transaction.index',compact('transactions'));
+        $datatables = datatables()->of($transactions)->addIndexColumn();
+
+        //return json_decode($transactions);
+        return $datatables->make(true);
+    }
 }

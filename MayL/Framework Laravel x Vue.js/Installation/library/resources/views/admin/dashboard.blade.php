@@ -141,7 +141,7 @@
         </div>
         <!-- /.card-body -->
       </div>
-    </div>
+        </div>
       <!-- /.card -->
 
     </div>
@@ -149,10 +149,12 @@
 @endsection
 
 @section('js')
+    
     <!-- jQuery -->
     <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
     <!-- ChartJS -->
     <script src="{{ asset('assets/plugins/chart.js/Chart.min.js') }}"></script>
+
     <script type="text/javascript">
         var label_donut = '{!! json_encode($label_donut) !!}';
         var data_donut = '{!! json_encode($data_donut) !!}';

@@ -55,3 +55,4 @@ Route::get('api/publishers', [App\Http\Controllers\PublisherController::class, '
 Route::get('api/transactions', [App\Http\Controllers\TransactionController::class, 'api']);
 
 Route::get('filterStatus/{status}',[App\Http\Controllers\TransactionController::class, 'filterStatus']);
+Route::get('filterDate',[App\Http\Controllers\TransactionController::class, 'filterDate']);

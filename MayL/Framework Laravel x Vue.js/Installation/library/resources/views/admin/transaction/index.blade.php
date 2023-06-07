@@ -11,15 +11,16 @@
                 <div class="card-header">
                   <a href="{{ url('transactions/create') }}" class="btn btn-primary pull-right">Create New Transaction</a>
                 
-                  <select v-model="selectedStatus">
+                  <select v-model="selectedStatus" @change="statusFilter">
                     <option value="0">Belum dikembalikan</option>
                     <option value="1">sudah dikembalikan</option>
                   </select>
                   
-                  <select name="filterTanggal" id="">
-                    <option value="1">Peminjaman terbaru</option>
-                    <option value="2">Peminjaman terlama</option>
-                  </select>
+                  <input type="date" id="filterDateStart">
+                  <input type="date" id="filterDateEnd">
+                  <button type="submit" class="btn btn-primary" @click="dateFilter">
+                    Search
+                  </button>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -85,6 +86,8 @@
   <script type="text/javascript">
     var actionUrl = '{{ url('transactions') }}';
     var apiUrl = '{{ url('api/transactions') }}';
+    var statusUrl = '{{ url('filterStatus') }}';
+    var dateUrl = '{{ url('filterDate') }}';
 
     var columns = [
             {data: 'DT_RowIndex', class: 'text-center', oderable: true},
@@ -132,6 +135,8 @@
         data: {},
         actionUrl,
         apiUrl,
+        dateUrl,
+        statusUrl,
         editStatus:false,
     },
     mounted: function () {
@@ -171,15 +176,55 @@
         },
         numberWithSpaces(x){
                     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-                }
-    },
-    computed:{
-        filteredStatus(){
-          return this.datas.filter(data =>{
-            return data.status === this.selectedStatus;
-            }, this);
-          }
+                },
+        statusFilter(e){
+          value = e.target.value;
+            console.log(value);
+            const _this = this;
+            _this.table = $('#dataTable').DataTable({
+              "bDestroy": true,
+                ajax:{
+                    url: _this.statusUrl+'/'+value,
+                    type : 'GET',
+                },
+                columns: columns
+            }).on('xhr', function(){
+                _this.datas = _this.table.ajax.json().data;
+            });
+            // axios.get(this.statusUrl+'/'+value).then(response => {
+            //   _this.datas = _this.table.ajax.json().data;
+            //             });
+        },
+        dateFilter(){
+          var date_start = new Date ($('#filterDateStart').val());
+          var day_start = date_start.getDate();
+          var month_start = date_start.getMonth();
+          var year_start = date_start.getYear();
+          //date_end;
+          var date_end = new Date ($("#filterDateEnd").val());
+          var day_end = date_end.getDate();
+          var month_end = date_end.getMonth();
+          var year_end = date_end.getYear();
+            const _this = this;
+            _this.table = $('#dataTable').DataTable({
+              "bDestroy": true,
+                ajax:{
+                    url: _this.dateUrl+'?date_start='+(year_start+1900)+'-'+(month_start+1)+'-'+day_start+'&'+'date_end='+(year_end+1900)+'-'+(month_end+1)+'-'+day_end,
+                    type : 'GET',
+                },
+                columns: columns
+            }).on('xhr', function(){
+                _this.datas = _this.table.ajax.json().data;
+            });
         }
+    }
+    // computed:{
+    //     filteredStatus(){
+    //       return this.datas.filter(data =>{
+    //         return data.status == this.selectedStatus;
+    //         }, this);
+    //       }
+    //     }
 });
 </script>
 {{-- <script src="{{ asset('js/data.js') }}"></script> --}}
