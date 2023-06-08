@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\Catalog;
+use App\Models\Transaction;
 use App\Models\Publisher;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -26,7 +28,15 @@ class BookController extends Controller
         $catalogs = Catalog::all();
         $publishers = Publisher::all();
 
-        return view('admin.book', compact('authors','books','catalogs','publishers'));
+        $currentTime = Carbon::now();
+        $overdueUsers = Transaction::select('members.name')
+        ->rightjoin('members','transactions.member_id','=','members.id')
+        ->rightjoin('transaction_details','transactions.id','=','transaction_details.transaction_id')
+        ->leftjoin('books','books.id','=','transaction_details.book_id')
+        ->where('transactions.status','=','0','and','transactions.date_end','>',$currentTime)
+        ->get();
+
+        return view('admin.book', compact('authors','books','catalogs','publishers','overdueUsers'));
     }
 
     public function api()

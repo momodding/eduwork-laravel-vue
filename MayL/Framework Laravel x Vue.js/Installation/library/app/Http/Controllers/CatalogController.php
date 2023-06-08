@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Catalog;
+use App\Models\Transaction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -21,8 +23,15 @@ class CatalogController extends Controller
     {
         $catalogs = Catalog::with('catalogs')->get();
 
-        //return $catalogs;
-        return view('admin.catalog.index', compact('catalogs'));
+        $currentTime = Carbon::now();
+        $overdueUsers = Transaction::select('members.name')
+        ->rightjoin('members','transactions.member_id','=','members.id')
+        ->rightjoin('transaction_details','transactions.id','=','transaction_details.transaction_id')
+        ->leftjoin('books','books.id','=','transaction_details.book_id')
+        ->where('transactions.status','=','0','and','transactions.date_end','>',$currentTime)
+        ->get();
+
+        return view('admin.catalog.index', compact('catalogs','overdueUsers'));
     }
 
     /**
@@ -30,7 +39,15 @@ class CatalogController extends Controller
      */
     public function create()
     {
-        return view('admin.catalog.create');
+        $currentTime = Carbon::now();
+        $overdueUsers = Transaction::select('members.name')
+        ->rightjoin('members','transactions.member_id','=','members.id')
+        ->rightjoin('transaction_details','transactions.id','=','transaction_details.transaction_id')
+        ->leftjoin('books','books.id','=','transaction_details.book_id')
+        ->where('transactions.status','=','0','and','transactions.date_end','>',$currentTime)
+        ->get();
+
+        return view('admin.catalog.create',compact('overdueUsers'));
     }
 
     /**
@@ -66,8 +83,15 @@ class CatalogController extends Controller
      */
     public function edit(Catalog $catalog)
     {
+        $currentTime = Carbon::now();
+        $overdueUsers = Transaction::select('members.name')
+        ->rightjoin('members','transactions.member_id','=','members.id')
+        ->rightjoin('transaction_details','transactions.id','=','transaction_details.transaction_id')
+        ->leftjoin('books','books.id','=','transaction_details.book_id')
+        ->where('transactions.status','=','0','and','transactions.date_end','>',$currentTime)
+        ->get();
         //return $catalog;
-        return view('admin.catalog.edit', compact('catalog'));
+        return view('admin.catalog.edit', compact('catalog','overdueUsers'));
     }
 
     /**
