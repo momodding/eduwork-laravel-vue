@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Book;
 use App\Models\Member;
 use App\Models\Transaction;
@@ -29,9 +30,16 @@ class TransactionController extends Controller
         ->leftjoin('books','books.id','=','transaction_details.book_id')
         ->get();
         
+        $currentTime = Carbon::now();
+        $overdueUsers = Transaction::select('members.name')
+        ->rightjoin('members','transactions.member_id','=','members.id')
+        ->rightjoin('transaction_details','transactions.id','=','transaction_details.transaction_id')
+        ->leftjoin('books','books.id','=','transaction_details.book_id')
+        ->where('transactions.status','=','0','and','transactions.date_end','>',$currentTime)
+        ->get();
         //return $transactions;
 
-        return view('admin.transaction.index', compact('transactions'));
+        return view('admin.transaction.index', compact('transactions','overdueUsers'));
     }
 
     public function api(){
@@ -55,8 +63,16 @@ class TransactionController extends Controller
         ->where('transaction_details.id','=',$id)
         ->first();
 
+        $currentTime = Carbon::now();
+        $overdueUsers = Transaction::select('members.name')
+        ->rightjoin('members','transactions.member_id','=','members.id')
+        ->rightjoin('transaction_details','transactions.id','=','transaction_details.transaction_id')
+        ->leftjoin('books','books.id','=','transaction_details.book_id')
+        ->where('transactions.status','=','0','and','transactions.date_end','>',$currentTime)
+        ->get();
+
         //return json_decode($transactions);
-        return view ('admin.transaction.detail',compact('transactions'));
+        return view ('admin.transaction.detail',compact('transactions','overdueUsers'));
     }
 
     /**
@@ -69,8 +85,15 @@ class TransactionController extends Controller
                         ->get();
         $members = Member::all();
         //return $books;
+        $currentTime = Carbon::now();
+        $overdueUsers = Transaction::select('members.name')
+        ->rightjoin('members','transactions.member_id','=','members.id')
+        ->rightjoin('transaction_details','transactions.id','=','transaction_details.transaction_id')
+        ->leftjoin('books','books.id','=','transaction_details.book_id')
+        ->where('transactions.status','=','0','and','transactions.date_end','>',$currentTime)
+        ->get();
 
-        return view('admin.transaction.create', compact('books','members'));
+        return view('admin.transaction.create', compact('books','members','overdueUsers'));
     }
 
     /**
@@ -124,9 +147,17 @@ class TransactionController extends Controller
         ->first();
         //$datatables = datatables()->of($transactions)->addIndexColumn();
 
+        $currentTime = Carbon::now();
+        $overdueUsers = Transaction::select('members.name')
+        ->rightjoin('members','transactions.member_id','=','members.id')
+        ->rightjoin('transaction_details','transactions.id','=','transaction_details.transaction_id')
+        ->leftjoin('books','books.id','=','transaction_details.book_id')
+        ->where('transactions.status','=','0','and','transactions.date_end','>',$currentTime)
+        ->get();
+
         //dd($transactions);
         //return json_decode($transactions);
-        return view ('admin.transaction.edit',compact('transactions'));
+        return view ('admin.transaction.edit',compact('transactions','overdueUsers'));
     }
 
     /**
@@ -142,10 +173,26 @@ class TransactionController extends Controller
         $transaction->update($request->all());
         // TransactionDetail::create(array_merge($request->all(),['transaction_id'=>$transaction->id]));
         $book = Book::where('id',$request->input('book_id'))->first();
-        $book->qty=$book->qty + $request->input('qty');
-        $book->save();
+        if ($request->status == "0"){
+            $book->save();
+            return redirect('transactions'); 
+        }
+        else{
+            $book->qty = $book->qty + $request->input('qty');
+            $book->save();
+            return redirect('transactions');
+        };
+        
 
-        return redirect('transactions');
+        $currentTime = Carbon::now();
+        $overdueUsers = Transaction::select('members.name')
+        ->rightjoin('members','transactions.member_id','=','members.id')
+        ->rightjoin('transaction_details','transactions.id','=','transaction_details.transaction_id')
+        ->leftjoin('books','books.id','=','transaction_details.book_id')
+        ->where('transactions.status','=','0','and','transactions.date_end','>',$currentTime)
+        ->get();
+
+        return redirect('transactions',compact('overdueUsers'));
     }
 
     /**

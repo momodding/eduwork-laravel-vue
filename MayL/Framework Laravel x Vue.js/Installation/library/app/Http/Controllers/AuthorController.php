@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Author;
+use App\Models\Transaction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -19,10 +21,16 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        //$authors = Author::all();
+        $currentTime = Carbon::now();
+        $overdueUsers = Transaction::select('members.name')
+        ->rightjoin('members','transactions.member_id','=','members.id')
+        ->rightjoin('transaction_details','transactions.id','=','transaction_details.transaction_id')
+        ->leftjoin('books','books.id','=','transaction_details.book_id')
+        ->where('transactions.status','=','0','and','transactions.date_end','>',$currentTime)
+        ->get();
 
         //return view('admin.author', compact('authors'));
-        return view('admin.author');
+        return view('admin.author', compact('overdueUsers'));
     }
 
     public function api()

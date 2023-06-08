@@ -141,7 +141,7 @@
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <span class="dropdown-item dropdown-header">15 Notifications</span>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" data-toggle="modal" data-target="#modal-default">
+                        <a class="dropdown-item" data-toggle="modal" data-target="#modal-notification">
                             <i class="fas fa-envelope mr-2"></i> 4 new messages
                             <span class="float-right text-muted text-sm">3 mins</span>
                         </a>
@@ -319,7 +319,7 @@
         </aside>
         <!-- /.control-sidebar -->
 
-        <div class="modal fade" id="modal-default">
+        <div class="modal fade" id="modal-notification">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
