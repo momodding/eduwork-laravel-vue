@@ -28,6 +28,7 @@ class TransactionController extends Controller
         ->leftjoin('members','transactions.member_id','=','members.id')
         ->leftjoin('transaction_details','transactions.id','=','transaction_details.transaction_id')
         ->leftjoin('books','books.id','=','transaction_details.book_id')
+        ->orderBy('transaction_details.created_at','desc')
         ->get();
         
         $currentTime = Carbon::now();
@@ -47,6 +48,7 @@ class TransactionController extends Controller
         ->join('members','transactions.member_id','=','members.id')
         ->join('transaction_details','transactions.id','=','transaction_details.transaction_id')
         ->join('books','books.id','=','transaction_details.book_id')
+        ->orderBy('transaction_details.created_at','desc')
         ->get();
 
         $datatables = datatables()->of($transactions)->addIndexColumn();
@@ -165,7 +167,7 @@ class TransactionController extends Controller
      */
     public function update(Request $request, Transaction $transaction)
     {
-        //dd($request);
+        //dd($transaction);
         // $this->validate($request,[
         //     'status' => ['required'],
         // ]);
@@ -173,12 +175,14 @@ class TransactionController extends Controller
         $transaction->update($request->all());
         // TransactionDetail::create(array_merge($request->all(),['transaction_id'=>$transaction->id]));
         $book = Book::where('id',$request->input('book_id'))->first();
-        if ($request->status == "0"){
+       
+        if ($request->statusBefore ==0 && $request->status==1){
+            //dd($request);
+            $book->qty = $book->qty + $request->input('qty');
             $book->save();
             return redirect('transactions'); 
         }
         else{
-            $book->qty = $book->qty + $request->input('qty');
             $book->save();
             return redirect('transactions');
         };
@@ -210,6 +214,7 @@ class TransactionController extends Controller
         ->join('transaction_details','transactions.id','=','transaction_details.transaction_id')
         ->join('books','books.id','=','transaction_details.book_id')
         ->where('transactions.status','=', $status)
+        ->orderBy('transaction_details.created_at','desc')
         ->get();
         
         //dd($transactions);
@@ -230,6 +235,7 @@ class TransactionController extends Controller
         ->join('transaction_details','transactions.id','=','transaction_details.transaction_id')
         ->join('books','books.id','=','transaction_details.book_id')
         ->whereBetween('transactions.date_start',[$date_start,$date_end])
+        ->orderBy('transaction_details.created_at','desc')
         ->get();
         
         //dd($transactions);
