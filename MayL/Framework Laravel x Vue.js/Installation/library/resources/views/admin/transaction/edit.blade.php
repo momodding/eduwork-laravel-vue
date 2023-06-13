@@ -17,9 +17,10 @@
                     <!-- form start method="post" @method('PUT')-->
                     <form action="{{ url('transactions/'.$transactions->transactions_id) }}"  method="post" >
                         @csrf
+                        @method('PUT')
                         <input type="hidden" name="id" value="{{ $transactions->transactions_id }}">
                         <input type="hidden" name="book_id" value="{{ $transactions->book_id }}">
-                        @method('PUT')
+                        <input type="hidden" name="statusBefore" value="{{ $transactions->status }}">
                         <div class="card-body">
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Member</label>
@@ -49,15 +50,12 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Status</label>
                                 <div class="col-sm-10">
-                                    {{-- 
-                                    <br>
-                                    <input type="radio" name="status" value="1"> <label>Sudah dikembalikan </label> --}}
                                     @if($transactions->status==0)
                                         <input type="radio" name="status" value="0" checked="checked"> <label>Belum dikembalikan</label>
                                             <br>
                                         <input type="radio" name="status" value="1"> <label>Sudah dikembalikan</label>
                                     @else
-                                        <input type="radio" name="status" value="0"> <label>Belum dikembalikan</label>
+                                        <input type="radio" name="status" value="0" disabled ><label>Belum dikembalikan</label>
                                         <br>
                                         <input type="radio" name="status" value="1" checked="checked"> <label>Sudah dikembalikan</label>
                                     @endif

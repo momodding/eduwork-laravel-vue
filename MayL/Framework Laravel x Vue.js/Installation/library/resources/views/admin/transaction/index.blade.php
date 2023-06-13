@@ -11,15 +11,20 @@
                 <div class="card-header">
                   <a href="{{ url('transactions/create') }}" class="btn btn-primary pull-right">Create New Transaction</a>
                 
+                  <a>Filter Status</a>
                   <select v-model="selectedStatus" @change="statusFilter">
                     <option value="0">Belum dikembalikan</option>
-                    <option value="1">sudah dikembalikan</option>
+                    <option value="1">Sudah dikembalikan</option>
                   </select>
-                  
+                  <a>Filter Tanggal transaksi</a>
                   <input type="date" id="filterDateStart">
+                  <a> - </a>
                   <input type="date" id="filterDateEnd">
                   <button type="submit" class="btn btn-primary" @click="dateFilter">
                     Search
+                  </button>
+                  <button type="submit" class="btn btn-primary" @click="resetFilter">
+                    Reset filter
                   </button>
                 </div>
                 <!-- /.card-header -->
@@ -157,13 +162,13 @@
         },
         detail(row){
           //console.log("menuju detail ke - "+ row);
-          this.actionUrl = '{{ url('transaction_details') }}' + '/' +row;
-            location.href = this.actionUrl;
+          this.detailUrl = '{{ url('transaction_details') }}' + '/' +row;
+            location.href = this.detailUrl;
         },
         edit(row){
           //console.log("menuju detail ke - "+ row);
-          this.actionUrl = '{{ url('transaction_edit') }}' + '/' +row;
-            location.href = this.actionUrl;
+          this.editUrl = '{{ url('transaction_edit') }}' + '/' +row;
+            location.href = this.editUrl;
         },
         deleteData(id){
           console.log(id);
@@ -179,7 +184,7 @@
                 },
         statusFilter(e){
           value = e.target.value;
-            console.log(value);
+            //console.log(value);
             const _this = this;
             _this.table = $('#dataTable').DataTable({
               "bDestroy": true,
@@ -210,6 +215,19 @@
               "bDestroy": true,
                 ajax:{
                     url: _this.dateUrl+'?date_start='+(year_start+1900)+'-'+(month_start+1)+'-'+day_start+'&'+'date_end='+(year_end+1900)+'-'+(month_end+1)+'-'+day_end,
+                    type : 'GET',
+                },
+                columns: columns
+            }).on('xhr', function(){
+                _this.datas = _this.table.ajax.json().data;
+            });
+        },
+        resetFilter(){
+          $('#dataTable').DataTable().clear();
+          const _this = this;
+            _this.table = $('#dataTable').DataTable({
+                ajax:{
+                    url: _this.apiUrl,
                     type : 'GET',
                 },
                 columns: columns
