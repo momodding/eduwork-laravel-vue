@@ -24,7 +24,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::select('transactions.date_start','transactions.date_end','members.name','books.title','transaction_details.qty','books.price','status')
+        $transactions = Transaction::select('transactions.date_start','transactions.date_end','members.name','books.title','transaction_details.qty','books.price','status',DB::raw('datediff(transactions.date_end, transactions.date_start)as dayrent'))
         ->leftjoin('members','transactions.member_id','=','members.id')
         ->leftjoin('transaction_details','transactions.id','=','transaction_details.transaction_id')
         ->leftjoin('books','books.id','=','transaction_details.book_id')
@@ -39,12 +39,11 @@ class TransactionController extends Controller
         ->where('transactions.status','=','0','and','transactions.date_end','>',$currentTime)
         ->get();
         //return $transactions;
-
         return view('admin.transaction.index', compact('transactions','overdueUsers'));
     }
 
     public function api(){
-        $transactions = Transaction::select('transaction_details.id as transaction_details_id','transactions.date_start','transactions.date_end','members.name','books.title','transaction_details.qty',DB::raw('transaction_details.qty*books.price as rentPrice'),'status','transaction_details.id')
+        $transactions = Transaction::select('transaction_details.id as transaction_details_id','transactions.date_start','transactions.date_end','members.name','books.title','transaction_details.qty',DB::raw('transaction_details.qty*books.price as rentPrice'),'status','transaction_details.id',DB::raw('datediff(transactions.date_end, transactions.date_start)as dayrent'))
         ->join('members','transactions.member_id','=','members.id')
         ->join('transaction_details','transactions.id','=','transaction_details.transaction_id')
         ->join('books','books.id','=','transaction_details.book_id')
@@ -52,7 +51,7 @@ class TransactionController extends Controller
         ->get();
 
         $datatables = datatables()->of($transactions)->addIndexColumn();
-
+        
         //return json_decode($transactions);
         return $datatables->make(true);
     }
