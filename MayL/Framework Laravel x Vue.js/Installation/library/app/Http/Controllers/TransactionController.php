@@ -57,7 +57,7 @@ class TransactionController extends Controller
     }
 
     public function detail($id){
-        $transactions = Transaction::select('transactions.date_start','transactions.date_end','members.name','books.title','transaction_details.qty',DB::raw('transaction_details.qty*books.price as rentPrice'),'status','transaction_details.id')
+        $transactions = Transaction::select('transactions.date_start','transactions.date_end','members.name','books.title','transaction_details.qty',DB::raw('transaction_details.qty*books.price as rentPrice'),'status','transaction_details.id', DB::raw('datediff(transactions.date_end, transactions.date_start)as dayrent'))
         ->join('members','transactions.member_id','=','members.id')
         ->join('transaction_details','transactions.id','=','transaction_details.transaction_id')
         ->join('books','books.id','=','transaction_details.book_id')
@@ -140,7 +140,7 @@ class TransactionController extends Controller
      */
     public function edit($id)
     {
-        $transactions = Transaction::select('transactions.id as transactions_id','transaction_details.id as transaction_details_id','books.id as book_id','transactions.date_start','transactions.date_end','members.name','books.title','transaction_details.qty',DB::raw('transaction_details.qty*books.price as rentPrice'),'status','transaction_details.id')
+        $transactions = Transaction::select('transactions.id as transactions_id','transaction_details.id as transaction_details_id','books.id as book_id','transactions.date_start','transactions.date_end','members.name','books.title','transaction_details.qty',DB::raw('transaction_details.qty*books.price as rentPrice'),'status','transaction_details.id', DB::raw('datediff(transactions.date_end, transactions.date_start)as dayrent'))
         ->join('members','transactions.member_id','=','members.id')
         ->join('transaction_details','transactions.id','=','transaction_details.transaction_id')
         ->join('books','books.id','=','transaction_details.book_id')
@@ -208,7 +208,7 @@ class TransactionController extends Controller
     }
 
     public function filterStatus($status){
-        $transactions = Transaction::select('transaction_details.id as transaction_details_id','transactions.date_start','transactions.date_end','members.name','books.title','transaction_details.qty',DB::raw('transaction_details.qty*books.price as rentPrice'),'status','transaction_details.id')
+        $transactions = Transaction::select('transaction_details.id as transaction_details_id','transactions.date_start','transactions.date_end','members.name','books.title','transaction_details.qty',DB::raw('transaction_details.qty*books.price as rentPrice'),'status','transaction_details.id', DB::raw('datediff(transactions.date_end, transactions.date_start)as dayrent'))
         ->join('members','transactions.member_id','=','members.id')
         ->join('transaction_details','transactions.id','=','transaction_details.transaction_id')
         ->join('books','books.id','=','transaction_details.book_id')
@@ -229,7 +229,7 @@ class TransactionController extends Controller
         $date_start = $request->input('date_start');
         $date_end = $request->input('date_end');
 
-        $transactions = Transaction::select('transaction_details.id as transaction_details_id','transactions.date_start','transactions.date_end','members.name','books.title','transaction_details.qty',DB::raw('transaction_details.qty*books.price as rentPrice'),'status','transaction_details.id')
+        $transactions = Transaction::select('transaction_details.id as transaction_details_id','transactions.date_start','transactions.date_end','members.name','books.title','transaction_details.qty',DB::raw('transaction_details.qty*books.price as rentPrice'),'status','transaction_details.id', DB::raw('datediff(transactions.date_end, transactions.date_start)as dayrent'))
         ->join('members','transactions.member_id','=','members.id')
         ->join('transaction_details','transactions.id','=','transaction_details.transaction_id')
         ->join('books','books.id','=','transaction_details.book_id')
