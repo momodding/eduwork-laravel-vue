@@ -99,7 +99,7 @@
             {data: 'date_start', class:'text-center', orderable:true},
             {data: 'date_end', class:'text-center', orderable:true}, 
             {data: 'name', class:'text-center', orderable:true},
-            {data: 'title', class:'text-center', orderable:false},
+            {data: 'dayrent', class:'text-center', orderable:false},
             {data: 'qty', class:'text-center', orderable:false},
             {data: 'rentPrice', class:'text-center', orderable:false,
               render: function(data, type, row, meta){
