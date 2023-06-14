@@ -145,7 +145,7 @@
                             <i class="fas fa-envelope mr-2"></i> 4 new messages
                             <span class="float-right text-muted text-sm">3 mins</span>
                         </a>
-                        <div class="dropdown-divider"></div>
+                        {{-- <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item">
                             <i class="fas fa-users mr-2"></i> 8 friend requests
                             <span class="float-right text-muted text-sm">12 hours</span>
@@ -154,7 +154,7 @@
                         <a href="#" class="dropdown-item">
                             <i class="fas fa-file mr-2"></i> 3 new reports
                             <span class="float-right text-muted text-sm">2 days</span>
-                        </a>
+                        </a> --}}
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                     </div>
@@ -329,9 +329,22 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                    @foreach($overdueUsers as $overdueUser)
-                        {{ $overdueUser->name }}<br>
-                    @endforeach
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>No</td>
+                                <td>Nama Peminjam</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($overdueUsers as $key => $overdueUser)
+                                <tr>
+                                    <td>{{ $key+1 }}</td>
+                                    <td>{{ $overdueUser->name }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
                 <div class="modal-footer justify-content-between">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
