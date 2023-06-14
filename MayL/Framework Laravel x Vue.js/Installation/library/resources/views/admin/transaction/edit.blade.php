@@ -48,6 +48,12 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Lama Pinjam</label>
+                                <div class="col-sm-10">
+                                    <input type="text" value="{{ $transactions->dayrent }}" name="qty">
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Status</label>
                                 <div class="col-sm-10">
                                     @if($transactions->status==0)

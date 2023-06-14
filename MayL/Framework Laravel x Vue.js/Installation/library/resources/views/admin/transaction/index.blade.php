@@ -12,7 +12,7 @@
                   <a href="{{ url('transactions/create') }}" class="btn btn-primary pull-right">Create New Transaction</a>
                 
                   <a>Filter Status</a>
-                  <select v-model="selectedStatus" @change="statusFilter">
+                  <select v-model="selectedStatus" @change="statusFilter" id="selectedStatus">
                     <option value="0">Belum dikembalikan</option>
                     <option value="1">Sudah dikembalikan</option>
                   </select>
@@ -223,7 +223,10 @@
             });
         },
         resetFilter(){
-          $('#dataTable').DataTable().clear();
+          $('#selectedStatus').val('');
+          $('#filterDateStart').val('');
+          $('#filterDateEnd').val('');
+          $('#dataTable').DataTable().clear().destroy();
           const _this = this;
             _this.table = $('#dataTable').DataTable({
                 ajax:{

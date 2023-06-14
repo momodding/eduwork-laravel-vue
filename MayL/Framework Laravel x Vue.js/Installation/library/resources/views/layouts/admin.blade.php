@@ -332,14 +332,14 @@
                     <table>
                         <thead>
                             <tr>
-                                <td>No</td>
-                                <td>Nama Peminjam</td>
+                                <td><b>No</b></td>
+                                <td><b>Nama Peminjam</b></td>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($overdueUsers as $key => $overdueUser)
                                 <tr>
-                                    <td>{{ $key+1 }}</td>
+                                    <td><b>{{ $key+1 }}</b></td>
                                     <td>{{ $overdueUser->name }}</td>
                                 </tr>
                             @endforeach
@@ -347,7 +347,7 @@
                     </table>
                 </div>
                 <div class="modal-footer justify-content-between">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                 </div>
               </div>
               <!-- /.modal-content -->
