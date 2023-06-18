@@ -8,11 +8,14 @@ use App\Models\Catalog;
 use App\Models\Member;
 use App\Models\Publisher;
 use App\Models\Author;
+use App\Models\User;
 use App\Models\Transaction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class AdminController extends Controller
 {
@@ -66,7 +69,26 @@ class AdminController extends Controller
         return view('admin.dashboard', compact('total_book','total_member','total_publisher','total_transaction','data_donut','label_donut','data_bar','overdueUsers'));
     }
 
+    public function test_spatie()
+    {
+        // $role = Role::create(['name'=>'petugas']);
+        // $permission = Permission::create(['name'=>'index peminjaman']);
 
+        // $role->givePermissionTo($permission);
+        // $permission->assignRole($role);
+
+        $user= auth()->user();
+        $user->assignRole('petugas');
+        return $user;
+
+        // $user = User::with('roles')->get();
+        // return $user;
+
+        // $user = auth()->user();
+        // $user->removeRole('petugas');
+
+
+    }
 
     /**
      * Show the form for creating a new resource.

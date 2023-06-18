@@ -56,3 +56,5 @@ Route::get('api/transactions', [App\Http\Controllers\TransactionController::clas
 
 Route::get('filterStatus/{status}',[App\Http\Controllers\TransactionController::class, 'filterStatus']);
 Route::get('filterDate',[App\Http\Controllers\TransactionController::class, 'filterDate']);
+
+Route::get('test_spatie',[App\Http\Controllers\AdminController::class,'test_spatie']);

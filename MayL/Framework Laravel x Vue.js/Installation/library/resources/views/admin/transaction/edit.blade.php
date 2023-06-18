@@ -44,13 +44,13 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Qty Book</label>
                                 <div class="col-sm-10">
-                                    <input type="text" value="{{ $transactions->qty }}" name="qty">
+                                    <input type="text" value="{{ $transactions->qty }}" name="qty" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Lama Pinjam</label>
                                 <div class="col-sm-10">
-                                    <input type="text" value="{{ $transactions->dayrent }}" name="qty">
+                                    <input type="text" value="{{ $transactions->dayrent }}" name="qty" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
