@@ -24,7 +24,8 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::select('transactions.date_start','transactions.date_end','members.name','books.title','transaction_details.qty','books.price','status',DB::raw('datediff(transactions.date_end, transactions.date_start)as dayrent'))
+        if(auth()->user()->role('petugas')){
+            $transactions = Transaction::select('transactions.date_start','transactions.date_end','members.name','books.title','transaction_details.qty','books.price','status',DB::raw('datediff(transactions.date_end, transactions.date_start)as dayrent'))
         ->leftjoin('members','transactions.member_id','=','members.id')
         ->leftjoin('transaction_details','transactions.id','=','transaction_details.transaction_id')
         ->leftjoin('books','books.id','=','transaction_details.book_id')
@@ -40,6 +41,10 @@ class TransactionController extends Controller
         ->get();
         //return $transactions;
         return view('admin.transaction.index', compact('transactions','overdueUsers'));
+        }else{
+            abort('403');
+        }
+        
     }
 
     public function api(){

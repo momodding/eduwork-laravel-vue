@@ -2,6 +2,8 @@
 @section('header', 'Transaction')
 
 @section('content')
+{{-- @can('index peminjaman') --}}
+@role('petugas')
     <!-- Main content -->
       <div id="controller">
         <div class="container-fluid">
@@ -9,7 +11,7 @@
             <div class="container-fluid">
               <div class="card">
                 <div class="card-header">
-                  <a href="{{ url('transactions/create') }}" class="btn btn-primary pull-right">Create New Transaction</a>
+                  <a href="{{ url('transactions/create') }}" class="btn btn-success pull-right">Create New Transaction</a>
                 
                   <a>Filter Status</a>
                   <select v-model="selectedStatus" @change="statusFilter" id="selectedStatus">
@@ -23,7 +25,7 @@
                   <button type="submit" class="btn btn-primary" @click="dateFilter">
                     Search
                   </button>
-                  <button type="submit" class="btn btn-primary" @click="resetFilter">
+                  <button type="submit" class="btn btn-danger" @click="resetFilter">
                     Reset filter
                   </button>
                 </div>
@@ -73,6 +75,8 @@
           </div>
         </div>
       <!-- /.content -->
+@endrole
+{{-- @endcan --}}
 @endsection
 
 @section('js')
