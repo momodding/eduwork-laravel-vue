@@ -161,13 +161,12 @@
                             <a href="{{  url('home')}}" class="nav-link active {{request()->is('home') ? 'active' : ''}}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    12:12 video
                                     Home
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item menu-open">
-                            <a href="{{url('catalog')}}" class="nav-link active {{request()->is('catalog') ? 'active' : ''}}">
+                            <a href="{{url('catalogs')}}" class="nav-link active {{request()->is('catalogs') ? 'active' : ''}}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Catalog
@@ -175,7 +174,7 @@
                             </a>
                         </li>
                         <li class="nav-item menu-open">
-                            <a href="{{url('publisher')}}" class="nav-link active {{request()->is('publihser') ? 'active' : ''}}">
+                            <a href="{{url('publishers')}}" class="nav-link active {{request()->is('publihsers') ? 'active' : ''}}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Publisher
@@ -183,7 +182,7 @@
                             </a>
                         </li>
                         <li class="nav-item menu-open">
-                            <a href="{{url('author')}}" class="nav-link active {{request()->is('author') ? 'active' : ''}}">
+                            <a href="{{url('authors')}}" class="nav-link active {{request()->is('authors') ? 'active' : ''}}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Author
@@ -191,7 +190,7 @@
                             </a>
                         </li>
                         <li class="nav-item menu-open">
-                            <a href="{{url('book')}}" class="nav-link active {{request()->is('book') ? 'active' : ''}}">
+                            <a href="{{url('books')}}" class="nav-link active {{request()->is('books') ? 'active' : ''}}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Book
@@ -199,10 +198,18 @@
                             </a>
                         </li>
                         <li class="nav-item menu-open">
-                            <a href="{{url('member')}}" class="nav-link active {{request()->is('member') ? 'active' : ''}}">
+                            <a href="{{url('members')}}" class="nav-link active {{request()->is('members') ? 'active' : ''}}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Member
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-open">
+                            <a href="{{url('transactions')}}" class="nav-link active {{request()->is('transactions') ? 'active' : ''}}">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Transaction
                                 </p>
                             </a>
                         </li>

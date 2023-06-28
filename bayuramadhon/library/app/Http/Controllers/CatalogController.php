@@ -12,7 +12,11 @@ class CatalogController extends Controller
      */
     public function index()
     {
-        return view('admin.catalog.index');
+        // panggil data query builder
+        $catalogs = Catalog::with('books')->get();
+
+        // return $catalogs;
+        return view('admin.catalog.index', compact('catalogs'));
     }
 
     /**
