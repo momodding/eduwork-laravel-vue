@@ -38,8 +38,8 @@
                             <td>{{ $author->phone_number}}</td>
                             <td>{{ $author->address}}</td>
                             <td class="text-right">
-                                <a href="#" @click="editData({{ $author }})" class="btn btn-warning btn-sm">Edit</a>
-                                <a href="#" @cllck="deleteData({{ $author }})" class="btn btn-danger btn-sm">Delete</a>
+                                <a @click="editData({{ $author }})" class="btn btn-warning btn-sm">Edit</a>
+                                <a @click="deleteData({{ $author->id }})" class="btn btn-danger btn-sm">Delete</a>
                             </td>
                         </tr>
                         @endforeach
@@ -127,10 +127,9 @@
                     //     axios.post(this.actionUrl, {_method: 'DELETE'}).then(response =>{
                     //         location.reload();
                     //     });
-                    console.log(id)
-                    }
+                    alert(id)
                 }
             }
-        )
+        })
     </script>
 @endsection
