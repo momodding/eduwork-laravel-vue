@@ -122,17 +122,6 @@
                     $('#modal-default').modal();
                 },
                 deleteData(id) {
-<<<<<<< HEAD
-                    // this.actionUrl = '{{ url('authors') }}'+'/'+id;
-                    // if(confirm("Are you sure?")) {
-                    //     axios.post(this.actionUrl, {_method: 'DELETE'}).then(response =>{
-                    //         location.reload();
-                    //     });
-                    alert(id)
-                }
-            }
-        })
-=======
                     this.actionUrl = '{{ url('authors') }}'+'/'+id;
                     if(confirm("Are you sure?")) {
                         axios.post(this.actionUrl, {_method: 'DELETE'}).then(response =>{
@@ -142,6 +131,5 @@
                 }
             }
         });
->>>>>>> 7681f12a (crud vue 1)
     </script>
 @endsection
