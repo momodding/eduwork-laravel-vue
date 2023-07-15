@@ -1,0 +1,236 @@
+[33mcommit d6cdc1b270b8db4bac8e3667ebc8ea26ff82a239[m[33m ([m[1;36mHEAD[m[33m, [m[1;31morigin/bayuramadhon[m[33m)[m
+Author: momodding <utsman.fajar@gmail.com>
+Date:   Thu Jul 13 11:43:59 2023 +0700
+
+    fix delete data
+
+[33mcommit 7c0368eb346d189df40cd189f43a922299b2361b[m
+Author: unknown <bayuamdan@gmail.com>
+Date:   Wed Jul 12 21:08:13 2023 +0700
+
+    modal delete
+
+[33mcommit fdc57a24728754b4b225af881e5f9363903622dd[m
+Author: unknown <bayuamdan@gmail.com>
+Date:   Wed Jul 5 21:30:01 2023 +0700
+
+    crud without vue js
+
+[33mcommit 8e2a69505d88b800ead11b0fc22f3c297129f4ea[m
+Author: unknown <bayuamdan@gmail.com>
+Date:   Wed Jun 28 17:33:35 2023 +0700
+
+    tugas compact
+
+[33mcommit adad548d66beaa43da166107079452c5ea78fb7b[m
+Author: unknown <bayuamdan@gmail.com>
+Date:   Sun Jun 25 09:00:52 2023 +0700
+
+    query builder task
+
+[33mcommit 68c7b70a662a3ff50bc2c612f6d6254cc9ad6509[m
+Author: unknown <bayuamdan@gmail.com>
+Date:   Tue Jun 20 21:15:13 2023 +0700
+
+    query builder
+
+[33mcommit cafc01c4ce80b3b1c3cc99c69cdc474364781970[m
+Author: unknown <bayuamdan@gmail.com>
+Date:   Sun Jun 4 15:10:35 2023 +0700
+
+    eloquent
+
+[33mcommit d7fc8895f4ebe109d4686ee7f5cfa3158ecaaf89[m
+Author: unknown <bayuamdan@gmail.com>
+Date:   Fri Jun 2 20:26:20 2023 +0700
+
+    route & view
+
+[33mcommit 632c651be69ace380b30d8342112a9557875b83a[m
+Author: unknown <bayuamdan@gmail.com>
+Date:   Mon May 29 21:15:09 2023 +0700
+
+    controller
+
+[33mcommit 5d1a8fdf27d24db73b1c2ab6d0a410f50d138c44[m
+Author: unknown <bayuamdan@gmail.com>
+Date:   Mon May 29 20:53:00 2023 +0700
+
+    membuat migration & db seedee
+
+[33mcommit 33f363842af66ab4cf208f180a6232f13aaad26e[m
+Author: unknown <bayuamdan@gmail.com>
+Date:   Mon May 22 22:22:05 2023 +0700
+
+    templating
+
+[33mcommit 94467824b3fa06ca332296731f5fc6bf4e3f9049[m
+Author: unknown <bayuamdan@gmail.com>
+Date:   Thu May 18 15:44:49 2023 +0700
+
+    templating
+
+[33mcommit a9e903cb4f46dad57759c75cc38f56aa97680b5a[m
+Author: unknown <bayuamdan@gmail.com>
+Date:   Sun May 14 20:36:28 2023 +0700
+
+    authen lib
+
+[33mcommit edf72479506ba63d58a2f7acc0de91020dfaa0d1[m
+Merge: 0c118f40 a83313d0
+Author: unknown <bayuamdan@gmail.com>
+Date:   Sun May 7 22:50:41 2023 +0700
+
+    installation & intro
+
+[33mcommit 0c118f40749aada8671ee00c556a0d54be1461bc[m
+Author: unknown <bayuamdan@gmail.com>
+Date:   Sun May 7 22:47:32 2023 +0700
+
+    installation & intro
+
+[33mcommit a83313d0f7c346335fadb2604e215bcacd953411[m
+Author: Bayu Ramadhon <47633489+bayuramadhon@users.noreply.github.com>
+Date:   Sun May 7 22:46:04 2023 +0700
+
+    Delete library directory
+
+[33mcommit 8d4fa29fd54a7b5e25ce9801c9b383749f8a985e[m
+Author: unknown <bayuamdan@gmail.com>
+Date:   Sun May 7 22:43:30 2023 +0700
+
+    installation & intro
+
+[33mcommit f54588936fbecc989cf1aefac3d58d5746b8a2ea[m
+Author: unknown <bayuamdan@gmail.com>
+Date:   Sun May 7 08:37:06 2023 +0700
+
+    handling
+
+[33mcommit 67a027e5081835055058543b6ce16ac27e7f1569[m
+Author: Bayu Ramadhon <bayuamdan@gmail.com>
+Date:   Sun Apr 2 21:00:21 2023 +0700
+
+    eduvue
+
+[33mcommit a1f6d929c39e2de3ff3cc375b9042d4734290993[m
+Author: Bayu Ramadhon <bayuamdan@gmail.com>
+Date:   Sun Mar 19 16:05:50 2023 +0700
+
+    crud php native
+
+[33mcommit 04eabc66799784188da4667aadd7b5f620aebf2b[m
+Author: Bayu Ramadhon <bayuamdan@gmail.com>
+Date:   Sun Feb 19 08:51:29 2023 +0700
+
+    tugas koneksi db php
+
+[33mcommit cad9a2a2dfd158254b224ead9a33f69ff6c12d72[m
+Author: Bayu Ramadhon <bayuamdan@gmail.com>
+Date:   Sun Feb 12 20:47:57 2023 +0700
+
+    multiple join sql
+
+[33mcommit f55df7d7ea14d3a9ba2eefcdce66f7f6fdc82b25[m
+Author: Bayu Ramadhon <bayuamdan@gmail.com>
+Date:   Sun Feb 12 19:00:45 2023 +0700
+
+    kuis sql word
+
+[33mcommit 1bd7b0e510f6a7ad1261e78adaad5b530b8b9175[m
+Author: Bayu Ramadhon <bayuamdan@gmail.com>
+Date:   Sat Jan 28 15:32:48 2023 +0700
+
+    update sql file
+
+[33mcommit f863d1c1c88f45a9941cf95ab6f570439c20e4a2[m
+Author: Bayu Ramadhon <bayuamdan@gmail.com>
+Date:   Sun Jan 15 14:03:01 2023 +0700
+
+    join sql
+
+[33mcommit 523862fe6cf4f14aa2e628c8227e14029214a80e[m
+Merge: e25a4521 c2228afd
+Author: Bayu Ramadhon <bayuamdan@gmail.com>
+Date:   Sun Dec 25 16:20:36 2022 +0700
+
+    tambah tugas db & updel sql
+
+[33mcommit e25a452181648f7a59f540bc1aad64e291f4212b[m
+Author: Bayu Ramadhon <bayuamdan@gmail.com>
+Date:   Sun Dec 25 16:10:15 2022 +0700
+
+    tambah tugas db sql & updet delete
+
+[33mcommit c2228afd2d0add81b5982bf529020c46926c9135[m
+Author: Bayu Ramadhon <47633489+bayuramadhon@users.noreply.github.com>
+Date:   Sun Dec 25 16:04:30 2022 +0700
+
+    Delete apotek.sql
+
+[33mcommit 1a41eb52fe0a7476a9b7b64046eb7746a05ab8a4[m
+Author: Bayu Ramadhon <47633489+bayuramadhon@users.noreply.github.com>
+Date:   Sat Dec 24 19:24:11 2022 +0700
+
+    Delete TUGAS  SQL EDU UPDETE & DELETE.txt
+
+[33mcommit 0c85640ab20ee08612aef6ba50792a65fda615d7[m[33m ([m[1;32mbayuramadon[m[33m)[m
+Author: Bayu Ramadhon <bayuamdan@gmail.com>
+Date:   Sat Dec 24 18:54:30 2022 +0700
+
+    query updet & delete
+
+[33mcommit 5c6c3f14c5c90ba18c33302c84157658c11b383a[m
+Author: Bayu Ramadhon <bayuamdan@gmail.com>
+Date:   Wed Dec 14 21:46:14 2022 +0700
+
+    update relasi db
+
+[33mcommit b716e3649cf0a496562937fa529a240e68dcac0f[m
+Author: Bayu Ramadhon <bayuamdan@gmail.com>
+Date:   Sun Nov 27 16:15:08 2022 +0700
+
+    add relasi apotek
+
+[33mcommit e1610d6f0752ad71a4e06784e04052edd08802d6[m
+Merge: 3ed9d3de 5cf5dc8b
+Author: Bayu Ramadhon <bayuamdan@gmail.com>
+Date:   Tue Nov 22 18:07:47 2022 +0700
+
+    word & sql
+
+[33mcommit 3ed9d3de32ef377c73b6de601ca3ca941382afc0[m
+Author: Bayu Ramadhon <bayuamdan@gmail.com>
+Date:   Tue Nov 22 17:14:56 2022 +0700
+
+    add word & sql
+
+[33mcommit 5cf5dc8baf11c694bdc7563a580c7fa5ce99dfc5[m
+Author: Bayu Ramadhon <47633489+bayuramadhon@users.noreply.github.com>
+Date:   Tue Nov 22 17:01:46 2022 +0700
+
+    Delete apotek.sql
+
+[33mcommit af15eae26db4b3292216a2e9349fc1857c063135[m
+Author: Bayu Ramadhon <bayuamdan@gmail.com>
+Date:   Sat Nov 5 14:46:45 2022 +0700
+
+    tambah file
+
+[33mcommit 8e1d34608f75cf3cbce02f48eec2aab45165e951[m
+Author: Bayu Ramadhon <bayuamdan@gmail.com>
+Date:   Sat Oct 22 14:46:54 2022 +0700
+
+    create new folder
+
+[33mcommit 266ac10859cf215bccbb10e118793f8ae9952d7a[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: andreleonardojudah <andre.leonardo.judah@gmail.com>
+Date:   Mon May 30 15:16:00 2022 +0700
+
+    first commit
+
+[33mcommit 61d04271767b0dfaa1d4294e32f617b82ed5496e[m
+Author: andreleonardojudah <andre.leonardo.judah@gmail.com>
+Date:   Wed May 25 12:40:37 2022 +0700
+
+    create new folder
