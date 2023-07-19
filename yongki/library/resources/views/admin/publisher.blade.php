@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('header', 'Author')
+@section('header', 'Publisher')
 
 @section('css')
 <!-- Datatables -->
@@ -15,34 +15,38 @@
         <div class="card">
             <div class="card-header">
                 {{-- <a href="#" data-target="#modal-default" data-toggle="modal"
-                    class="btn btn-sm btn-primary pull-right">Create New Author</a> --}}
+                    class="btn btn-sm btn-primary pull-right">Create New Publisher</a> --}}
                 <a href="#" @click="addData()"
-                    class="btn btn-sm btn-primary pull-right">Create New Author</a>
+                    class="btn btn-sm btn-primary pull-right">Create New Publisher</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
                 <table id="datatable" class="table table-bordered table-striped">
                     <thead>
-                        <tr>
-                            <th style="width: 10px">No</th>
-                            <th class="text-center">Name</th>
-                            <th class="text-center">Email</th>
-                            <th class="text-center">Phone</th>
-                            <th class="text-center">Address</th>
-                            <th class="text-center">Action</th>
-                        </tr>
+                    <tr>
+                        <th style="width: 10px">No</th>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Email</th>
+                        <th class="text-center">Phone Number</th>
+                        <th class="text-center">Address</th>
+                        <th class="text-center">Jumlah Books</th>  
+                        <th class="text-center">Action</th>                              
+                        <th class="text-center">Created_at</th>                                    
+                    </tr>
                     </thead>
                     <tbody>
-                        @foreach ($authors as $key => $author)
+                        @foreach ($publishers as $key => $publisher)
                         <tr>
                             <td>{{ $key+1 }}</td>
-                            <td>{{ $author->name }}</td>
-                            <td>{{ $author->email}}</td>
-                            <td>{{ $author->phone_number}}</td>
-                            <td>{{ $author->address}}</td>
+                            <td class="text-center">{{ $publisher->name }}</td>
+                            <td class="text-center">{{ $publisher->email }}</td>
+                            <td class="text-center">{{ $publisher->phone_number }}</td>
+                            <td class="text-center">{{ $publisher->address }}</td>
+                            <td class="text-center">{{ count($publisher->books) }}</td>
+                            <td class="text-center">{{ date('H:i:s - d M Y', strtotime($publisher->created_at)) }}</td>
                             <td class="text-center">
-                                <a @click="editData({{ $author }})" class="btn btn-warning btn-sm">Edit</a>
-                                <a @click="deleteData({{ $author->id }})" class="btn btn-danger btn-sm">Delete</a>
+                                <a @click="editData({{ $publisher }})" class="btn btn-warning btn-sm">Edit</a>
+                                <a @click="deleteData({{ $publisher->id }})" class="btn btn-danger btn-sm">Delete</a>
                             </td>
                         </tr>
                         @endforeach
@@ -127,7 +131,7 @@
             el: '#controller',
             data: {
                 data:{},
-                actionUrl : '{{ url('authors') }}',
+                actionUrl : '{{ url('publishers') }}',
                 editStatus : false
             },
             mounted: function () {
@@ -136,18 +140,18 @@
             methods: {
                 addData() {
                      this.data = {};
-                     this.actionUrl = '{{ url('authors') }}';
+                     this.actionUrl = '{{ url('publishers') }}';
                      this.editStatus = false;
                    $('#modal-default').modal();
                 },
                 editData(data) {
                     this.data = data;
-                    this.actionUrl = '{{ url('authors') }}'+'/'+data.id;
+                    this.actionUrl = '{{ url('publishers') }}'+'/'+data.id;
                     this.editStatus = true;
                     $('#modal-default').modal();
                 },
                 deleteData(id) {
-                    this.actionUrl = '{{ url('authors') }}'+'/'+id;
+                    this.actionUrl = '{{ url('publishers') }}'+'/'+id;
                     if(confirm("Are you sure?")) {
                         axios.post(this.actionUrl, {_method: 'DELETE'}).then(response =>{
                             location.reload();
