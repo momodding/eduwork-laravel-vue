@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('header', 'Publisher')
+@section('header', 'Member')
 
 @section('css')
 <!-- Datatables -->
@@ -15,22 +15,23 @@
         <div class="card">
             <div class="card-header">
                 {{-- <a href="#" data-target="#modal-default" data-toggle="modal"
-                    class="btn btn-sm btn-primary pull-right">Create New Publisher</a> --}}
+                    class="btn btn-sm btn-primary pull-right">Create New Member</a> --}}
                 <a href="#" @click="addData()"
-                    class="btn btn-sm btn-primary pull-right">Create New Publisher</a>
+                    class="btn btn-sm btn-primary pull-right">Create New Member</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
                 <table id="datatable" class="table table-bordered table-striped">
                     <thead>
-                    <tr>
-                        <th style="width: 10px">No</th>
-                        <th class="text-center">Name</th>
-                        <th class="text-center">Email</th>
-                        <th class="text-center">Phone Number</th>
-                        <th class="text-center">Address</th>
-                        <th class="text-center">Action</th>                                                            
-                    </tr>
+                        <tr>
+                            <th style="width: 10px">No</th>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Gender</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center">Phone</th>
+                            <th class="text-center">Address</th>
+                            <th class="text-center">Action</th>
+                        </tr>
                     </thead>
                 </table>
             </div>
@@ -42,7 +43,7 @@
     <div class="modal fade" id="modal-default" style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form method="post" :action="actionUrl" autocomplete="off">
+            <form method="post" :action="actionUrl" autocomplete="off" @submit="submitForm($event, data.id)">
                 <div class="modal-header">
 
                     <h4 class="modal-title">Default Modal</h4>
@@ -59,6 +60,10 @@
                     <div class="form-group">
                         <label>Name</label>
                         <input type="text" class="form-control" name="name" :value="data.name" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <input type="text" class="form-control" name="gender" :value="data.gender" required="">
                     </div>
                     <div class="form-group">
                         <label>Email</label>
@@ -99,12 +104,13 @@
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <script type="text/javascript">
-    var actionUrl = '{{ url('publishers') }}';
-    var apiUrl = '{{ url('api/publishers') }}';
+    var actionUrl = '{{ url('members') }}';
+    var apiUrl = '{{ url('api/members') }}';
 
     var columns =[
         {data: 'DT_RowIndex', class: 'text-center', orderable: true},
         {data: 'name', class: 'text-center', orderable: true},
+        {data: 'gender', class: 'text-center', orderable: true},
         {data: 'email', class: 'text-center', orderable: true},
         {data: 'phone_number', class: 'text-center', orderable: true},
         {data: 'address', class: 'text-center', orderable: true},
@@ -120,7 +126,6 @@
     ];
 </script>
 <script src="{{ asset('js/data.js') }}"></script>
-
 <!-- <script type="text/javascript">
      $(function () {
     $("#datatable").DataTable({
@@ -128,14 +133,14 @@
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
   });
-</script>
-CRUD Vue js -->
+</script> -->
+<!-- CRUD Vue js -->
 <!-- <script type="text/javascript">
         var controller = new Vue({
             el: '#controller',
             data: {
                 data:{},
-                actionUrl : '{{ url('publishers') }}',
+                actionUrl : '{{ url('authors') }}',
                 editStatus : false
             },
             mounted: function () {
@@ -144,18 +149,18 @@ CRUD Vue js -->
             methods: {
                 addData() {
                      this.data = {};
-                     this.actionUrl = '{{ url('publishers') }}';
+                     this.actionUrl = '{{ url('authors') }}';
                      this.editStatus = false;
                    $('#modal-default').modal();
                 },
                 editData(data) {
                     this.data = data;
-                    this.actionUrl = '{{ url('publishers') }}'+'/'+data.id;
+                    this.actionUrl = '{{ url('authors') }}'+'/'+data.id;
                     this.editStatus = true;
                     $('#modal-default').modal();
                 },
                 deleteData(id) {
-                    this.actionUrl = '{{ url('publishers') }}'+'/'+id;
+                    this.actionUrl = '{{ url('authors') }}'+'/'+id;
                     if(confirm("Are you sure?")) {
                         axios.post(this.actionUrl, {_method: 'DELETE'}).then(response =>{
                             location.reload();
