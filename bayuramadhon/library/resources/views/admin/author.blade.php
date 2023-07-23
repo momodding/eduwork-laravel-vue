@@ -24,7 +24,7 @@
                 <table id="datatable" class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th style="width: 10px">No</th>
+                            <th style="width: 30px">No</th>
                             <th class="text-center">Name</th>
                             <th class="text-center">Email</th>
                             <th class="text-center">Phone</th>
@@ -32,21 +32,6 @@
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach ($authors as $key => $author)
-                        <tr>
-                            <td class="text-center">{{ $key+1 }}</td>
-                            <td>{{ $author->name }}</td>
-                            <td>{{ $author->email}}</td>
-                            <td class="text-center">{{ $author->phone_number}}</td>
-                            <td>{{ $author->address}}</td>
-                            <td class="text-center">
-                                <a @click="editData({{ $author }})" class="btn btn-warning btn-sm">Edit</a>
-                                <a @click="deleteData({{ $author->id }})" class="btn btn-danger btn-sm">Delete</a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
                 </table>
             </div>
         </div>
@@ -100,7 +85,7 @@
 @endsection
 
 @section('js')
- {{-- Databales & plugins --}}
+ {{-- Datatables & plugins --}}
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
@@ -108,19 +93,69 @@
 <script src="{{ asset('assets/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/jszip/jszip.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/pdfmake/pdfmake.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/pdfmake/vfs_fonts.js') }}"></script>
+<script src="{{ asset('assets/plugins/pdfmake/pdfmake.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-<script type="text/javascript">
+<script type="text/javascripct">
+    var actionUrl = '{{ url('authors')}}';
+    var apiUrl = '{{ url('api/authors')}}';
+
+    var columns = [
+        {data: 'DT_RowIndex', class:'text-center', orderable: true},
+        {data: 'name', class:'text-center', orderable: true},
+        {data: 'email', class:'text-center', orderable: true},
+        {data: 'phone_number', class:'text-center', orderable: true},
+        {data: 'address', class:'text-center', orderable: true},
+        {render: function (index, row, data, meta)   {
+            return `
+            <a href="#" class"btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">
+                Edit
+            </a>
+
+            <a class="btn btn-danger btn-sm" onclick="controller.deleteData(event, ${data.id})">
+                Delete
+            </a>`;
+        }, orderable: false, width: '200px', class: 'text-center'},
+        ];
+
+    var controller = new Vue({
+        el: '#controller',
+        data: {
+            datas: [],
+            data: {},
+            actionUrl,
+            apiUrl,
+            editStatus : false,
+        },
+        mounted: function () {
+            this.datatable();
+        },
+        methods: {
+            datatable() {
+                const _this = this;
+                _this.table = $('#datatable').DataTable({
+                    ajax: {
+                        url _this.apiUrl,
+                        type: 'GET',
+                    },
+                    columns : columns
+                }).on('xhr', function() {
+                    _this.datas = _this.table.ajax.json().data;
+                });
+            },
+        }
+    });
+</script>
+{{-- <script type="text/javascript">
     $(function () {
     $("#datatable").DataTable();
   });
 </script>
 
     {{-- crud vue js --}}
-    <script type="text/javascript">
+ {{-- <script type="text/javascript">
         var controller = new Vue({
             el: '#controller',
             data: {
@@ -154,5 +189,5 @@
                 }
             }
         });
-    </script>
-@endsection
+    </script> --}}
+{{-- @endsection --}}

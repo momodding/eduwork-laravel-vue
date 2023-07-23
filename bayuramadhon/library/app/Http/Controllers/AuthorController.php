@@ -17,10 +17,19 @@ class AuthorController extends Controller
     public function index()
     {
         // panggil data query builder
-        $authors = author::all();
+        // $authors = author::all();
 
         // return $publishers;
-        return view('admin.author', compact('authors'));
+        // return view('admin.author', compact('authors'));
+        return view('admin.author');
+    }
+
+    public function api()
+    {
+        $authors = Author::all();
+        $datatables = datatables()->of($authors)->addIndexColumn();
+
+        return $datatables->make(true);
     }
 
     /**
