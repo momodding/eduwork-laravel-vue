@@ -23,7 +23,7 @@ class MemberController extends Controller
 
     public function api()
     {
-        $members = Members::all();
+        $members = Member::all();
         $datatables = datatables()->of($members)->addIndexColumn();
         
         return $datatables->make(true);
