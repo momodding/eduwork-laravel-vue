@@ -1,11 +1,11 @@
 @extends('layouts.admin')
-@section('header', 'Author')
+@section('header','Publisher')
 
 @section('css')
 <!-- DataTables -->
-  <link rel="stylesheet" href="{{asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-  <link rel="stylesheet" href="{{asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-  <link rel="stylesheet" href="{{asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 @endsection
 
 @section('content')
@@ -16,7 +16,7 @@
             <div class="card-header">
                 {{-- <a href="#" data-target="#modal-default" data-toggle="modal"
                     class="btn btn-sm btn-primary pull-right">Create New Author</a> --}}
-                <a href="#" @click="addData()" class="btn btn-sm btn-primary pull-right">Create New Author</a>
+                <a href="#" @click="addData()" class="btn btn-sm btn-primary pull-right">Create New Publisher</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -36,13 +36,14 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="modal-default" style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form method="post" :action="actionUrl" autocomplete="off" @submit="submitForm($event, data.id)">
                 <div class="modal-header">
 
-                    <h4 class="modal-title">Authors</h4>
+                    <h4 class="modal-title">Publisher</h4>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -82,7 +83,7 @@
 @endsection
 
 @section('js')
- {{-- Datatables & plugins --}}
+{{-- Datatables & plugins --}}
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
@@ -96,8 +97,8 @@
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <script type="text/javascript">
-    var actionUrl = '{{ url('authors')}}';
-    var apiUrl = '{{ url('api/authors')}}';
+    var actionUrl = '{{ url('publishers')}}';
+    var apiUrl = '{{ url('api/publishers')}}';
 
     var columns = [
         {data: 'DT_RowIndex', class:'text-center', orderable: true},
@@ -117,50 +118,64 @@
         }, orderable: false, width: '200px', class: 'text-center'},
     ];
 
-
+    var controller = new Vue({
+        el: '#controller',
+        data: {
+            datas: [],
+            data: {},
+            actionUrl,
+            apiUrl,
+            editStatus : false,
+        },
+        mounted: function () {
+            this.datatable();
+        },
+        methods: {
+            datatable() {
+                const _this = this;
+                _this.table = $('#datatable').DataTable({
+                    ajax: {
+                        url: _this.apiUrl,
+                        type: 'GET',
+                    },
+                    columns
+                }).on('xhr', function () {
+                    _this.datas = _this.table.ajax.json().data;
+                });
+            },
+            addData() {
+                //data table yajra
+            //     this.data = {};
+            //     this.actionUrl = '{{ url('authors') }}';
+            //     this.editStatus = false;
+            //   $('#modal-default').modal();
+                this.data = {};
+                this.editStatus = false;
+              $('#modal-default').modal();
+           },
+           editData(event, row) {
+               this.data = this.datas[row];
+               this.editStatus = true;
+               $('#modal-default').modal();
+           },
+           deleteData(event,id) {
+               if(confirm("Are you sure?")) {
+                   $(event.target).parents('tr').remove();
+                   axios.post(this.actionUrl+'/'+id, {_method: 'DELETE'}).then(response =>{
+                       alert('Data has been removed');
+                   });
+               }
+           },
+           submitForm(event, id) {
+            event.preventDefault();
+            const _this = this;
+            var actionUrl = ! this.editStatus ? this.actionUrl : this.actionUrl+'/'+id;
+            axios.post(actionUrl, new FormData($(event.target)[0])).then(response =>{
+                $('#modal-default').modal('hide');
+                _this.table.ajax.reload();
+            });
+           },
+        }
+    });
 </script>
-<script src="{{ asset('js/data.js') }}"></script>
 @endsection
- {{-- <script type="text/javascript">
-    $(function () {
-    $("#datatable").DataTable();
-  });
-</script> --}}
-
-    {{-- crud vue js --}}
- {{-- <script type="text/javascript">
-        var controller = new Vue({
-            el: '#controller',
-            data: {
-                data:{},
-                actionUrl : '{{ url('authors') }}',
-                editStatus : false
-            },
-            mounted: function () {
-
-            },
-            methods: {
-                addData() {
-                     this.data = {};
-                     this.actionUrl = '{{ url('authors') }}';
-                     this.editStatus = false;
-                   $('#modal-default').modal();
-                },
-                editData(data) {
-                    this.data = data;
-                    this.actionUrl = '{{ url('authors') }}'+'/'+data.id;
-                    this.editStatus = true;
-                    $('#modal-default').modal();
-                },
-                deleteData(id) {
-                    this.actionUrl = '{{ url('authors') }}'+'/'+id;
-                    if(confirm("Are you sure?")) {
-                        axios.post(this.actionUrl, {_method: 'DELETE'}).then(response =>{
-                            location.reload();
-                        });
-                    }
-                }
-            }
-        });
-    </script>
- @endsection --}}
