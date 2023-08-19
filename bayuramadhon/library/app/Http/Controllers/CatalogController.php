@@ -51,7 +51,7 @@ class CatalogController extends Controller
      */
     public function show(Catalog $catalog)
     {
-        // video 30:02
+        //
     }
 
     /**

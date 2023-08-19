@@ -36,17 +36,13 @@ class PublisherController extends Controller
      */
     public function store(Request $request)
     {
-        //cara validasi
+
         $this->validate($request, [
             'name' => ['required'],
             'email' => ['required'],
             'phone_number' => ['required'],
             'address' => ['required'],
         ]);
-        //cara 1
-        // $catalog = new Catalog;
-        // $catalog->name = $request->name;
-        // $catalog->save();
 
         Publisher::create($request->all());
 
