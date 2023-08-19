@@ -24,11 +24,12 @@
                     <thead>
                         <tr>
                             <th style="width: 30px">No</th>
-                            <th class="text-center">Name</th>
-                            <th class="text-center">Email</th>
-                            <th class="text-center">Phone</th>
-                            <th class="text-center">Address</th>
-                            <th class="text-center">Action</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Address</th>
+                            <th>Created At</th>
+                            <th class="text-right">Action</th>
                         </tr>
                     </thead>
                 </table>
@@ -105,6 +106,7 @@
         {data: 'email', class:'text-center', orderable: false},
         {data: 'phone_number', class:'text-center', orderable: true},
         {data: 'address', class:'text-center', orderable: true},
+        {data: 'date', class:'text-center', orderable: true},
         {render: function (index, row, data, meta)   {
             return `
             <a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">
