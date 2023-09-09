@@ -9,10 +9,10 @@ use Illuminate\Http\Response;
 
 class MemberController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
     /**
      * Display a listing of the resource.
      */
@@ -21,6 +21,14 @@ class MemberController extends Controller
         $members = Member::all();
 
         return view('admin.member',compact('members'));
+    }
+
+    public function api()
+    {
+        $members = Member::all();
+
+        $datatables = datatables()->of($members)->addIndexColumn();
+        return $datatables->make(true);
     }
 
     /**
