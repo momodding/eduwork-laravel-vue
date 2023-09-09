@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Variant;
 use Illuminate\Http\Request;
 
 class VariantController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $variants = Variant::all();
+        return view('admin.variant',compact('variants'));
     }
 
     /**
@@ -27,7 +33,13 @@ class VariantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'name'=>['required'],
+        ]);
+
+        Variant::create($request->all());
+
+        return redirect('variants');
     }
 
     /**
@@ -49,16 +61,22 @@ class VariantController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Variant $variant)
     {
-        //
+        $this->validate($request,[
+            'name'=>['required'],
+        ]);
+
+        $variant->update($request->all());
+
+        return redirect('variants');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Variant $variant)
     {
-        //
+        $variant->delete();
     }
 }

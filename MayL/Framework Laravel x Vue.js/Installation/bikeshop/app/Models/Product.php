@@ -20,4 +20,9 @@ class Product extends Model
     {
         return $this->belongsTo('App\Models\Variant','variant_id');
     }
+
+    public function cart()
+    {
+        return $this->belongsToMany('App\Models\Cart','product_id');
+    }
 }

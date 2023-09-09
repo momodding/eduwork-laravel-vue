@@ -2,16 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $categories = Category::All();
+
+        return view('admin.category',compact('categories'));
     }
 
     /**
@@ -27,7 +34,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'name'=>['required'],
+        ]);
+
+        Category::create($request->all());
+
+        return redirect('categories');
     }
 
     /**
@@ -49,16 +62,22 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $this->validate($request,[
+            'name'=>['required'],
+        ]);
+
+        $category->update($request->all());
+
+        return redirect('categories');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
     }
 }

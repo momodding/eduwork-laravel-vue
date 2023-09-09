@@ -80,7 +80,7 @@
                     </div>
                 </form>
 
-                <a href="{{ route('login') }}" class="text-center">I already have a membership</a>
+                <a href="{{ route('register') }}" class="text-center">I already have a membership</a>
             </div>
             <!-- /.form-box -->
         </div><!-- /.card -->
