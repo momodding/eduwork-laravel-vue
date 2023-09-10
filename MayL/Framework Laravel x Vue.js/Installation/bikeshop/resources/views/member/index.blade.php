@@ -115,7 +115,7 @@
             {
                 render:function(index,data,row){
                     //<button class="btn btn-success btn-sm" onclick="controller.submitForm()">Add</button>
-                    //@submit="submitForm($event,data)" method="create" :action="createUrl"
+                    //@controller.submit="submitForm($event,data)" method="create" :action="{{ url('carts/create') }}"
                     // <form method="create" autocomplete="off" :action="createUrl" @submit="submitForm($event,data)">
                     //     <input type="hidden" value="{{ auth()->user()->member_id }}" name="member_id">
                     //     <input type="hidden" value="${row.id}" name="product_id">
@@ -123,7 +123,7 @@
                     //     <button type="submit" class="btn btn-success btn-sm">Add</button>
                     // </form>
                     return`
-                    <form method="post" autocomplete="off" :action="{{ url('carts/create') }}" @submit="controller.submitForm($event,data)">
+                    <form method="post" autocomplete="off" @submit.prevent="controller.submitForm(data)">
                         @csrf
                         <input type="hidden" value="{{ auth()->user()->member_id }}" name="member_id">
                         <input type="hidden" value="${row.id}" name="product_id">
@@ -213,7 +213,8 @@
                 // getUserCart(idUser) {
                 //     var actionUrl = this.actionUrl + '/' + 'cart/' + idUser;
                 // },
-                submitForm(event,data){
+                submitForm(data){
+                    console.log(data);
                     console.log("ini masuk submitform");
                     const _this = this;
                     //var createUrl;
