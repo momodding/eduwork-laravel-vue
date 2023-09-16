@@ -55,7 +55,7 @@ class CartController extends Controller
      */
     public function create(Request $request)
     {
-        dd($request);
+        //dd($request);
 
         $memberAdd = $request->member_id;
 
@@ -128,6 +128,7 @@ class CartController extends Controller
      */
     public function destroy(Cart $cart)
     {
-        //
+        //dd($carts);        
+        $cart->delete();
     }
 }
