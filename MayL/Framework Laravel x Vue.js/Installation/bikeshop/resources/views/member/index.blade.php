@@ -5,7 +5,7 @@
     <div id="controller">
         <div class="row">
             <div class="col-6">
-                <label for="">Product</label>
+                <label for="">Product</label>{{--  http://localhost:8000/carts/create?member_id=2&product_id=5&qty=1--}}
                 <table class="table table-bordered" id="productTable">
                     <thead>
                         <th style="width: 10px">#</th>
@@ -22,7 +22,7 @@
                                 <td>{{ $product->qty }}</td>
                                 <td>{{ $product->price }}</td>
                                 <td>
-                                    <form method="create" :action="actionUrl" autocomplete="off">
+                                    <form method="create" :action="createUrl" autocomplete="off">
                                         <input type="hidden" value="{{ auth()->user()->member_id }}" name="member_id">
                                         <input type="hidden" value="{{ $product->id }}" name="product_id">
                                         <input type="hidden" value=1 name="qty">
@@ -100,6 +100,7 @@
     <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
     <script type="text/javascript">
+        var actionUrl = '{{ url('carts') }}';
         var idUser = '{{ auth()->user()->member_id }}';
         var createUrl = '{{ url('carts/create') }}';
         var cartUrl = '{{ url('api/cart') }}';
@@ -123,8 +124,7 @@
                     //     <button type="submit" class="btn btn-success btn-sm">Add</button>
                     // </form>
                     return`
-                    <form method="post" autocomplete="off" @submit.prevent="controller.submitForm(data)">
-                        @csrf
+                    <form method="create" autocomplete="off" action="{{ url('carts/create') }}">
                         <input type="hidden" value="{{ auth()->user()->member_id }}" name="member_id">
                         <input type="hidden" value="${row.id}" name="product_id">
                         <input type="hidden" value=1 name="qty">
@@ -135,7 +135,7 @@
                 }
             },
         ];
-
+        
         var columns = [
             {data: 'DT_RowIndex',class: 'text-center',oderable: true},
             {data: 'name',class: 'text-center',orderable: true},
@@ -144,7 +144,7 @@
                 render:function(index,data,row){
                     return`
                     <button onclick="controller.itemMin(${row.id},${row.qty})">-</button>
-                    <input id="cartInputValue" value="${row.qty}" style="width:50px"></input>
+                    <input id="cartInputValue" value="${row.qty}" style="width:50px" readonly></input>
                     <button onclick="controller.itemPlus(${row.id})">+</button>
                     `
                 }
@@ -153,10 +153,9 @@
                 data: 'total',class: 'text-center',orderable: true
             },
             {
-                render: function(index, row, data, meta) {
+                render: function(index,data,row) {
                     return `
-                    <a class="btn btn-danger btn-sm" onclick="controller.deleteData(event,
-                        ${row.id})">
+                    <a class="btn btn-danger btn-sm" onclick="controller.deleteCart(${row.id})">
                         Delete
                     </a>`
                 },
@@ -166,6 +165,13 @@
             },
         ];
 
+        console.log(columns);
+
+        for (let i = 0; i < columns.length; i++) {
+           
+                        
+            }
+
         var controller = new Vue({
             el: '#controller',
             data: {
@@ -174,6 +180,7 @@
                 datas: [],
                 data: {},
                 idUser,
+                actionUrl,
                 cartUrl,
                 productUrl,
                 createUrl,
@@ -194,8 +201,9 @@
                         },
                          columns:productColumns 
                     }).on('xhr', function() {
-                        _this.datas = _this.productTable.ajax.json().data;
+                        _this.productDatas = _this.productTable.ajax.json().dataProduct;
                     });
+                    
                 },
                 datatable() {
                     const _this = this;
@@ -209,10 +217,9 @@
                     }).on('xhr', function() {
                         _this.datas = _this.table.ajax.json().data;
                     });
+
+                   
                 },
-                // getUserCart(idUser) {
-                //     var actionUrl = this.actionUrl + '/' + 'cart/' + idUser;
-                // },
                 submitForm(data){
                     console.log(data);
                     console.log("ini masuk submitform");
@@ -246,6 +253,11 @@
                 },
                 deleteCart(id){
                     console.log(id);
+                    const _this = this;
+                    var deleteUrl = this.actionUrl+'/'+id;
+                    axios.delete(deleteUrl).then(response =>{
+                        _this.table.ajax.reload();
+                    });
                 }
             },
         });
