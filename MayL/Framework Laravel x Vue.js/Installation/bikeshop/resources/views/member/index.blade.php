@@ -47,7 +47,7 @@
                     </thead>
                     {{-- <tbody>
                         @foreach ($products as $key => $product)
-                        
+
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>{{ $product->name }}</td>
@@ -65,7 +65,7 @@
                     <tr>
                         <td>Grand Total : </td>
                         <td>
-                            <label id="grandTotal" value="">99999</label>
+                            <label id="grandTotal" value="">@{{ grandTotal }}</label>
                         </td>
                     </tr>
                     <tr>
@@ -130,12 +130,12 @@
                         <input type="hidden" value=1 name="qty">
                         <button type="submit" class="btn btn-success btn-sm">Add</button>
                     </form>
-                    
+
                     `
                 }
             },
         ];
-        
+
         var columns = [
             {data: 'DT_RowIndex',class: 'text-center',oderable: true},
             {data: 'name',class: 'text-center',orderable: true},
@@ -168,8 +168,8 @@
         console.log(columns);
 
         for (let i = 0; i < columns.length; i++) {
-           
-                        
+
+
             }
 
         var controller = new Vue({
@@ -186,6 +186,7 @@
                 createUrl,
                 cartMin,
                 cartPlus,
+                grandTotal: 0
             },
             mounted: function() {
                 this.product();
@@ -199,11 +200,11 @@
                             url: _this.productUrl,
                             type: 'GET',
                         },
-                         columns:productColumns 
+                         columns:productColumns
                     }).on('xhr', function() {
                         _this.productDatas = _this.productTable.ajax.json().dataProduct;
                     });
-                    
+
                 },
                 datatable() {
                     const _this = this;
@@ -218,7 +219,7 @@
                         _this.datas = _this.table.ajax.json().data;
                     });
 
-                   
+
                 },
                 submitForm(data){
                     console.log(data);
@@ -260,6 +261,13 @@
                     });
                 }
             },
+            watch: {
+                datas: function () {
+                    for (let index = 0; index < this.datas.length; index++) {
+                        this.grandTotal = this.grandTotal + this.datas[index].total
+                    }
+                }
+            }
         });
     </script>
 @endsection
