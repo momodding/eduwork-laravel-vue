@@ -9,8 +9,10 @@ class Transaction extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['member_id','grand_total','discount','pay','change','note','payment','userv_id'];
+
     public function transactionDetail()
     {
-        return $this->hasMany('App\Models\TransactionDetail','transaction_id');
+        return $this->hasMany('App\Models\TransactionDetail', 'transaction_id');
     }
 }

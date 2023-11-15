@@ -150,10 +150,6 @@
                 ${data.id})">
                 Detail
                 </a>
-                <a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event,
-                ${meta.row})">
-                Edit
-                </a>
                 <a href="#" class="btn btn-danger btn-sm" onclick="controller.deleteData(event,
                 ${data.id})">
                 Delete

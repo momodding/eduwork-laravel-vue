@@ -19,6 +19,15 @@ class CartController extends Controller
         return view('member.index',compact('products'));
     }
 
+    public function api(){
+        $carts = Cart::all();
+
+        // $carts = Cart::select('*')
+        // ->groupby('carts.member_id')
+        // ->orderby('asc');
+        return $carts;
+    }
+
     public function cart($id)
     {
         $cartItem = Cart::select('carts.id as id','name','product_id','price','carts.qty',db::raw('products.price*carts.qty as total'),'products.qty as qty_max')
@@ -42,7 +51,6 @@ class CartController extends Controller
     }
 
     public function plus($id){
-        //dd($id);
         $cartPlus = Cart::select('*')
         ->where('id','=',$id)
         ->first();

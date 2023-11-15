@@ -72,7 +72,26 @@
                         <td>Discount</td>
                         <td>: 99999</td>
                     </tr>
+                    <tr>
+                        <td>Pembayaran</td>
+                        <td>
+                            <select class="form-control" name="payment_method" id="payment_method" @change="payment($event)">
+                                <option value="1" disabled>Cash</option>
+                                <option value="2">Qris</option>
+                                <option value="3" selected>Transfer</option>
+                                <option value="4" disabled>Marketplace</option>
+                            </select>
+                        </td>
+                        
+                    </tr>
                 </table>
+                <form action="actionUrl" @submit.prevent="submitForm($event, data)" autocomplete="off">
+                    @csrf
+                    <input type="hidden" name="member_id" id="member_id">
+                    <input type="hidden" name="payment" id="paymentMethod">
+                    <input type="hidden" name="grandTotal" :value="grandTotal">
+                    <button type="submit" class="btn btn-primary">Checkout</button>
+                </form>
                 {{-- <form id='myform' method='POST' class='quantity' action='#'>
                     <input type='button' value='-' class='qtyminus minus' field='quantity' />
                     <input type='text' name='quantity' value='0' class='qty' />
@@ -102,11 +121,13 @@
     <script type="text/javascript">
         var actionUrl = '{{ url('carts') }}';
         var idUser = '{{ auth()->user()->member_id }}';
+        
         var createUrl = '{{ url('carts/create') }}';
         var cartUrl = '{{ url('api/cart') }}';
         var productUrl = '{{ url('api/products') }}';
         var cartMin = '{{ url('cart/min') }}';
         var cartPlus = '{{ url('cart/plus') }}';
+        var checkout = '{{ url('transactions') }}'; 
 
         var productColumns = [
             {data: 'DT_RowIndex',class: 'text-center',oderable: true},
@@ -115,14 +136,6 @@
             {data: 'price',class: 'text-center',orderable: true},
             {
                 render:function(index,data,row){
-                    //<button class="btn btn-success btn-sm" onclick="controller.submitForm()">Add</button>
-                    //@controller.submit="submitForm($event,data)" method="create" :action="{{ url('carts/create') }}"
-                    // <form method="create" autocomplete="off" :action="createUrl" @submit="submitForm($event,data)">
-                    //     <input type="hidden" value="{{ auth()->user()->member_id }}" name="member_id">
-                    //     <input type="hidden" value="${row.id}" name="product_id">
-                    //     <input type="hidden" value=1 name="qty">
-                    //     <button type="submit" class="btn btn-success btn-sm">Add</button>
-                    // </form>
                     return`
                     <form method="create" autocomplete="off" action="{{ url('carts/create') }}">
                         <input type="hidden" value="{{ auth()->user()->member_id }}" name="member_id">
@@ -164,13 +177,6 @@
                 class: 'text-center'
             },
         ];
-
-        console.log(columns);
-
-        for (let i = 0; i < columns.length; i++) {
-
-
-            }
 
         var controller = new Vue({
             el: '#controller',
@@ -219,15 +225,14 @@
                         _this.datas = _this.table.ajax.json().data;
                     });
 
-
+                    var member_id = $('#member_id').val(idUser);
                 },
-                submitForm(data){
-                    console.log(data);
-                    console.log("ini masuk submitform");
+                submitForm(){
+                    // var grand = $('#grandTotal').val();
+                    // console.log(grand);
                     const _this = this;
-                    //var createUrl;
-                    var createUrl = '{{ url('carts/create') }}';
-                    axios.post(createUrl, new FormData($(event.target)[0])).then(response =>{
+                    var checkoutUrl = '{{ url('checkout') }}';
+                    axios.post(checkoutUrl, new FormData($(event.target)[0])).then(response =>{
                         _this.table.ajax.reload();
                     });
                 },
@@ -259,7 +264,13 @@
                     axios.delete(deleteUrl).then(response =>{
                         _this.table.ajax.reload();
                     });
-                }
+                },
+                payment(event){
+                    
+                    var payment = event.target.value;
+                    console.log(payment);
+                    var payments = $('#paymentMethod').val(payment);
+                },
             },
             watch: {
                 datas: function () {

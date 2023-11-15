@@ -64,7 +64,7 @@
                     <!-- /.card-body -->
 
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <a href="{{ url('transactions') }}"class="btn btn-primary">Back</a>
                     </div>
                 </form>
             </div>
