@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 18, 2023 at 02:43 PM
+-- Generation Time: Nov 19, 2023 at 04:13 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -41,9 +41,7 @@ CREATE TABLE `carts` (
 --
 
 INSERT INTO `carts` (`id`, `member_id`, `product_id`, `qty`, `created_at`, `updated_at`) VALUES
-(4, 2, 5, 2, '2023-08-21 08:40:34', '2023-09-14 18:00:10'),
-(5, 3, 5, 1, NULL, NULL),
-(6, 2, 6, 2, '2023-08-23 20:21:38', '2023-09-09 06:55:12');
+(5, 3, 5, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -263,8 +261,8 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `name`, `category_id`, `variant_id`, `qty`, `price`, `created_at`, `updated_at`) VALUES
 (2, 'Rodrick Doyle Sr.', 1, 1, 8, 12306, '2023-08-05 18:02:32', '2023-08-05 18:02:32'),
-(3, 'Micheal Lockman Jr.', 1, 4, 17, 13464, '2023-08-05 18:02:32', '2023-08-05 18:02:32'),
-(4, 'Mrs. Dianna Batz IV', 2, 4, 15, 19567, '2023-08-05 18:02:32', '2023-08-05 18:02:32'),
+(3, 'Micheal Lockman Jr.', 1, 4, 16, 13464, '2023-08-05 18:02:32', '2023-11-14 22:02:49'),
+(4, 'Mrs. Dianna Batz IV', 2, 4, 14, 19567, '2023-08-05 18:02:32', '2023-11-14 22:02:49'),
 (5, 'Emilia Lemke', 4, 4, 5, 14630, '2023-08-05 18:02:32', '2023-08-05 18:02:32'),
 (6, 'Paolo Gerhold', 4, 1, 5, 14271, '2023-08-05 18:02:32', '2023-08-05 18:02:32');
 
@@ -322,6 +320,7 @@ CREATE TABLE `transactions` (
   `pay` int NOT NULL,
   `change` int NOT NULL,
   `note` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payment` int NOT NULL,
   `user_id` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -331,9 +330,15 @@ CREATE TABLE `transactions` (
 -- Dumping data for table `transactions`
 --
 
-INSERT INTO `transactions` (`id`, `member_id`, `grand_total`, `discount`, `pay`, `change`, `note`, `user_id`, `created_at`, `updated_at`) VALUES
-(3, 2, 2830000, NULL, 2850000, 20000, '', 1, NULL, NULL),
-(4, 1, 2962000, NULL, 3000000, 38000, '', 1, NULL, NULL);
+INSERT INTO `transactions` (`id`, `member_id`, `grand_total`, `discount`, `pay`, `change`, `note`, `payment`, `user_id`, `created_at`, `updated_at`) VALUES
+(3, 2, 2830000, NULL, 2850000, 20000, '', 0, 1, '2023-08-31 23:05:02', NULL),
+(4, 1, 2962000, NULL, 3000000, 38000, '', 0, 1, '2023-09-20 02:24:20', NULL),
+(30, 2, 0, NULL, 0, 0, '', 0, 0, '2023-11-13 05:17:04', '2023-11-13 05:17:04'),
+(68, 2, 0, NULL, 0, 0, '', 0, 0, '2023-11-14 22:01:35', '2023-11-14 22:01:35'),
+(69, 2, 0, NULL, 0, 0, '', 0, 0, '2023-11-14 22:02:49', '2023-11-14 22:02:49'),
+(70, 2, 0, NULL, 0, 0, '', 0, 0, '2023-11-14 22:13:17', '2023-11-14 22:13:17'),
+(71, 2, 0, NULL, 0, 0, '', 0, 0, '2023-11-14 22:14:34', '2023-11-14 22:14:34'),
+(72, 2, 19567, 0, 19567, 0, 'tidak ada', 2, 0, '2023-11-14 22:17:52', '2023-11-14 22:17:52');
 
 -- --------------------------------------------------------
 
@@ -361,7 +366,11 @@ INSERT INTO `transaction_details` (`id`, `transaction_id`, `product_id`, `qty`, 
 (3, 3, 3, 4, 355000, 1420000, NULL, NULL),
 (4, 4, 3, 3, 150000, 450000, NULL, NULL),
 (5, 4, 3, 4, 123000, 492000, NULL, NULL),
-(6, 4, 5, 4, 505000, 2020000, NULL, NULL);
+(6, 4, 5, 4, 505000, 2020000, NULL, NULL),
+(20, 30, 5, 2, 14630, 29260, '2023-11-13 05:17:04', '2023-11-13 05:17:04'),
+(21, 30, 4, 2, 19567, 39134, '2023-11-13 05:17:04', '2023-11-13 05:17:04'),
+(22, 69, 3, 1, 13464, 0, '2023-11-14 22:02:49', '2023-11-14 22:02:49'),
+(23, 69, 4, 1, 19567, 0, '2023-11-14 22:02:49', '2023-11-14 22:02:49');
 
 -- --------------------------------------------------------
 
@@ -550,7 +559,7 @@ ALTER TABLE `variants`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -604,13 +613,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `transaction_details`
 --
 ALTER TABLE `transaction_details`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `users`
